@@ -30,6 +30,18 @@ GitHub repo. The agent edits, runs `./scripts/check.sh` in its sandbox, and
 pushes; you review diffs and watch Actions go green. CI is the referee, so
 "works on my machine" is never in dispute — there is no machine.
 
+**The sandbox provisions itself.** A remote session starts from a bare
+container with no engine in it, so `.claude/hooks/session-start.sh` (registered
+in `.claude/settings.json`) installs the toolchain before the agent's first
+turn: the Godot version CI pins — read out of `.github/workflows/ci.yml` so the
+two cannot drift — plus gdUnit4, a primed import cache, pandoc for the codex
+EPUB, and the web export templates. Cold that is about a minute; warm, on a
+cached container, a few seconds of existence checks. It is a no-op outside a
+remote session (`$CLAUDE_CODE_REMOTE`), so it never touches the Godot on your
+own machine. The effect is that `./scripts/check.sh` and `./scripts/export_web.sh`
+work in a session's first minute, and an agent has no excuse to claim a change
+works without running them.
+
 ## Anticipated (with the AI-native path named in advance)
 
 **2D art — the only art this game needs.** Fresco-style pieces come from

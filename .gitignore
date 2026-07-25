@@ -13,6 +13,9 @@ build/
 # gdUnit4 output
 reports/
 
+# Claude Code per-machine overrides (the shared config is .claude/settings.json)
+.claude/settings.local.json
+
 # OS
 .DS_Store
 Thumbs.db

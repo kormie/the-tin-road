@@ -2,6 +2,9 @@
 # Export the playable web build. Needs Godot 4.6.x (GODOT env var or `godot`
 # on PATH); fetches the matching web export templates if they are absent.
 # Threads are disabled in the preset, so the result runs on any static host.
+#
+#   --fetch-templates-only   provision the templates and stop (used by the
+#                            SessionStart hook to warm a fresh container)
 set -euo pipefail
 cd "$(dirname "$0")/.."
 GODOT="${GODOT:-godot}"
@@ -14,6 +17,10 @@ if [ ! -f "$TDIR/web_nothreads_release.zip" ]; then
 		"https://github.com/godotengine/godot-builds/releases/download/${VERSION}-stable/Godot_v${VERSION}-stable_export_templates.tpz"
 	unzip -o -j -q /tmp/tin_road_templates.tpz 'templates/web_*' -d "$TDIR"
 	rm /tmp/tin_road_templates.tpz
+fi
+if [ "${1:-}" = "--fetch-templates-only" ]; then
+	echo "Web export templates ready in ${TDIR}"
+	exit 0
 fi
 mkdir -p build/web
 "$GODOT" --headless --path . --import > /dev/null 2>&1 || true
