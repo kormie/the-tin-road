@@ -1,0 +1,190 @@
+/* The Tin Road — component styles. Requires tokens.css.
+   Every rule here obeys rule zero: pigment does not glow. There is not a
+   box-shadow, gradient-as-sheen, or blur in this file; the one gradient
+   below is a flat tiled pattern, which is what gradients are for here. */
+
+.tin-root {
+	background: var(--tin-night);
+	color: var(--tin-papyrus);
+	font-family: var(--tin-font-chrome);
+	font-size: var(--tin-size-body);
+	line-height: var(--tin-leading-chrome);
+	min-height: 100vh;
+	padding: var(--tin-space-6);
+	box-sizing: border-box;
+}
+.tin-root *, .tin-root *::before, .tin-root *::after { box-sizing: inherit; }
+
+.tin-shell {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
+	gap: var(--tin-space-8);
+	align-items: start;
+	max-width: 1280px;
+	margin: 0 auto;
+}
+@media (max-width: 900px) { .tin-shell { grid-template-columns: 1fr; } }
+
+.tin-title {
+	color: var(--tin-bronze);
+	font-family: var(--tin-font-chrome);
+	font-size: var(--tin-size-title);
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	margin: 0 0 var(--tin-space-4);
+}
+
+/* The meander — the tiled geometric border reserved for major pieces.
+   Flat two-color crenellation; suggests pattern, spells nothing. */
+.tin-meander {
+	height: 8px;
+	border: none;
+	margin: var(--tin-space-4) 0;
+	background:
+		repeating-linear-gradient(90deg,
+			var(--tin-bronze) 0 8px, transparent 8px 16px) top / 100% 3px no-repeat,
+		repeating-linear-gradient(90deg,
+			transparent 0 8px, var(--tin-bronze) 8px 16px) bottom / 100% 3px no-repeat;
+}
+
+/* The book. Serif, roomy, selectable; the centerpiece of every view. */
+.tin-chronicle {
+	font-family: var(--tin-font-chronicle);
+	font-size: var(--tin-size-chronicle);
+	line-height: var(--tin-leading-chronicle);
+	color: var(--tin-papyrus);
+	max-width: 65ch;
+}
+.tin-chronicle p { margin: 0 0 var(--tin-space-4); }
+.tin-season-heading {
+	font-family: var(--tin-font-chronicle);
+	font-size: var(--tin-size-heading);
+	font-weight: 600;
+	color: var(--tin-bronze);
+	margin: var(--tin-space-8) 0 var(--tin-space-4);
+}
+.tin-chronicle .tin-season-heading:first-child { margin-top: 0; }
+.tin-colophon {
+	font-style: italic;
+	color: var(--tin-papyrus-dim);
+}
+
+/* Panels: plaster over night, one drawn contour line. */
+.tin-panel {
+	background: var(--tin-plaster);
+	border: var(--tin-line) solid var(--tin-contour);
+	border-radius: var(--tin-radius);
+	padding: var(--tin-space-4);
+}
+.tin-panel--major { border-width: var(--tin-line-heavy); }
+.tin-panel-heading {
+	color: var(--tin-bronze);
+	font-size: var(--tin-size-body);
+	font-weight: 600;
+	margin: 0 0 var(--tin-space-3);
+}
+.tin-panel > .tin-panel-heading:not(:first-child) { margin-top: var(--tin-space-6); }
+
+.tin-status {
+	color: var(--tin-verdigris);
+	font-size: var(--tin-size-caption);
+	line-height: var(--tin-leading-chrome);
+	margin: 0 0 var(--tin-space-3);
+}
+
+.tin-refusal {
+	color: var(--tin-kiln);
+	font-size: var(--tin-size-caption);
+	margin: var(--tin-space-3) 0 0;
+	min-height: 1.2em;
+}
+
+/* Buttons attempt and report. They do not disable themselves to predict
+   the sim; they stay pressable and the refusal is stated in words. */
+.tin-button {
+	display: block;
+	width: 100%;
+	background: var(--tin-plaster-deep);
+	color: var(--tin-papyrus);
+	border: var(--tin-line) solid var(--tin-contour);
+	border-radius: var(--tin-radius);
+	font-family: var(--tin-font-chrome);
+	font-size: var(--tin-size-body);
+	padding: var(--tin-space-2) var(--tin-space-4);
+	cursor: pointer;
+	text-align: center;
+}
+.tin-button:hover { border-color: var(--tin-papyrus-dim); }
+.tin-button:active { background: var(--tin-night); }
+.tin-button:focus-visible { outline: var(--tin-line-heavy) solid var(--tin-bronze); outline-offset: 1px; }
+.tin-button--primary { border-color: var(--tin-bronze); color: var(--tin-bronze); }
+.tin-button--primary:hover { background: var(--tin-plaster); border-color: var(--tin-bronze); }
+.tin-button--danger { border-color: var(--tin-kiln); color: var(--tin-kiln); }
+.tin-button--danger:hover { background: var(--tin-plaster); border-color: var(--tin-kiln); }
+.tin-button--inline { display: inline-block; width: auto; }
+.tin-button-row { display: flex; gap: var(--tin-space-2); }
+.tin-button-row .tin-button { flex: 1; }
+
+.tin-stack { display: flex; flex-direction: column; gap: var(--tin-space-2); }
+
+/* Form pieces */
+.tin-input {
+	background: var(--tin-plaster-deep);
+	color: var(--tin-papyrus);
+	border: var(--tin-line) solid var(--tin-contour);
+	border-radius: var(--tin-radius);
+	font-family: var(--tin-font-chrome);
+	font-size: var(--tin-size-body);
+	padding: var(--tin-space-2) var(--tin-space-3);
+}
+.tin-input:focus-visible { outline: var(--tin-line-heavy) solid var(--tin-bronze); outline-offset: 1px; }
+
+.tin-stepper { display: flex; align-items: center; gap: var(--tin-space-3); }
+.tin-stepper-label { flex: 1; }
+.tin-stepper-hint { display: block; color: var(--tin-papyrus-dim); font-size: var(--tin-size-caption); }
+.tin-stepper-value {
+	min-width: 2.5ch;
+	text-align: center;
+	font-variant-numeric: tabular-nums;
+}
+.tin-stepper .tin-button { width: 2.25rem; padding: var(--tin-space-1); }
+
+.tin-seal-toggle {
+	display: flex;
+	align-items: center;
+	gap: var(--tin-space-2);
+	cursor: pointer;
+	user-select: none;
+}
+.tin-seal-toggle-mark {
+	width: 1rem;
+	height: 1rem;
+	border: var(--tin-line) solid var(--tin-kiln);
+	border-radius: var(--tin-radius);
+	display: inline-block;
+	background: transparent;
+}
+.tin-seal-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+.tin-seal-toggle input:checked + .tin-seal-toggle-mark { background: var(--tin-kiln); }
+.tin-seal-toggle input:focus-visible + .tin-seal-toggle-mark { outline: var(--tin-line-heavy) solid var(--tin-bronze); outline-offset: 1px; }
+
+.tin-contract { border-color: var(--tin-contour); }
+.tin-contract-name { color: var(--tin-papyrus); font-weight: 600; margin: 0; }
+.tin-contract-holder { color: var(--tin-verdigris); font-size: var(--tin-size-caption); margin: 0 0 var(--tin-space-2); }
+.tin-contract-terms {
+	font-family: var(--tin-font-chronicle);
+	font-style: italic;
+	color: var(--tin-papyrus-dim);
+	margin: 0 0 var(--tin-space-3);
+}
+.tin-contract--signed .tin-contract-name::after {
+	content: " — in force";
+	color: var(--tin-kiln);
+	font-weight: 400;
+	font-size: var(--tin-size-caption);
+}
+
+.tin-stats { display: flex; flex-wrap: wrap; gap: var(--tin-space-4); margin: 0; }
+.tin-stat { margin: 0; }
+.tin-stat dt { color: var(--tin-papyrus-dim); font-size: var(--tin-size-caption); }
+.tin-stat dd { margin: 0; font-variant-numeric: tabular-nums; }
