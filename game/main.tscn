@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://game/session.gd" id="1_session"]
+[ext_resource type="Script" path="res://game/road_strip.gd" id="2_road_strip"]
+[ext_resource type="Script" path="res://game/daylight_bar.gd" id="3_daylight_bar"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -32,17 +34,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="Title" type="Label" parent="Margin/Split/BookColumn"]
+[node name="Title" type="Label" parent="Margin/Split/BookColumn" groups=["ink_bronze"]]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
 theme_override_font_sizes/font_size = 24
 text = "THE TIN ROAD"
 
-[node name="Book" type="RichTextLabel" parent="Margin/Split/BookColumn"]
+[node name="Book" type="RichTextLabel" parent="Margin/Split/BookColumn" groups=["ink_papyrus"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/default_color = Color(0.925, 0.875, 0.753, 1)
 selection_enabled = true
 scroll_following = true
 text = ""
@@ -57,17 +57,15 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="Status" type="Label" parent="Margin/Split/SideScroll/SidePanel"]
+[node name="Status" type="Label" parent="Margin/Split/SideScroll/SidePanel" groups=["ink_verdigris"]]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.369, 0.659, 0.573, 1)
 autowrap_mode = 3
 text = "No House yet."
 
-[node name="Refusal" type="Label" parent="Margin/Split/SideScroll/SidePanel"]
+[node name="Refusal" type="Label" parent="Margin/Split/SideScroll/SidePanel" groups=["ink_kiln"]]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.753, 0.353, 0.208, 1)
 autowrap_mode = 3
 text = ""
 
@@ -76,9 +74,8 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Tagline" type="Label" parent="Margin/Split/SideScroll/SidePanel/TitlePanel"]
+[node name="Tagline" type="Label" parent="Margin/Split/SideScroll/SidePanel/TitlePanel" groups=["ink_papyrus"]]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.925, 0.875, 0.753, 1)
 autowrap_mode = 3
 text = "Everything you learn dies with you. Unless you wrote it down."
 
@@ -104,27 +101,29 @@ visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="InheritHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
+[node name="InheritHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel" groups=["ink_bronze"]]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
 text = "What this scribe inherits"
 
-[node name="InheritLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
+[node name="InheritLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel" groups=["ink_papyrus"]]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.925, 0.875, 0.753, 1)
 autowrap_mode = 3
 text = ""
 
-[node name="OutfitHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
+[node name="OutfitStrip" type="Control" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 92)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
+script = ExtResource("2_road_strip")
+
+[node name="OutfitHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel" groups=["ink_bronze"]]
+layout_mode = 2
 text = "Outfit the season"
 
-[node name="MediaHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
+[node name="MediaHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel" groups=["ink_dim"]]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
 autowrap_mode = 3
 text = ""
 
@@ -193,39 +192,46 @@ visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="RoadHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+[node name="RoadHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel" groups=["ink_bronze"]]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
 text = "The road"
+
+[node name="RoadStrip" type="Control" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+script = ExtResource("2_road_strip")
+
+[node name="DaylightBar" type="Control" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+script = ExtResource("3_daylight_bar")
 
 [node name="TravelButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Travel to the next node"
 
-[node name="WriteHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+[node name="WriteHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel" groups=["ink_bronze"]]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
 text = "Write what you learn"
 
-[node name="WriteHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+[node name="WriteHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel" groups=["ink_dim"]]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
 autowrap_mode = 3
 text = ""
 
-[node name="SealCheck" type="CheckBox" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+[node name="SealCheck" type="CheckBox" parent="Margin/Split/SideScroll/SidePanel/RoadPanel" groups=["ink_bronze"]]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
 autowrap_mode = 3
 text = "Seal the next entry"
 
-[node name="SealHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+[node name="SealHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel" groups=["ink_dim"]]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
 autowrap_mode = 3
 text = ""
 
@@ -243,11 +249,10 @@ layout_mode = 2
 custom_minimum_size = Vector2(160, 0)
 text = "Note"
 
-[node name="NoteDesc" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/NoteRow"]
+[node name="NoteDesc" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/NoteRow" groups=["ink_dim"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
 autowrap_mode = 3
 text = ""
 
@@ -261,11 +266,10 @@ layout_mode = 2
 custom_minimum_size = Vector2(160, 0)
 text = "Record"
 
-[node name="RecordDesc" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/RecordRow"]
+[node name="RecordDesc" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/RecordRow" groups=["ink_dim"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
 autowrap_mode = 3
 text = ""
 
@@ -279,11 +283,10 @@ layout_mode = 2
 custom_minimum_size = Vector2(160, 0)
 text = "Survey"
 
-[node name="SurveyDesc" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/SurveyRow"]
+[node name="SurveyDesc" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/SurveyRow" groups=["ink_dim"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
 autowrap_mode = 3
 text = ""
 
@@ -297,17 +300,15 @@ layout_mode = 2
 custom_minimum_size = Vector2(160, 0)
 text = "Treatise"
 
-[node name="TreatiseDesc" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/TreatiseRow"]
+[node name="TreatiseDesc" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/TreatiseRow" groups=["ink_dim"]]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
 autowrap_mode = 3
 text = ""
 
-[node name="DispatchHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+[node name="DispatchHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel" groups=["ink_bronze"]]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
 text = "The guild hall"
 
 [node name="CourierButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
@@ -315,10 +316,9 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Send the ledger home by courier"
 
-[node name="CourierHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+[node name="CourierHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel" groups=["ink_dim"]]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
 autowrap_mode = 3
 text = ""
 
@@ -327,15 +327,13 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Buy a seal at the guild hall"
 
-[node name="ContractsHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+[node name="ContractsHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel" groups=["ink_bronze"]]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
 text = "Standing contracts"
 
-[node name="ContractsHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+[node name="ContractsHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel" groups=["ink_dim"]]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
 autowrap_mode = 3
 text = ""
 
@@ -350,24 +348,27 @@ visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="DeskLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/DeskPanel"]
+[node name="DeskLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/DeskPanel" groups=["ink_bronze"]]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
 autowrap_mode = 3
 text = "The season is over."
 
-[node name="HoldingsLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/DeskPanel"]
+[node name="HoldingsLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/DeskPanel" groups=["ink_papyrus"]]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.925, 0.875, 0.753, 1)
 autowrap_mode = 3
 text = ""
 
-[node name="FacilitatorLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/DeskPanel"]
+[node name="DeskStrip" type="Control" parent="Margin/Split/SideScroll/SidePanel/DeskPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 92)
+layout_mode = 2
+script = ExtResource("2_road_strip")
+
+[node name="FacilitatorLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/DeskPanel" groups=["ink_dim"]]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.443, 0.427, 0.384, 1)
 theme_override_font_sizes/font_size = 11
 autowrap_mode = 3
 text = ""
