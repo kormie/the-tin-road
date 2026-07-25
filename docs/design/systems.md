@@ -26,13 +26,18 @@ The core system. Everything else exists to make this decision interesting.
 | Vellum | Light | Low | Expensive | Strictly better and priced accordingly. |
 | Blocks | Heavy | Low | Very expensive | Reproduces rather than records. See §5. |
 
+First-pass road numbers for the slice: a pack bulkier than 12 (bulk costs in
+`sim/outfit.gd`) pays +1 Daylight per node travelled. Water mishaps ruin
+papyrus only; surviving a water peril soaks every sheet. Clay is immune to
+water — it walks out of the marsh streaked but legible.
+
 **The tension:** Daylight spent writing is Daylight not spent travelling, trading, or getting clear of something. A season that documents everything reaches nowhere. A season that reaches everywhere teaches your successor nothing.
 
 ## 2. The Archive
 
 Persistent. Merges on successful return. Partial merge on courier delivery (§3).
 
-**Automation threshold.** Three surveyed legs constitute a documented route. A documented route can be assigned a caravan, which runs it unattended and returns income and an incident report each season without player input.
+**Automation threshold.** Three surveyed legs constitute a documented route. A leg the archive holds only as rumour counts toward the threshold, but the caravan walks it at half confidence and half pay until a sealed survey confirms it. A documented route can be assigned a caravan — a standing order, posted and priced — which runs it unattended and returns income and an incident report each season without player input.
 
 Automation is the primary reward curve. It should feel like the game handing you back your own past work, because it is.
 

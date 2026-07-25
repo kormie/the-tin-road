@@ -4,9 +4,9 @@
   "display_name": "the Ugarit road",
   "nodes": [
     { "id": "ugarit", "name": "Ugarit", "kind": "settlement", "leg": 0 },
-    { "id": "salt_marsh", "name": "the Salt Marsh", "kind": "hazard", "leg": 1 },
+    { "id": "salt_marsh", "name": "the Salt Marsh", "kind": "hazard", "leg": 1, "flavor": "water" },
     { "id": "rival_sail", "name": "the Rival Sail", "kind": "rival", "leg": 1 },
-    { "id": "open_water", "name": "Open Water", "kind": "hazard", "leg": 2 },
+    { "id": "open_water", "name": "Open Water", "kind": "hazard", "leg": 2, "flavor": "water" },
     { "id": "drowned_shrine", "name": "the Drowned Shrine", "kind": "ruin", "leg": 2 },
     { "id": "alashiya", "name": "Alashiya", "kind": "settlement", "leg": 3 }
   ]

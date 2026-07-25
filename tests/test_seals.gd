@@ -69,6 +69,10 @@ func test_rumoured_leg_pays_half() -> void:
 	rumour_house.surveyed_legs.append(1)
 	rumour_house.surveyed_legs.append(2)
 	rumour_house.rumoured_legs.append(3)
+	sealed_house.silver = House.STANDING_ORDER_COST
+	rumour_house.silver = House.STANDING_ORDER_COST
+	assert_bool(sealed_house.post_standing_order()).is_true()
+	assert_bool(rumour_house.post_standing_order()).is_true()
 	sealed_house.start_season()
 	rumour_house.start_season()
 	var full := _income_of(sealed_house)

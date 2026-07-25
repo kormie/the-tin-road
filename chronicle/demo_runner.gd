@@ -19,18 +19,44 @@ static func run(seed_value: int, seasons: int, house_name: String = "House Sapan
 	for _i: int in range(seasons):
 		var season := house.start_season(_choose_outfit(house))
 		season.begin()
-		for template: ContractCatalog.ContractTemplate in catalog.templates:
-			season.sign_contract(template)  # The brain signs everything on offer.
+		_sign_contracts(season, house, catalog)
 		_play_out(season, route)
 		house.merge(season)
+		# The brain posts the standing order the season it can pay the guild
+		# scribes, which may lag documentation — the wait is the cost being real.
+		if house.route_documented() and not house.has_standing_order():
+			house.post_standing_order()
 	var renderer := ChronicleRenderer.load_default(house.rng.stream(&"prose"))
 	return {"book": renderer.render_book(house), "house": house}
 
 
-## The brain buys the standard kit every season, deliberately. Outfit choice
-## belongs to a human; the demo only has to exercise the purchase.
+## The brain has learned exactly one thing about outfitting: clay is heavy.
+## It carries a light mixed pack — two tablets against the water, six sheets
+## for the words — and travels two days faster for it. Everything subtler
+## belongs to a human.
 static func _choose_outfit(_house: House) -> Outfit:
-	return Outfit.default_kit()
+	return Outfit.new(2, 6, 2)
+
+
+## What the brain signs is a budget call, not a strategy. While the road is
+## still being charted, the pack must cover a survey AND the courier, so it
+## signs only the income deal. Once the route is documented it signs
+## everything on offer — and pays for that breadth with a thinner courier
+## reserve, which is the intended tension, not a bug.
+static func _sign_contracts(season: Season, house: House, catalog: ContractCatalog) -> void:
+	if house.route_documented():
+		for template: ContractCatalog.ContractTemplate in catalog.templates:
+			season.sign_contract(template)
+		return
+	var income_deal := catalog.by_id("urtenu_consignment")
+	if income_deal != null:
+		season.sign_contract(income_deal)
+	# Once the House holds any paper on the road, the far guild hall's door
+	# is worth a page of the pack — the confirming seasons spend seals.
+	if not house.surveyed_legs.is_empty() or not house.rumoured_legs.is_empty():
+		var access_deal := catalog.by_id("sojourners_right")
+		if access_deal != null:
+			season.sign_contract(access_deal)
 
 
 static func _play_out(season: Season, route: Route) -> void:
@@ -51,9 +77,9 @@ static func _consider_writing(season: Season, route: Route) -> void:
 	var node: Route.RouteNode = route.nodes[season.position]
 	var travel_still_owed: int
 	if season.heading_home:
-		travel_still_owed = season.position * Season.TRAVEL_COST
+		travel_still_owed = season.position * season.travel_cost()
 	else:
-		travel_still_owed = (route.last_index() * 2 - season.position) * Season.TRAVEL_COST
+		travel_still_owed = (route.last_index() * 2 - season.position) * season.travel_cost()
 	var to_spare := season.daylight - travel_still_owed - HOME_BUFFER
 	# A bad season admits it: when the light budget goes red, send what exists
 	# home by courier. Once — a second dispatch would repeat the first.

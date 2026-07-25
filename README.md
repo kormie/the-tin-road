@@ -15,22 +15,29 @@ Built with Godot 4.6. Everything is text; the repo is the game.
 ## The pitch, demonstrated
 
 Every playthrough is event-sourced into a chronicle, and the chronicle renders
-as prose. This is seed 1259, unedited, from `docs/sample-chronicle.md`:
+as prose. This is seed 101, unedited, from `docs/sample-chronicle.md`:
 
-> The season ended where it stood, at the Salt Marsh. The ledger of Niqmepa
-> never reached the archive.
+> A standing order went into the archive of House Sapanu — 100 shekels to the
+> guild scribes and the drover bond, and the Ugarit road became a road that
+> runs itself on paper first.
 >
-> House Sapanu continued, as houses do, in the person of Arhalba, standing on
-> everything Niqmepa left in writing.
+> While the House slept, a caravan walked the Ugarit road on its own and came
+> home with 362 shekels, weighed. The drovers took their 60 at the gate. The
+> road remembered; it had been written down.
 >
 > …
 >
-> While the House slept, a caravan walked the Ugarit road on its own and came
-> home with 339 shekels, weighed. The road remembered. It had been written down.
+> The season ended where it stood, at the Rival Sail. What Attenu had not sent
+> ahead never reached the archive.
+>
+> 358 shekels arrived from the Ugarit road, earned by a road walking itself,
+> less the 60 the caravan costs to exist. The archive, as usual, said nothing
+> and did everything.
 
-Niqmepa surveyed the first leg and died before bringing it home, so the
-knowledge died too. Three generations re-earned it, wrote it all down, and by
-the fifth season the road ran itself. Nobody authored that story — the sim
+Seven generations charted that road — as unsealed rumour, then sealed fact —
+paid for their contracts in writing stock, lost a season's papyrus to the
+marsh, and finally posted the standing order. Then a scribe died on the road,
+and the caravan came home anyway. Nobody authored that story — the sim
 emitted it, the renderer wrote it. Same seed, same book, every time.
 
 ## Quickstart
@@ -40,7 +47,7 @@ Requires [Godot 4.6.x](https://godotengine.org/download/) and git.
 ```bash
 git init && git add -A && git commit -m "Season zero"
 ./scripts/setup.sh        # fetch the pinned test framework, prime imports
-./scripts/check.sh        # import + scene smoke + 12 tests + demo determinism
+./scripts/check.sh        # import + scene smoke + the full test suite + demo determinism
 ```
 
 Then either open the project in the Godot editor and press play, or stay
@@ -52,7 +59,26 @@ TIN_SEED=735 TIN_SEASONS=8 godot --headless --path . -s scripts/demo_season.gd
 ```
 
 Every seed is a different house, a different sequence of deaths and ledgers,
-a different book. Seed 1259 — the Treaty year — is the committed sample.
+a different book. Seed 101 is the committed sample; seed 1259 — the Treaty
+year — anchors the determinism check.
+
+## Play it in a browser
+
+The playable beta is a web export. CI builds it on every push as the
+`the-tin-road-web` artifact (Actions → latest run → Artifacts); unzip and
+serve the folder from any static host — threads are disabled, so no special
+headers are needed. Or build it locally:
+
+```bash
+./scripts/export_web.sh                     # fetches web templates if absent
+python3 -m http.server -d build/web 8080    # then open localhost:8080
+```
+
+Found a House, buy the pack (clay is heavy, papyrus drowns), walk the road
+choosing when to write and what to seal, and read the book you are making as
+it grows. Season one can kill you — that is what the courier is for. Document
+all three legs, post the standing order, and watch a caravan walk your road
+without you.
 
 ## The ebook pipeline
 
@@ -89,12 +115,14 @@ CLAUDE.md     Working agreement for AI agents: conventions, constraints, rules.
 
 ## What this is not, yet
 
-This is vertical-slice steps 1–2 of `docs/design/vertical-slice.md`: the season
-clock, daylight, travel, the four ledger entry types, death, succession, and a
-naive automation payout — enough to prove the loop
-**write → die → inherit → automate → read the book**. Not built: the Courier,
-the Keeper and Endurance, media weight, archive corruption, factions, presses,
-real UI, saves. The design docs know the way.
+This is vertical-slice steps 1–5 of `docs/design/vertical-slice.md`: the season
+clock, daylight, travel, the four ledger entry types, death and succession, the
+Courier, seals and rumours, the outfit step, Standing Contracts, media that
+matters on the road, and assignable automation — the loop
+**write → die → inherit → automate → read the book**, complete in the sim.
+Not built: the playable layer (the demo brain still stands in for you), the
+Keeper and Endurance, archive corruption, incident reports and caravan loss,
+factions, presses, real UI, saves. The design docs know the way.
 
 ## License
 

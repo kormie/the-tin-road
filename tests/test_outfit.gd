@@ -77,3 +77,13 @@ func test_kit_validity_gates() -> void:
 	assert_bool(Outfit.new(0, 6, 2).is_valid(22)).is_true()
 	assert_bool(Outfit.new(-1, 6, 2).is_valid(1000)).is_false()
 	assert_bool(Outfit.new(0, 0, 3).is_valid(1000)).is_false()
+
+
+func test_invalid_reason_codes_are_the_contract() -> void:
+	# The UI keys its refusal copy on these exact codes; a rename on either
+	# side must fail here, not degrade to a generic fallback in play.
+	assert_str(String(Outfit.new(0, 6, 2).invalid_reason(10))).is_equal("too_costly")
+	assert_str(String(Outfit.new(4, 6, 3).invalid_reason(1000))).is_equal("too_bulky")
+	assert_str(String(Outfit.new(-1, 6, 2).invalid_reason(1000))).is_equal("negative")
+	assert_str(String(Outfit.new(0, 0, 3).invalid_reason(1000))).is_equal("no_media")
+	assert_str(String(Outfit.new(2, 6, 2).invalid_reason(1000))).is_equal("")
