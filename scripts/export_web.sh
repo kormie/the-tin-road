@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Export the playable web build. Needs Godot 4.6.x (GODOT env var or `godot`
+# Export the playable web build. Needs Godot 4.7.x (GODOT env var or `godot`
 # on PATH); fetches the matching web export templates if they are absent.
 # Threads are disabled in the preset, so the result runs on any static host.
 #
@@ -8,7 +8,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 GODOT="${GODOT:-godot}"
-VERSION="4.6.3"
+VERSION="4.7.1"
 TDIR="$HOME/.local/share/godot/export_templates/${VERSION}.stable"
 if [ ! -f "$TDIR/web_nothreads_release.zip" ]; then
 	echo "Fetching web export templates for ${VERSION}..."

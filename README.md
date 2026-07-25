@@ -10,7 +10,7 @@ walk the tin routes one mortal lifetime at a time. **Everything a scribe
 learns dies with them — unless they wrote it down.** Documentation is the
 meta-progression, the automation system, and the point.
 
-Built with Godot 4.6. Everything is text; the repo is the game.
+Built with Godot 4.7. Everything is text; the repo is the game.
 
 ![The road: the chronicle grows down the page as it is written — here a scribe has signed two contracts, written a note, and sent the ledger home by courier because the road was going badly](docs/screenshots/road.png)
 
@@ -53,7 +53,7 @@ emitted it, the renderer wrote it. Same seed, same book, every time.
 
 ## Quickstart
 
-Requires [Godot 4.6.x](https://godotengine.org/download/) and git.
+Requires [Godot 4.7.x](https://godotengine.org/download/) and git.
 
 ```bash
 git init && git add -A && git commit -m "Season zero"

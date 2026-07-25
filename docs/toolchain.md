@@ -9,7 +9,7 @@ works through a human pointing at a GUI does not get a seat.
 
 | Tool | Role | AI-native driver |
 |---|---|---|
-| Godot 4.6.x | Engine | `godot --headless --path .` for import, tests, demos; scenes/scripts are text |
+| Godot 4.7.x | Engine | `godot --headless --path .` for import, tests, demos; scenes/scripts are text |
 | gdUnit4 (pinned v6.1.3) | Tests | `./scripts/check.sh`, also run in CI |
 | pandoc | Codex → EPUB | `./scripts/build_codex.sh` |
 | git + GitHub Actions | Truth | CI runs the full check on every push — a green check means `check.sh` passed on a clean machine |
