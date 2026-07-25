@@ -14,6 +14,8 @@ in `docs/` — read it before proposing mechanics:
 - `docs/design/vertical-slice.md` — build order. Steps 1–5 are built; the
   measurement plan and the playable layer remain.
 - `docs/world/` — the setting bible, timeline, and factions.
+- `docs/art-direction.md` · `docs/audio-direction.md` — how it looks, how it
+  sounds. Read the relevant one before generating any asset.
 
 ## The three constraints (do not violate)
 
@@ -45,6 +47,12 @@ green `./scripts/check.sh`.
   `chronicle/renderer.gd` turns events into text via `data/chronicle/en.json`.
   New sim behavior = new event type = new template variants, in that order.
   The test `test_renderer_covers_every_emitted_event_type` enforces this.
+- **`sim/` is also silent.** No `AudioStreamPlayer`, no audio bus, no cue
+  lookup in `sim/`. Sound binds off `ChronicleEvent`s in `game/`, the way prose
+  binds off them in `chronicle/renderer.gd`. Silence is a valid cue — most
+  events should make none. Generated audio is baked at build time by
+  `scripts/`, committed, and imported headless; **no audio API is ever called
+  at runtime.** Doctrine: `docs/audio-direction.md`.
 - **Content is data.** Routes, names, prose templates, and lore live in
   `data/` as JSON/Markdown. Adding content should not require code.
 - **`game/` binds sim to presentation** and stays thin.
@@ -90,5 +98,7 @@ a web-export pipeline (`scripts/export_web.sh`, CI artifact).
 **Not built:** order revocation, incident reports and caravan loss,
 the Keeper and Endurance,
 archive corruption, factions beyond the Yabninu commission const, presses, the
-Concord axis, any real UI, saves. Do not gold-plate scaffolding; the next
+Concord axis, any real UI, saves. **No audio of any kind** — the game is
+currently silent, and `docs/audio-direction.md` is doctrine for a pipeline that
+does not exist yet. Do not gold-plate scaffolding; the next
 milestone is `docs/design/vertical-slice.md`.

@@ -24,26 +24,70 @@ automation you *assign* rather than receive, and the measurement plan in
 `docs/design/vertical-slice.md`. Exit question: does watching a caravan run a
 road you documented feel good?
 
-**2. The Keeper and Endurance.** The support role, structurally central.
-One shared Endurance pool, decay not damage, no health bars anywhere.
-Designed in `docs/design/systems.md` §4.
+The measurement plan is the gate for everything below it, and specifically for
+milestone 2. A baseline taken in silence is the only thing that can tell us
+later whether sound helped.
 
-**3. Archive corruption — on probation.** Poisoned entries, Verify, the
-paranoia economy. Prototype early; cut cleanly if it produces frustration
-instead of tension. `systems.md` §2, and the design doc's "risky idea."
+**2. The audible payoff — small, gated, measured against the baseline.**
+Doctrine in `docs/audio-direction.md`; hooks in `docs/design/systems.md` §6.
+Runs only once milestone 1 has produced instrumented data, and it is an A/B
+against that data, not a decoration pass.
+
+Scope, and it is small on purpose: the write cue with a duration proportional
+to the entry (a Note is a scratch, a Treatise is a wearying passage), the seal
+press, the water that ruins papyrus, and one unique unrepeated sound for the
+first automated return. Roughly a dozen assets, no voice, no music, and the
+whole bake pipeline (`manifest → lock → headless import`) built once here so
+every later milestone inherits it.
+
+Exit question: does the same loop, measured the same way, land harder with the
+payoff audible? If not, the roadmap keeps its data and audio goes back to
+milestone 9 where it started.
+
+**3. The Keeper and Endurance.** The support role, structurally central.
+One shared Endurance pool, decay not damage, no health bars anywhere.
+Designed in `docs/design/systems.md` §4. Verify is listening — the entry read
+aloud is the action, which makes recorded speech load-bearing here rather than
+ornamental, and makes Petition and Mediate the only voiced actions in the game.
 
 **4. The remaining Scribe kit.** Seals, Standing Contracts, Obligations,
 Factors, Conversion. `systems.md` §3.
 
-**5. Factions as commission variety.** Six seats, three great houses, the
-temples, the Settled — each a contract source. `docs/world/factions.md`.
+**5. Archive corruption — on probation.** Poisoned entries, Verify, the
+paranoia economy. Prototype early; cut cleanly if it produces frustration
+instead of tension. `systems.md` §2, and the design doc's "risky idea."
 
-**6. Presses, then the Concord axis.** Copy / Publish / Forge; publishing as
+Depends on milestone 3 for Verify and inherits its tell from milestone 2's
+pipeline: a forged entry is baked without the House lexicon, so it mispronounces
+the road, and the same entry renders with the place name *misspelled*. Identical
+to a clean entry until acted on, catchable by ear or by eye, and free to produce
+because it is a pipeline step omitted rather than a system added.
+
+**6. Factions as commission variety.** Six seats, three great houses, the
+temples, the Settled — each a contract source. `docs/world/factions.md`.
+Temple script and road script pronounce the world differently
+(`data/codex/020-two-scripts.md`); one lexicon per faction is content, not
+code, and makes whose archive you are reading audible.
+
+**7. Presses, then the Concord axis.** Copy / Publish / Forge; publishing as
 the game's only irreversible act; the campaign-length axis last because it
 cannot be validated short. `systems.md` §5.
 
-**7. Presentation.** Real UI in the fresco direction (`docs/art-direction.md`),
-audio, saves, the in-game codex reader.
+**8. Presentation.** Real UI in the fresco direction (`docs/art-direction.md`),
+saves, the in-game codex reader.
 
-**8. The book pipeline, matured.** Chronicle → edited-novel workflow, codex
+**9. Audio in full**, on the pipeline milestone 2 built. One designed voice per
+scribe drawn by the seeded `&"voice"` stream, so the archive is recited by
+whoever wrote it and a rumour is recited by a stranger; road tunes that
+assemble as the archive fills, so a documented road has a melody and an
+undocumented one has only footfall; the silence budget enforced. Doctrine and
+its open questions live in `docs/audio-direction.md`, including the licensing
+check that gates shipping any generated second.
+
+**10. The book pipeline, matured.** Chronicle → edited-novel workflow, codex
 growth toward the ebook DLC, per-seed "chronicle sharing."
+
+And its audio twin, which the determinism buys us for almost nothing: a seed
+replays headless, renders its chronicle, and speaks it. `scripts/narrate.sh
+--seed 735` produces the audiobook of a playthrough nobody else has had. Seed →
+story → recital, offline, no runtime key, shareable as a file.
