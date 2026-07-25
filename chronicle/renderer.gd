@@ -78,8 +78,14 @@ func render_event(ev: ChronicleEvent, house: House) -> String:
 		slots["entry_count"] = _compose_count(int(str(ev.data["entries"])),
 			"entries_one", "entries_many")
 	if ev.data.has("cost"):
-		var cost := int(str(ev.data["cost"]))
-		slots["cost_days"] = "%d day" % cost if cost == 1 else "%d days" % cost
+		slots["cost_days"] = _compose_days(int(str(ev.data["cost"])))
+	# The sim attributes every daylight spend to a bucket (sim/season.gd), which
+	# means the book can quote the true cost instead of a number written into a
+	# template and left to rot when the tuning moves.
+	for light_key: Variant in ev.data.keys():
+		var bucket := str(light_key)
+		if bucket.begins_with("light_"):
+			slots[bucket.trim_prefix("light_") + "_days"] = _compose_days(int(str(ev.data[light_key])))
 	var sentence := template.format(slots)
 	if sentence.length() > 1:
 		sentence = sentence[0].to_upper() + sentence.substr(1)
@@ -104,6 +110,11 @@ func _compose_lost(lost_clay: int, lost_papyrus: int) -> String:
 	if parts.is_empty():
 		return str(f.get("lost_nothing", "nothing"))
 	return str(f.get("lost_join", " and ")).join(parts)
+
+
+## A count of days, in words the templates can drop straight into a sentence.
+func _compose_days(n: int) -> String:
+	return "%d day" % n if n == 1 else "%d days" % n
 
 
 ## Compose a pluralized count slot from the _fragments table.

@@ -75,6 +75,27 @@ func test_season_end_reaches_the_desk() -> void:
 	assert_int(session.phase).is_equal(GameSession.Phase.OUTFIT)
 
 
+func test_the_desk_emits_the_season_record() -> void:
+	# The playable layer produces the same record scripts/measure.gd does, so a
+	# playtest and the reference pass can be read side by side. It computes
+	# nothing itself — it reads the chronicle, like everything else here.
+	var session := _session()
+	session.seed_input.text = "1"
+	session._on_found_pressed()
+	session._on_depart_pressed()
+	# Run the light out on a real step rather than forcing the result: the
+	# record is read off the log, so an ending the sim never announced is an
+	# ending the measurement is right not to see.
+	session.season.daylight = 1
+	session._on_travel_pressed()
+	assert_int(session.phase).is_equal(GameSession.Phase.DESK)
+	var expected: SeasonRecord = Measurement.of_chronicle(
+		session.house.chronicle, session.house.rng.master_seed).records[0]
+	assert_str(expected.outcome).is_equal("stranded")
+	assert_int(expected.light_travel).is_equal(Season.TRAVEL_COST)
+	assert_str(session.desk_label.text).contains(expected.headline())
+
+
 func test_incremental_rendering_matches_the_whole_book() -> void:
 	# Prose variants draw in event order, so a book grown in two pulls must
 	# equal the same book rendered in one.

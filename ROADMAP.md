@@ -17,7 +17,7 @@ a web-export beta (CI artifact) · codex → ebook build · tests + CI.
 
 ## Milestones
 
-**1. Finish the vertical slice** — the hypothesis test.
+**1. Finish the vertical slice** — the hypothesis test. **Built.**
 The Courier (send the ledger home mid-season, die survivable), media types
 that matter (clay heavy/durable vs papyrus light/fragile), a real outfit step,
 automation you *assign* rather than receive, and the measurement plan in
@@ -27,6 +27,15 @@ road you documented feel good?
 The measurement plan is the gate for everything below it, and specifically for
 milestone 2. A baseline taken in silence is the only thing that can tell us
 later whether sound helped.
+
+It lands in two halves, and the split is the point. `scripts/measure.gd` reads
+the chronicle and reports four of the five signals over seeded runs; the fifth
+— the reaction at the first automated return — is not instrumented, because
+"watch faces, not surveys" is an instruction rather than a caveat. The build
+points at the moment and refuses to score it. `docs/design/measurement.md` has
+what each signal is computed from and the bands it is judged against;
+`docs/design/playtest-script.md` is the observation protocol for the human
+half. What remains before milestone 2 is not code: it is running sessions.
 
 **2. The audible payoff — small, gated, measured against the baseline.**
 Doctrine in `docs/audio-direction.md`; hooks in `docs/design/systems.md` §6.

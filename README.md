@@ -73,6 +73,19 @@ Every seed is a different house, a different sequence of deaths and ledgers,
 a different book. Seed 101 is the committed sample; seed 1259 — the Treaty
 year — anchors the determinism check.
 
+The same log the book is rendered from is also read for numbers:
+
+```bash
+godot --headless --path . -s scripts/measure.gd    # the vertical slice's five signals
+```
+
+Four of the five are computed from the chronicle. The fifth — the reaction at
+the first automated return — is not, and will not be: the design says "watch
+faces, not surveys", so the pass locates the moment and prints `[NOT MEASURED]`
+against it. `docs/design/measurement.md` covers what each signal is computed
+from and the bands it is judged against; `docs/design/playtest-script.md` is
+the observation protocol for the parts a person has to be in the room for.
+
 ## Play it in a browser
 
 The playable beta is a web export. CI builds it on every push as the
@@ -116,11 +129,12 @@ or it doesn't enter), including the working-from-a-phone workflow.
 ```
 sim/          Pure, deterministic simulation. No Nodes, no prose. Emits events.
 chronicle/    Renderer (events -> prose) and the demo runner.
-data/         Content: routes, names, prose templates, codex. JSON + Markdown.
+measure/      The same events -> numbers. Reads the log; never a system in sim/.
+data/         Content: routes, names, prose templates, tuning bands, codex.
 game/         Scenes. Thin. Currently: a button that chronicles a house.
 tests/        gdUnit4 suites. ./scripts/check.sh is the definition of done.
 docs/         Design bible (docs/design/, docs/world/) + the sample chronicle.
-scripts/      setup, check, demo, codex build.
+scripts/      setup, check, demo, measure, codex build.
 CLAUDE.md     Working agreement for AI agents: conventions, constraints, rules.
 ```
 
@@ -130,10 +144,14 @@ This is vertical-slice steps 1–5 of `docs/design/vertical-slice.md`: the seaso
 clock, daylight, travel, the four ledger entry types, death and succession, the
 Courier, seals and rumours, the outfit step, Standing Contracts, media that
 matters on the road, and assignable automation — the loop
-**write → die → inherit → automate → read the book**, complete in the sim.
-Not built: the playable layer (the demo brain still stands in for you), the
-Keeper and Endurance, archive corruption, incident reports and caravan loss,
-factions, presses, real UI, saves. The design docs know the way.
+**write → die → inherit → automate → read the book**, complete in the sim, with
+a text-first playable layer over it and the measurement plan that closes
+milestone 1. What the measurement has not had yet is **playtests** — the
+apparatus exists, the sessions have not been run, and until they are, the
+slice's question is unanswered rather than answered well.
+Not built: the Keeper and Endurance, archive corruption, incident reports and
+caravan loss, order revocation, factions, presses, real UI, saves, any audio at
+all. The design docs know the way.
 
 ## License
 

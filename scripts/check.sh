@@ -25,5 +25,25 @@ TIN_SEED=1259 TIN_SEASONS=6 "${GODOT}" --headless --path . -s scripts/demo_seaso
 diff -q /tmp/tinroad_demo_a.txt /tmp/tinroad_demo_b.txt > /dev/null
 grep -q "The Chronicle of" /tmp/tinroad_demo_a.txt
 
+echo "== measurement (the five signals must report, deterministically) =="
+TIN_SEEDS=1259,735 TIN_SEASONS=8 "${GODOT}" --headless --path . -s scripts/measure.gd > /tmp/tinroad_measure_a.txt
+TIN_SEEDS=1259,735 TIN_SEASONS=8 "${GODOT}" --headless --path . -s scripts/measure.gd > /tmp/tinroad_measure_b.txt
+diff -q /tmp/tinroad_measure_a.txt /tmp/tinroad_measure_b.txt > /dev/null
+# Every signal in docs/design/vertical-slice.md must appear, including the one
+# the build refuses to score. A silently dropped signal is the failure this
+# guards against.
+for signal in \
+  "Daylight spent writing vs travelling" \
+  "A full route surveyed" \
+  "Reaction at first automated return" \
+  "Whether the Courier is used" \
+  "Whether season two differs from season one"
+do
+  grep -q "${signal}" /tmp/tinroad_measure_a.txt || {
+    echo "measurement dropped a signal: ${signal}" >&2; exit 1; }
+done
+grep -q "\[NOT MEASURED\] Reaction at first automated return" /tmp/tinroad_measure_a.txt || {
+  echo "the reaction signal must stay unscored — it is watched, not measured." >&2; exit 1; }
+
 echo
 echo "ALL CHECKS PASSED"

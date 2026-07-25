@@ -7,6 +7,10 @@ extends Control
 
 enum Phase { TITLE, OUTFIT, ROAD, DESK }
 
+## Prefix on every measurement line, so a playtest transcript can be sieved out
+## of a log with grep and fed to whatever plots it (docs/design/measurement.md).
+const MEASURE_TAG := "TINMEASURE "
+
 ## The words for sim refusal codes. Presentation strings, so they live with
 ## the presentation.
 const OUTFIT_REFUSALS: Dictionary[StringName, String] = {
@@ -215,13 +219,38 @@ func _after_action() -> void:
 		}
 		desk_label.text = str(endings.get(season.result, "The season is over."))
 		_show_phase(Phase.DESK)
+		_emit_measurement()
+
+
+## Emit the season record the measurement pass also produces, so a human
+## session and `scripts/measure.gd` yield the same shape and can be read side
+## by side. Computed from the chronicle, exactly as the headless pass computes
+## it — the playable layer counts nothing itself.
+##
+## Called again when a desk action changes the closing season (posting a
+## standing order lands in the season just finished). Two lines for one season
+## is expected: the later one supersedes the earlier.
+func _emit_measurement() -> void:
+	if house == null:
+		return
+	var measurement := Measurement.of_chronicle(house.chronicle, house.rng.master_seed)
+	if measurement.records.is_empty():
+		return
+	var record: SeasonRecord = measurement.records[measurement.records.size() - 1]
+	var row := record.to_dict()
+	row["seed"] = house.rng.master_seed
+	print(MEASURE_TAG + JSON.stringify(row))
+	desk_label.text += "\n\n" + record.headline()
 
 
 func _on_post_order_pressed() -> void:
 	refusal_label.text = ""
 	if not house.post_standing_order():
 		_refuse("No order posted: it takes a documented road, %d shekels, and no order already standing." % House.STANDING_ORDER_COST)
+		_refresh()
+		return
 	_refresh()
+	_emit_measurement()
 
 
 func _on_next_season_pressed() -> void:

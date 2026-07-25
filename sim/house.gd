@@ -167,8 +167,11 @@ func merge(season: Season) -> void:
 
 ## Fold surveyed legs out of merged entries into the House's knowledge of the
 ## road. A sealed survey documents its leg (confirming any standing rumour);
-## an unsealed one enters as rumour. The route-documented moment is announced
-## exactly once, on the transition.
+## an unsealed one enters as rumour. Each of the three outcomes says so on the
+## log — &"leg_surveyed", &"rumour_confirmed", &"leg_rumoured" — so what the
+## House knows about the road is readable from the chronicle alone, at any
+## point in its history. The route-documented moment is announced exactly once,
+## on the transition.
 func _fold_surveys(merged: Array[Dictionary], season: Season) -> void:
 	var was_documented := route_documented()
 	for entry: Dictionary in merged:
@@ -182,6 +185,9 @@ func _fold_surveys(merged: Array[Dictionary], season: Season) -> void:
 			if rumoured_legs.has(leg):
 				rumoured_legs.erase(leg)
 				chronicle.record(ChronicleEvent.make(season.number, season.day, &"rumour_confirmed",
+					route.nodes[0].display_name, season.scribe, {"leg": str(leg)}))
+			else:
+				chronicle.record(ChronicleEvent.make(season.number, season.day, &"leg_surveyed",
 					route.nodes[0].display_name, season.scribe, {"leg": str(leg)}))
 		elif not rumoured_legs.has(leg):
 			rumoured_legs.append(leg)

@@ -37,17 +37,17 @@
     "{place} passed beneath the caravan's feet and asked for nothing."
   ],
   "delayed": [
-    "{place} took its toll in patience — {cost} days of light gone to waiting.",
+    "{place} took its toll in patience — {road_days} of light gone to waiting.",
     "The road slowed at {place}, the way roads do when watched.",
-    "Two days were lost at {place}, and no one could afterwards say to what."
+    "The road took {road_days} at {place}, and no one could afterwards say to what."
   ],
   "mishap": [
-    "At {place}, the road collected: {lost}, and three days of light.",
+    "At {place}, the road collected: {lost}, and {road_days} of light.",
     "{place} was unkind. The caravan left lighter by {lost}.",
     "Something went wrong at {place} in the ordinary way, and it cost {lost}."
   ],
   "peril_survived": [
-    "{place} nearly kept {scribe}. It settled for four days of light.",
+    "{place} nearly kept {scribe}. It settled for {road_days} of light.",
     "There are prayers for what happened at {place}, and {scribe} used several.",
     "{scribe} came through {place} alive, which the ledger records without comment."
   ],
@@ -62,7 +62,7 @@
     "Among the stones of {place}, an older road's leavings. {scribe} made a note."
   ],
   "entry_written": [
-    "{scribe} stopped and wrote: a {entry_type} on {subject}. It cost {cost_days} of light, and it was the point.",
+    "{scribe} stopped and wrote: a {entry_type} on {subject}. It cost {writing_days} of light, and it was the point.",
     "Daylight went to ink at {place} — a {entry_type} concerning {subject}.",
     "The pen came out at {place}. A {entry_type}: {subject}. The road will remember what {scribe} paid to know it."
   ],
@@ -95,6 +95,11 @@
     "At the guild hall of {place}, {scribe} bought the season's pack: {clay} clay, {papyrus} papyrus, {seals} seals — {spent} shekels, weighed out before the dew burned off.",
     "{spent} shekels became {clay} tablets of clay, {papyrus} sheets of papyrus, and {seals} seals. Every choice from here would be about what the pack held.",
     "{scribe} outfitted at {place}: {clay} clay, {papyrus} papyrus, {seals} seals. What the pack could not carry, the season would do without."
+  ],
+  "leg_surveyed": [
+    "Leg {leg} entered the archive under seal — surveyed, vouched for, and from this day a thing the House knows rather than believes.",
+    "The survey of leg {leg} was filed with its seal intact. One more stretch of road had stopped being a matter of opinion.",
+    "Leg {leg}, written down and sealed. The archive of {house} gained a fact, which is the only kind of ground a caravan can be sent out on."
   ],
   "leg_rumoured": [
     "The survey of leg {leg} arrived unsealed, and the archive shelved it among the rumours — read, doubted, half-believed.",
