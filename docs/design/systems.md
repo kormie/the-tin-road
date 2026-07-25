@@ -129,7 +129,19 @@ Late-game. A House that acquires press capacity can reproduce its own archive.
 
 Publishing is the game's only genuinely irreversible action, and it is how a player pushes the Concord axis deliberately rather than incidentally. Printing the treaty is a move available to the player and it does what it did in 735 AK.
 
-## 6. Open questions
+## 6. Audible systems
+
+Three places where sound carries a rule rather than decorating one. Doctrine, the pipeline, and the licensing gate live in `../audio-direction.md`; this section is only the mechanics. Each of these must also work with the sound off — audio is a second channel for information the game already provides, never the only one.
+
+**Writing has a duration.** The stylus runs for a length proportional to the entry: a Note is a scratch, a Treatise is a wearying passage. §1's tension is arithmetic about daylight, and this is the one place a player can feel that arithmetic without reading a number.
+
+**The seal is a sound.** Authentication (§3) is the press into damp clay. A sealed entry and a rumour differ mechanically at half value, and they differ audibly too: sealed entries are recited in their writer's voice, rumours by an uncredited stranger recounting what they were told. No tutorial needed.
+
+**A forgery mispronounces the road.** For corruption (§2): a forged entry is generated without the House pronunciation lexicon, so a place name comes out wrong, because the forger was never trained in this House and does not know how the name is said. The same entry renders with that name *misspelled*, so the tell is catchable by ear or by eye. It is identical to a clean entry until acted on, which is the requirement, and it costs nothing to produce because it is a pipeline step omitted rather than a system added.
+
+This makes the Keeper's **Verify** (§4) an act of listening: have the entry read aloud. The support role's counter to the game's most dangerous system is to ask someone to say it out loud, which is both good mechanics and the correct joke.
+
+## 7. Open questions
 
 Unresolved. Flagged rather than papered over.
 
@@ -137,3 +149,4 @@ Unresolved. Flagged rather than papered over.
 - Is there co-op? The Scribe and Keeper are built for it, but generational hand-off across two players is an unsolved structural problem.
 - How does the Concord axis surface to the player? A visible meter cheapens it. No feedback at all makes thirty seasons of drift invisible.
 - Does automation ever fail? A route that silently stops paying is realistic and probably infuriating.
+- Does the audible payoff (§6) actually move the slice's numbers, or does it only move opinions? It is scheduled as an A/B against a silent baseline precisely because nobody can answer that in advance, including us.

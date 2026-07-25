@@ -37,10 +37,22 @@ image-generation models using `docs/art-direction.md`; post-processing
 (crops, WebP, palette checks) is ImageMagick/Pillow in scripts. Import is
 `godot --headless --import`. No drawing app in the loop.
 
-**Audio.** When milestone 7 arrives: SFX and ambience via API-scriptable
-generators (e.g. ElevenLabs SFX API, Stable Audio), batch-generated from a
-manifest file, imported headless. Music direction TBD in a future
-`docs/audio-direction.md` before any tool is chosen.
+**Audio — tool now chosen; see `docs/audio-direction.md`.** That file was the
+precondition this table demanded, and it exists. The tool is **ElevenLabs**
+(sound effects, text-to-speech, voice design, music), driven from `scripts/`
+by API against `data/audio/manifest.json`, hash-locked so nothing regenerates
+unchanged, and imported headless. A first slice of it arrives at milestone 2,
+gated on the vertical slice's measurement data; the rest waits for milestone 9.
+
+The rule that matters more than the tool: **build-time only, never runtime.**
+A key in a web export is a key given away, a per-player API bill is a business
+model nobody asked for, an offline player would lose the game's voice, and
+generation that varies per playthrough would break "same seed, same story."
+Generated audio is committed content, exactly like generated art.
+
+Licensing is an open gate, not a settled question — commercial rights depend
+on the account tier, and `audio-direction.md` requires the tier and date be
+recorded there before any generated second ships in a build.
 
 **Fonts.** OFL-licensed only (the site work used Fraunces + Instrument Sans +
 IBM Plex Mono — same family thinking applies in-game). Licenses ship in
