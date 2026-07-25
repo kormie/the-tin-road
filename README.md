@@ -62,6 +62,24 @@ Every seed is a different house, a different sequence of deaths and ledgers,
 a different book. Seed 101 is the committed sample; seed 1259 — the Treaty
 year — anchors the determinism check.
 
+## Play it in a browser
+
+The playable beta is a web export. CI builds it on every push as the
+`the-tin-road-web` artifact (Actions → latest run → Artifacts); unzip and
+serve the folder from any static host — threads are disabled, so no special
+headers are needed. Or build it locally:
+
+```bash
+./scripts/export_web.sh                     # fetches web templates if absent
+python3 -m http.server -d build/web 8080    # then open localhost:8080
+```
+
+Found a House, buy the pack (clay is heavy, papyrus drowns), walk the road
+choosing when to write and what to seal, and read the book you are making as
+it grows. Season one can kill you — that is what the courier is for. Document
+all three legs, post the standing order, and watch a caravan walk your road
+without you.
+
 ## The ebook pipeline
 
 The lore the game reads and the book you'd publish are the same files.

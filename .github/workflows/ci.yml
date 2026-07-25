@@ -38,3 +38,40 @@ jobs:
 
       - name: Build codex
         run: ./scripts/build_codex.sh
+
+  build-web:
+    runs-on: ubuntu-latest
+    needs: check
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Godot
+        id: cache-godot
+        uses: actions/cache@v4
+        with:
+          path: ~/godot
+          key: godot-${{ env.GODOT_VERSION }}-linux-x86_64
+
+      - name: Download Godot
+        if: steps.cache-godot.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/godot
+          curl -sL -o ~/godot/godot.zip \
+            "https://github.com/godotengine/godot-builds/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip"
+          unzip -o -q ~/godot/godot.zip -d ~/godot
+          chmod +x ~/godot/Godot_v${GODOT_VERSION}_linux.x86_64
+
+      - name: Cache web export templates
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/godot/export_templates
+          key: godot-templates-web-${{ env.GODOT_VERSION }}
+
+      - name: Export web build
+        run: GODOT=~/godot/Godot_v${GODOT_VERSION}_linux.x86_64 ./scripts/export_web.sh
+
+      - name: Upload web build
+        uses: actions/upload-artifact@v4
+        with:
+          name: the-tin-road-web
+          path: build/web

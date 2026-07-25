@@ -12,8 +12,8 @@ merge at half value) · the outfit step (patron advance, priced bulk-capped
 kit) · Standing Contracts (income per leg, road-wired call-ins, the season
 purse) · media that matters (water ruins papyrus, heavy packs cost daylight) ·
 assignable automation (standing orders: posted, priced, generational) · the
-chronicle pipeline (events → prose → markdown) · codex → ebook build ·
-tests + CI.
+chronicle pipeline (events → prose → markdown) · a playable text-first UI ·
+a web-export beta (CI artifact) · codex → ebook build · tests + CI.
 
 ## Milestones
 

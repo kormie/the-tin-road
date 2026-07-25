@@ -84,7 +84,9 @@ authentication (unsealed surveys merge as half-value rumours), the outfit step
 call-ins, the season purse, contract-gated seal replenishment), media types
 that matter (water ruins papyrus, heavy packs cost daylight), assignable
 automation (a standing order in the archive: silver to post, a per-season
-caravan fee, income scaled by archive quality), and the chronicle pipeline.
+caravan fee, income scaled by archive quality), the chronicle pipeline, a
+playable text-first UI (`game/session.gd` — thin, attempt-and-report), and
+a web-export pipeline (`scripts/export_web.sh`, CI artifact).
 **Not built:** order revocation, incident reports and caravan loss,
 the Keeper and Endurance,
 archive corruption, factions beyond the Yabninu commission const, presses, the
