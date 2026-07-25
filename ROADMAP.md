@@ -6,9 +6,12 @@ the riskiest assumption first. Agents: build the current milestone; do not
 gold-plate ahead of it.
 
 **Built (v0 scaffold):** season clock · daylight · node travel · the four
-ledger entry types · death (peril + stranding) · succession · naive automation
-payout · the chronicle pipeline (events → prose → markdown) · codex → ebook
-build · tests + CI.
+ledger entry types · death (peril + stranding) · succession · the Courier
+(send the ledger home, die survivable) · seals & rumours (unsealed surveys
+merge at half value) · the outfit step (patron advance, priced bulk-capped
+kit) · Standing Contracts (income per leg, road-wired call-ins, the season
+purse) · naive automation payout · the chronicle pipeline (events → prose →
+markdown) · codex → ebook build · tests + CI.
 
 ## Milestones
 

@@ -14,14 +14,23 @@ const HOME_BUFFER := 6  # daylight held in reserve against the road home. First-
 static func run(seed_value: int, seasons: int, house_name: String = "House Sapanu") -> Dictionary:
 	var route := Route.load_from_file("res://data/routes/tin_road_slice.json")
 	var naming := Naming.load_from_file("res://data/names/scribes.json")
+	var catalog := ContractCatalog.load_from_file("res://data/contracts/slice_contracts.json")
 	var house := House.new(house_name, seed_value, route, naming)
 	for _i: int in range(seasons):
-		var season := house.start_season()
+		var season := house.start_season(_choose_outfit(house))
 		season.begin()
+		for template: ContractCatalog.ContractTemplate in catalog.templates:
+			season.sign_contract(template)  # The brain signs everything on offer.
 		_play_out(season, route)
 		house.merge(season)
 	var renderer := ChronicleRenderer.load_default(house.rng.stream(&"prose"))
 	return {"book": renderer.render_book(house), "house": house}
+
+
+## The brain buys the standard kit every season, deliberately. Outfit choice
+## belongs to a human; the demo only has to exercise the purchase.
+static func _choose_outfit(_house: House) -> Outfit:
+	return Outfit.default_kit()
 
 
 static func _play_out(season: Season, route: Route) -> void:
@@ -32,6 +41,10 @@ static func _play_out(season: Season, route: Route) -> void:
 		if season.is_over():
 			return
 		_consider_writing(season, route)
+		# At the far guild hall, after the writing is done (a spent survey
+		# frees pack room), restock seals if the pouch is low.
+		if season.position == route.last_index() and season.seals <= 1:
+			season.buy_seal()
 
 
 static func _consider_writing(season: Season, route: Route) -> void:
@@ -42,11 +55,20 @@ static func _consider_writing(season: Season, route: Route) -> void:
 	else:
 		travel_still_owed = (route.last_index() * 2 - season.position) * Season.TRAVEL_COST
 	var to_spare := season.daylight - travel_still_owed - HOME_BUFFER
+	# A bad season admits it: when the light budget goes red, send what exists
+	# home by courier. Once — a second dispatch would repeat the first.
+	if to_spare < 0 and season.sent_entries.is_empty() and not season.entries.is_empty():
+		season.send_courier()
+		return
 	# Survey the leg just completed, if the House doesn't know it and light allows.
 	# One survey per season: the demo brain has read what happens to greedy scribes.
 	if node.leg >= 1 and season.surveys.is_empty() and to_spare >= Ledger.daylight_cost(Ledger.EntryType.SURVEY):
+		# Seal only what settles the road: the leg that completes it, or a
+		# rumour a predecessor left behind. Earlier legs go home as hearsay —
+		# the rumour economy gets exercised, and a courier seal stays in hand.
+		var should_seal := node.leg == route.leg_count() or season.house.rumoured_legs.has(node.leg)
 		season.write_entry(Ledger.EntryType.SURVEY,
-			"the road as far as %s" % node.display_name, node.leg)
+			"the road as far as %s" % node.display_name, node.leg, should_seal)
 		return
 	# Otherwise, cheap notes at ruins — a scribe cannot help themselves.
 	if node.kind == "ruin" and to_spare >= Ledger.daylight_cost(Ledger.EntryType.NOTE):

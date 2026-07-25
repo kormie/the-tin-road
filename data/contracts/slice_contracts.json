@@ -1,0 +1,46 @@
+{
+  "_comment": "Standing contracts for the vertical slice (systems.md §3). 'trigger' must be one of: shaken_down, peril_survived, turned_home — the road outcomes a call-in can ride. A demand_daylight is always honoured and can strand you; a demand_silver defaults when the purse is short. terms/demand/penalty are the chronicle's words — the sim never writes prose. All numbers first-pass; argue in playtests. sojourners_right is signed at Ugarit deliberately: a trade-mission arrangement made before departure, which is why its seal access works at the far guild hall.",
+  "contracts": [
+    {
+      "id": "urtenu_consignment",
+      "display_name": "the Urtenu consignment",
+      "holder": "House Urtenu",
+      "sign_at": ["ugarit"],
+      "income_per_leg": 2,
+      "trigger": "shaken_down",
+      "demand_silver": 12,
+      "default_media_penalty": 2,
+      "voids_on_default": true,
+      "terms": "carriage silver every leg, callable wherever Urtenu's factors fly their sail",
+      "demand": "twelve shekels, weighed on the spot",
+      "penalty": "two of media, seized against the debt, and the consignment torn up"
+    },
+    {
+      "id": "storm_pledge",
+      "display_name": "the storm pledge",
+      "holder": "the temple of the storm god",
+      "sign_at": ["ugarit"],
+      "peril_death_chance": 0.15,
+      "trigger": "peril_survived",
+      "demand_daylight": 3,
+      "voids_on_default": false,
+      "terms": "the god's hand over the bad crossings, tithed in daylight each time it is needed",
+      "demand": "three days of light, owed to the god who kept you",
+      "penalty": ""
+    },
+    {
+      "id": "sojourners_right",
+      "display_name": "the sojourner's right",
+      "holder": "the guild hall of Alashiya",
+      "sign_at": ["ugarit"],
+      "grants_seal_access": true,
+      "trigger": "turned_home",
+      "demand_silver": 4,
+      "default_media_penalty": 0,
+      "voids_on_default": true,
+      "terms": "standing at the Alashiyan guild hall, arranged from Ugarit before the sail",
+      "demand": "four shekels of standing dues at the turn for home",
+      "penalty": "the right lapses, and the guild hall's door closes"
+    }
+  ]
+}

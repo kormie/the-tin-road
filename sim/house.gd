@@ -6,6 +6,10 @@ extends RefCounted
 
 const AUTOMATED_INCOME_BASE := 260  # shekels, weighed. First-pass.
 const AUTOMATED_INCOME_SPREAD := 120
+const YABNINU_ADVANCE := 30  # shekels per season. First-pass.
+# The slice's one commissioning faction (docs/design/vertical-slice.md).
+# A const until factions become commission data at milestone 5.
+const PATRON_NAME := "House Yabninu"
 
 var display_name: String
 var rng: SimRng
@@ -17,6 +21,7 @@ var generation := 0
 var past_scribes: Array[String] = []
 var archive: Array[Dictionary] = []
 var surveyed_legs: Array[int] = []
+var rumoured_legs: Array[int] = []
 var silver := 0
 
 
@@ -28,13 +33,17 @@ func _init(p_name: String, p_seed: int, p_route: Route, p_naming: Naming) -> voi
 	route = p_route
 
 
+## A leg counts toward documentation whether surveyed under seal or held as
+## rumour — but the caravan pays rumoured legs at half (see _archive_income).
 func route_documented() -> bool:
-	return surveyed_legs.size() >= route.leg_count()
+	return surveyed_legs.size() + rumoured_legs.size() >= route.leg_count()
 
 
-## Begin the next generation's season. Handles succession and any automated
-## caravans the archive can already run on its own.
-func start_season() -> Season:
+## Begin the next generation's season: succession, any automated caravan the
+## archive can already run, the patron's advance, and the outfit purchase.
+## A null or invalid outfit falls back to the default kit, which the advance
+## always covers (YABNINU_ADVANCE >= the default kit's cost).
+func start_season(outfit: Outfit = null) -> Season:
 	generation += 1
 	var scribe := naming.pick(rng.stream(&"names"), past_scribes)
 	past_scribes.append(scribe)
@@ -42,31 +51,101 @@ func start_season() -> Season:
 		chronicle.record(ChronicleEvent.make(generation, 0, &"succession",
 			route.nodes[0].display_name, scribe,
 			{"predecessor": past_scribes[past_scribes.size() - 2], "house": display_name}))
+	else:
+		# The book opens with the house and its first scribe, not with money.
+		chronicle.record(ChronicleEvent.make(generation, 0, &"season_began",
+			route.nodes[0].display_name, scribe, {}))
 	if route_documented():
-		var income := AUTOMATED_INCOME_BASE + rng.stream(&"trade").randi_range(0, AUTOMATED_INCOME_SPREAD)
+		var raw := AUTOMATED_INCOME_BASE + rng.stream(&"trade").randi_range(0, AUTOMATED_INCOME_SPREAD)
+		var income := _archive_income(raw)
 		silver += income
 		chronicle.record(ChronicleEvent.make(generation, 0, &"caravan_returned",
 			route.nodes[0].display_name, scribe,
 			{"income": str(income), "route": route.display_name}))
-	return Season.new(self, route, rng, chronicle, scribe, generation)
+	silver += YABNINU_ADVANCE
+	chronicle.record(ChronicleEvent.make(generation, 0, &"commissioned",
+		route.nodes[0].display_name, scribe,
+		{"patron": PATRON_NAME, "advance": str(YABNINU_ADVANCE)}))
+	if outfit == null or not outfit.is_valid(silver):
+		outfit = Outfit.default_kit()
+	silver -= outfit.total_cost()
+	chronicle.record(ChronicleEvent.make(generation, 0, &"outfitted",
+		route.nodes[0].display_name, scribe,
+		{"clay": str(outfit.clay), "papyrus": str(outfit.papyrus),
+			"seals": str(outfit.seals), "spent": str(outfit.total_cost())}))
+	return Season.new(self, route, rng, chronicle, scribe, generation, outfit)
 
 
-## Fold a finished season back into the House. Only a scribe who came home
-## merges anything — the courier (not yet built) is what will soften this.
+## What the caravan actually pays: full share per sealed leg, half per
+## rumoured leg — "merges at reduced value" in shekels (systems.md §3).
+func _archive_income(raw: int) -> int:
+	var legs := route.leg_count()
+	if legs < 1:
+		return raw  # A route with no legs has nothing to discount.
+	var sealed_count := 0
+	var rumoured_count := 0
+	for leg: int in range(1, legs + 1):
+		if surveyed_legs.has(leg):
+			sealed_count += 1
+		elif rumoured_legs.has(leg):
+			rumoured_count += 1
+	@warning_ignore("integer_division")
+	return raw * (2 * sealed_count + rumoured_count) / (2 * legs)
+
+
+## Fold a finished season back into the House. A scribe who came home merges
+## everything; a scribe the road kept merges only what the courier already
+## carried (docs/design/systems.md §2: partial merge on courier delivery).
 func merge(season: Season) -> void:
-	if season.result != Season.Result.RETURNED:
+	if not season.is_over():
 		return
-	var newly_surveyed: Array[int] = []
-	for entry: Dictionary in season.entries:
+	if season.result == Season.Result.RETURNED:
+		for entry: Dictionary in season.entries:
+			archive.append(entry)
+		if not season.entries.is_empty():
+			chronicle.record(ChronicleEvent.make(season.number, season.day, &"ledger_merged",
+				route.nodes[0].display_name, season.scribe,
+				{"entries": str(season.entries.size()), "house": display_name}))
+		if season.silver > 0:
+			silver += season.silver
+			chronicle.record(ChronicleEvent.make(season.number, season.day, &"purse_banked",
+				route.nodes[0].display_name, season.scribe,
+				{"silver": str(season.silver)}))
+			season.silver = 0  # Bank once; a second merge must not double-count.
+		_fold_surveys(season.entries, season)
+		return
+	if season.sent_entries.is_empty():
+		return
+	for entry: Dictionary in season.sent_entries:
 		archive.append(entry)
-	for leg: int in season.surveys:
-		if not surveyed_legs.has(leg):
+	chronicle.record(ChronicleEvent.make(season.number, season.day, &"courier_delivered",
+		route.nodes[0].display_name, season.scribe,
+		{"entries": str(season.sent_entries.size()), "house": display_name}))
+	_fold_surveys(season.sent_entries, season)
+
+
+## Fold surveyed legs out of merged entries into the House's knowledge of the
+## road. A sealed survey documents its leg (confirming any standing rumour);
+## an unsealed one enters as rumour. The route-documented moment is announced
+## exactly once, on the transition.
+func _fold_surveys(merged: Array[Dictionary], season: Season) -> void:
+	var was_documented := route_documented()
+	for entry: Dictionary in merged:
+		if str(entry.get("type", "")) != Ledger.type_name(Ledger.EntryType.SURVEY):
+			continue
+		var leg := int(entry.get("leg", -1))
+		if leg < 1 or surveyed_legs.has(leg):
+			continue
+		if bool(entry.get("sealed", false)):
 			surveyed_legs.append(leg)
-			newly_surveyed.append(leg)
-	if not season.entries.is_empty():
-		chronicle.record(ChronicleEvent.make(season.number, season.day, &"ledger_merged",
-			route.nodes[0].display_name, season.scribe,
-			{"entries": str(season.entries.size()), "house": display_name}))
-	if not newly_surveyed.is_empty() and route_documented():
+			if rumoured_legs.has(leg):
+				rumoured_legs.erase(leg)
+				chronicle.record(ChronicleEvent.make(season.number, season.day, &"rumour_confirmed",
+					route.nodes[0].display_name, season.scribe, {"leg": str(leg)}))
+		elif not rumoured_legs.has(leg):
+			rumoured_legs.append(leg)
+			chronicle.record(ChronicleEvent.make(season.number, season.day, &"leg_rumoured",
+				route.nodes[0].display_name, season.scribe, {"leg": str(leg)}))
+	if not was_documented and route_documented():
 		chronicle.record(ChronicleEvent.make(season.number, season.day, &"route_documented",
 			route.nodes[0].display_name, season.scribe, {"route": route.display_name}))
