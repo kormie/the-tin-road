@@ -44,13 +44,21 @@ Step 5 is the whole build. Steps 1 through 4 exist to make step 5 mean something
 
 Instrument the playtest for these specifically. Impressions after the fact are not usable data here.
 
-| Signal | What it tells you |
-|---|---|
-| Daylight spent writing vs travelling | Whether the central tension is live or one option dominates |
-| Whether they survey a full route unprompted | Whether the automation goal is legible without being told |
-| Reaction at first automated return | The hypothesis, answered. Watch faces, not surveys. |
-| Whether they use the Courier | Whether the cost is calibrated or prohibitive |
-| Whether season two feels different from season one | Whether inheritance reads as progress or as a reset |
+| Signal | What it tells you | Where the number comes from |
+|---|---|---|
+| Daylight spent writing vs travelling | Whether the central tension is live or one option dominates | the event log |
+| Whether they survey a full route unprompted | Whether the automation goal is legible without being told | the log, plus the hint ladder in §2 of the playtest script |
+| Reaction at first automated return | The hypothesis, answered. Watch faces, not surveys. | **a person, watched.** Not instrumented, on purpose |
+| Whether they use the Courier | Whether the cost is calibrated or prohibitive | the event log |
+| Whether season two feels different from season one | Whether inheritance reads as progress or as a reset | the log for what carried; §5 of the script for whether it registered |
+
+Built. `docs/design/measurement.md` says what each signal is computed from and
+what a healthy number looks like; `docs/design/playtest-script.md` is the
+observation protocol for the half of this table that is not arithmetic. Run the
+pass with `godot --headless --path . -s scripts/measure.gd`.
+
+The third row stays unscored. No proxy metric stands in for it, and
+`scripts/check.sh` fails if one ever does.
 
 ## Failure conditions
 

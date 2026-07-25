@@ -1,0 +1,49 @@
+{
+  "_comment": "What a healthy number looks like on the first-pass tuning, for the five signals in docs/design/vertical-slice.md. These are PREDICTIONS, written before the playtests, so that a disappointing result cannot be retrofitted into a satisfying one. They are the numbers most worth arguing with in this repo — argue by editing this file and saying why in the commit, not by rationalising a reading. Reasoning for each band, and what a breach implies: docs/design/measurement.md.",
+  "signals": {
+    "daylight_split": {
+      "title": "Daylight spent writing vs travelling",
+      "tells": "Whether the central tension is live or one option dominates",
+      "metric": "share of spent light that went to writing, %",
+      "low": 25,
+      "high": 45,
+      "healthy": "A quarter to a half of the season's light goes to the Ledger. Below that, writing is a tax players pay grudgingly; above it, the road is decorative.",
+      "worrying": "Under 25% is the 'players optimise writing away' failure condition. Over 45% means travel is too cheap to be a real alternative."
+    },
+    "route_surveyed": {
+      "title": "A full route surveyed",
+      "tells": "Whether the automation goal is legible without being told",
+      "metric": "seasons until the route is documented whole",
+      "low": 2,
+      "high": 5,
+      "healthy": "Two to five seasons. Season one cannot finish it (three legs, forty days), so 2 is the floor and a run that reaches it has understood the goal.",
+      "worrying": "Above 5, the goal is either illegible or too expensive to pursue; a run that never documents it has failed the slice's whole question. Below 2 would mean the threshold is trivially cheap."
+    },
+    "first_automated_return": {
+      "title": "Reaction at first automated return",
+      "tells": "The hypothesis, answered",
+      "metric": "not telemetry — a face, watched, at a moment the build can only point to",
+      "measurable": false,
+      "healthy": "An unprompted reaction — leaning in, a laugh, reading the caravan line twice, saying something out loud. Recorded by an observer against docs/design/playtest-script.md §3.",
+      "worrying": "Silence, or a scroll past. If the moment the whole slice exists to produce does not register, no number rescues it."
+    },
+    "courier_use": {
+      "title": "Whether the Courier is used",
+      "tells": "Whether the cost is calibrated or prohibitive",
+      "metric": "share of seasons in which a courier was sent, %",
+      "low": 10,
+      "high": 40,
+      "healthy": "Sent in roughly one season in five. The Courier is meant to be an admission that a season is going badly, not a routine.",
+      "worrying": "Under 10% with entries being lost to deaths means the price is prohibitive and the seal economy is starving it. Over 40% means it is simply the correct move and has stopped being a decision."
+    },
+    "season_two_delta": {
+      "title": "Whether season two differs from season one",
+      "tells": "Whether inheritance reads as progress or as a reset",
+      "metric": "legs of road the second scribe inherits from the first",
+      "low": 1,
+      "high": 3,
+      "healthy": "At least one leg carries. The second scribe should open on ground the first paid for, in a form they can see.",
+      "worrying": "Zero legs inherited is the 'inheritance reads as a reset' failure condition — season one bought the House nothing it can point at, and the generational premise is in trouble."
+    }
+  }
+}

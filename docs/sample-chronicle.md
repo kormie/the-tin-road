@@ -72,11 +72,11 @@ The Salt Marsh passed beneath the caravan's feet and asked for nothing.
 
 Milkuyaton stopped and wrote: a survey on the road as far as the Salt Marsh. It cost 8 days of light, and it was the point.
 
-Two days were lost at the Rival Sail, and no one could afterwards say to what.
+The road took 2 days at the Rival Sail, and no one could afterwards say to what.
 
 Open Water passed beneath the caravan's feet and asked for nothing.
 
-At the Drowned Shrine, the road collected: a clay tablet, and three days of light.
+At the Drowned Shrine, the road collected: a clay tablet, and 3 days of light.
 
 Alashiya passed beneath the caravan's feet and asked for nothing.
 
@@ -90,7 +90,7 @@ A seal changed hands at Alashiya — 5 shekels, weighed. The sojourner's arrange
 
 In the silence of the Drowned Shrine, Milkuyaton found something the sea had not finished claiming.
 
-Two days were lost at Open Water, and no one could afterwards say to what.
+The road took 2 days at Open Water, and no one could afterwards say to what.
 
 The Rival Sail took its toll in patience — 2 days of light gone to waiting.
 
@@ -123,7 +123,7 @@ The Salt Marsh passed beneath the caravan's feet and asked for nothing.
 
 The Rival Sail took its toll in patience — 2 days of light gone to waiting.
 
-Two days were lost at Open Water, and no one could afterwards say to what.
+The road took 2 days at Open Water, and no one could afterwards say to what.
 
 Daylight went to ink at Open Water — a survey concerning the road as far as Open Water.
 
@@ -190,7 +190,7 @@ The Drowned Shrine passed beneath the caravan's feet and asked for nothing.
 
 Open Water passed beneath the caravan's feet and asked for nothing.
 
-Two days were lost at the Rival Sail, and no one could afterwards say to what.
+The road took 2 days at the Rival Sail, and no one could afterwards say to what.
 
 The Salt Marsh took its toll in patience — 2 days of light gone to waiting.
 
@@ -258,7 +258,7 @@ House Urtenu offered the Urtenu consignment, and Ammittamru took the stylus: car
 
 At Ugarit, Ammittamru signed the sojourner's right with the guild hall of Alashiya: standing at the Alashiyan guild hall, arranged from Ugarit before the sail. Ink dries; obligations do not.
 
-At the Salt Marsh, the road collected: a sheet of papyrus, and three days of light.
+At the Salt Marsh, the road collected: a sheet of papyrus, and 3 days of light.
 
 The Rival Sail passed beneath the caravan's feet and asked for nothing.
 
@@ -278,11 +278,11 @@ Ammittamru paid what the sojourner's right named — four shekels of standing du
 
 Ammittamru pressed 5 shekels across a guild counter at Alashiya and left with one more seal than the road had allowed.
 
-Two days were lost at the Drowned Shrine, and no one could afterwards say to what.
+The road took 2 days at the Drowned Shrine, and no one could afterwards say to what.
 
 Open Water passed beneath the caravan's feet and asked for nothing.
 
-At the Rival Sail, the road collected: nothing worth keeping, and three days of light.
+At the Rival Sail, the road collected: nothing worth keeping, and 3 days of light.
 
 On the tenth day, the Salt Marsh, and nothing worse.
 
@@ -331,7 +331,7 @@ A seal changed hands at Alashiya — 5 shekels, weighed. The sojourner's arrange
 
 The road gave the Drowned Shrine up without argument.
 
-Two days were lost at Open Water, and no one could afterwards say to what.
+The road took 2 days at Open Water, and no one could afterwards say to what.
 
 The road gave the Rival Sail up without argument.
 
@@ -343,77 +343,79 @@ The ledger merged into the archive of House Sapanu: a single entry the House now
 
 11 shekels, earned leg by leg, crossed from the scribe's belt to the House strongbox.
 
-The Ugarit road, complete in the archive. From this season forward, the road no longer required Danataya — which was the entire idea.
+Leg 3, written down and sealed. The archive of House Sapanu gained a fact, which is the only kind of ground a caravan can be sent out on.
 
-A standing order went into the archive of House Sapanu — 100 shekels to the guild scribes and the drover bond, and the Ugarit road became a road that runs itself on paper first.
+The last leg went into the archive, and the Ugarit road became a written thing. What is written can be repeated.
+
+House Sapanu committed a caravan to the Ugarit road by the oldest mechanism there is: writing it down where no one can pretend it was not written.
 
 
 ## The Eighth Season
 
-House Sapanu continued, as houses do, in the person of Ibiranu, standing on everything Danataya left in writing.
+Ibiranu inherited the House, the Archive, and the Concord's memory of Danataya.
 
-While the House slept, a caravan walked the Ugarit road on its own and came home with 362 shekels, weighed. The drovers took their 60 at the gate. The road remembered; it had been written down.
+A caravan ran the Ugarit road unattended and returned 362 shekels; 60 went back out for beasts and guards. No one living had to be anywhere.
 
-The season began as seasons do: House Yabninu's silver on the table, 30 shekels of it, and the understanding that backing Ibiranu would continue exactly as long as it paid.
+30 shekels arrived under House Yabninu's seal before the dew burned off. Patrons pay early; it is later that they collect.
 
-Ibiranu outfitted at Ugarit: 2 clay, 6 papyrus, 2 seals. What the pack could not carry, the season would do without.
+24 shekels became 2 tablets of clay, 6 sheets of papyrus, and 2 seals. Every choice from here would be about what the pack held.
 
-The caravan cleared the gate of Ugarit at first light, 40 days of it bought and paid for.
+Ibiranu walked out of Ugarit counting daylight like silver, 40 days of it.
 
-The Urtenu consignment was signed at Ugarit — carriage silver every leg, callable wherever Urtenu's factors fly their sail. Its copy went into House Urtenu's files, which forget nothing.
+At Ugarit, Ibiranu signed the Urtenu consignment with House Urtenu: carriage silver every leg, callable wherever Urtenu's factors fly their sail. Ink dries; obligations do not.
 
-At Ugarit, Ibiranu signed the storm pledge with the temple of the storm god: the god's hand over the bad crossings, tithed in daylight each time it is needed. Ink dries; obligations do not.
+The storm pledge was signed at Ugarit — the god's hand over the bad crossings, tithed in daylight each time it is needed. Its copy went into the temple of the storm god's files, which forget nothing.
 
 The sojourner's right was signed at Ugarit — standing at the Alashiyan guild hall, arranged from Ugarit before the sail. Its copy went into the guild hall of Alashiya's files, which forget nothing.
 
-Ibiranu came through the Salt Marsh alive, which the ledger records without comment.
+There are prayers for what happened at the Salt Marsh, and Ibiranu used several.
 
-Ibiranu counted the pack on the far side of the Salt Marsh. The tablets had merely gotten wet; 3 sheets of papyrus had stopped being papyrus.
+The water at the Salt Marsh took its census: 3 sheets of papyrus came out pulp. The clay came out streaked but legible.
 
-At the Salt Marsh, the temple of the storm god called in the storm pledge: three days of light, owed to the god who kept you.
+The temple of the storm god chose its moment, as holders do. At the Salt Marsh, the storm pledge came due: three days of light, owed to the god who kept you.
 
 The demand was met; the storm pledge stood, and the temple of the storm god withdrew until the next bad moment.
 
-On the third day, the Rival Sail, and nothing worse.
+The Rival Sail passed beneath the caravan's feet and asked for nothing.
 
-Two days were lost at Open Water, and no one could afterwards say to what.
-
-On the fifth day, the Drowned Shrine, and nothing worse.
-
-The pen came out at the Drowned Shrine. A note: what the sea left at the Drowned Shrine. The road will remember what Ibiranu paid to know it.
-
-The road gave Alashiya up without argument.
-
-Alashiya, copper-rich and jealous, marked the far end of the season. The caravan turned.
-
-At Alashiya, the guild hall of Alashiya called in the sojourner's right: four shekels of standing dues at the turn for home.
-
-Ibiranu honoured the sojourner's right: four shekels of standing dues at the turn for home. The ledger records it without editorial.
+The road slowed at Open Water, the way roads do when watched.
 
 The Drowned Shrine passed beneath the caravan's feet and asked for nothing.
 
 Ibiranu stopped and wrote: a note on what the sea left at the Drowned Shrine. It cost 1 day of light, and it was the point.
 
-Something went wrong at Open Water in the ordinary way, and it cost nothing worth keeping.
+On the sixth day, Alashiya, and nothing worse.
 
-The Rival Sail took its toll in patience — 2 days of light gone to waiting.
+At Alashiya the road ran out of away. Ibiranu turned for home.
 
-The road slowed at the Salt Marsh, the way roads do when watched.
+At Alashiya, the guild hall of Alashiya called in the sojourner's right: four shekels of standing dues at the turn for home.
+
+Ibiranu paid what the sojourner's right named — four shekels of standing dues at the turn for home — and the road went on.
+
+The road gave the Drowned Shrine up without argument.
+
+The pen came out at the Drowned Shrine. A note: what the sea left at the Drowned Shrine. The road will remember what Ibiranu paid to know it.
+
+At Open Water, the road collected: nothing worth keeping, and 3 days of light.
+
+The road slowed at the Rival Sail, the way roads do when watched.
+
+The road took 2 days at the Salt Marsh, and no one could afterwards say to what.
 
 Ugarit received its scribe back. 2 entries came home in the bags.
 
-2 entries, folded into the House's memory. The dead will thank Ibiranu for this, eventually.
+The ledger merged into the archive of House Sapanu: 2 entries the House now cannot forget.
 
-The road purse came home: 16 shekels of contract silver, banked into the House accounts.
+16 shekels, earned leg by leg, crossed from the scribe's belt to the House strongbox.
 
 
 ## The Ninth Season
 
-The pen passed to Attenu. What Ibiranu wrote remained; what Ibiranu knew did not.
+House Sapanu continued, as houses do, in the person of Attenu, standing on everything Ibiranu left in writing.
 
 272 shekels arrived from the Ugarit road, earned by a road walking itself, less the 60 the caravan costs to exist. The archive, as usual, said nothing and did everything.
 
-30 shekels arrived under House Yabninu's seal before the dew burned off. Patrons pay early; it is later that they collect.
+House Yabninu advanced 30 shekels against the season's road — generously, promptly, and with the ledger of what it expected in return already open.
 
 At the guild hall of Ugarit, Attenu bought the season's pack: 2 clay, 6 papyrus, 2 seals — 24 shekels, weighed out before the dew burned off.
 
@@ -421,21 +423,21 @@ Attenu left Ugarit with 40 days of light in hand and less certainty than the led
 
 At Ugarit, Attenu signed the Urtenu consignment with House Urtenu: carriage silver every leg, callable wherever Urtenu's factors fly their sail. Ink dries; obligations do not.
 
-At Ugarit, Attenu signed the storm pledge with the temple of the storm god: the god's hand over the bad crossings, tithed in daylight each time it is needed. Ink dries; obligations do not.
+The temple of the storm god offered the storm pledge, and Attenu took the stylus: the god's hand over the bad crossings, tithed in daylight each time it is needed.
 
-The guild hall of Alashiya offered the sojourner's right, and Attenu took the stylus: standing at the Alashiyan guild hall, arranged from Ugarit before the sail.
+The sojourner's right was signed at Ugarit — standing at the Alashiyan guild hall, arranged from Ugarit before the sail. Its copy went into the guild hall of Alashiya's files, which forget nothing.
 
 Attenu came through the Salt Marsh alive, which the ledger records without comment.
 
-What the water at the Salt Marsh left: the clay. What it took: 3 sheets of papyrus, now one grey mass with opinions in it.
+Attenu counted the pack on the far side of the Salt Marsh. The tablets had merely gotten wet; 3 sheets of papyrus had stopped being papyrus.
 
-The temple of the storm god chose its moment, as holders do. At the Salt Marsh, the storm pledge came due: three days of light, owed to the god who kept you.
+The terms of the storm pledge arrived at the Salt Marsh wearing the temple of the storm god's seal: three days of light, owed to the god who kept you.
 
-Attenu paid what the storm pledge named — three days of light, owed to the god who kept you — and the road went on.
+Attenu honoured the storm pledge: three days of light, owed to the god who kept you. The ledger records it without editorial.
 
-The Rival Sail took its toll in patience — 2 days of light gone to waiting.
+The road took 2 days at the Rival Sail, and no one could afterwards say to what.
 
-Two days were lost at Open Water, and no one could afterwards say to what.
+The road slowed at Open Water, the way roads do when watched.
 
 On the fifth day, the Drowned Shrine, and nothing worse.
 
@@ -443,26 +445,26 @@ Daylight went to ink at the Drowned Shrine — a note concerning what the sea le
 
 On the sixth day, Alashiya, and nothing worse.
 
-Alashiya, copper-rich and jealous, marked the far end of the season. The caravan turned.
+The outward road ended at Alashiya. Everything after this was returning.
 
-The terms of the sojourner's right arrived at Alashiya wearing the guild hall of Alashiya's seal: four shekels of standing dues at the turn for home.
+At Alashiya, the guild hall of Alashiya called in the sojourner's right: four shekels of standing dues at the turn for home.
 
-Attenu honoured the sojourner's right: four shekels of standing dues at the turn for home. The ledger records it without editorial.
+Attenu paid what the sojourner's right named — four shekels of standing dues at the turn for home — and the road went on.
 
-Two days were lost at the Drowned Shrine, and no one could afterwards say to what.
+The Drowned Shrine took its toll in patience — 2 days of light gone to waiting.
 
-Open Water nearly kept Attenu. It settled for four days of light.
+There are prayers for what happened at Open Water, and Attenu used several.
 
-The temple of the storm god chose its moment, as holders do. At Open Water, the storm pledge came due: three days of light, owed to the god who kept you.
+At Open Water, the temple of the storm god called in the storm pledge: three days of light, owed to the god who kept you.
 
-Attenu honoured the storm pledge: three days of light, owed to the god who kept you. The ledger records it without editorial.
+The demand was met; the storm pledge stood, and the temple of the storm god withdrew until the next bad moment.
 
-The season ended where it stood, at the Rival Sail. What Attenu had not sent ahead never reached the archive.
+The light ran out at the Rival Sail, and the road kept Attenu. What was not sent home was lost.
 
 
 ## The Tenth Season
 
-Tallaya inherited the House, the Archive, and the Concord's memory of Attenu.
+House Sapanu continued, as houses do, in the person of Tallaya, standing on everything Attenu left in writing.
 
 358 shekels arrived from the Ugarit road, earned by a road walking itself, less the 60 the caravan costs to exist. The archive, as usual, said nothing and did everything.
 
@@ -470,39 +472,39 @@ Tallaya inherited the House, the Archive, and the Concord's memory of Attenu.
 
 Tallaya outfitted at Ugarit: 2 clay, 6 papyrus, 2 seals. What the pack could not carry, the season would do without.
 
-Tallaya walked out of Ugarit counting daylight like silver, 40 days of it.
+The caravan cleared the gate of Ugarit at first light, 40 days of it bought and paid for.
 
-House Urtenu offered the Urtenu consignment, and Tallaya took the stylus: carriage silver every leg, callable wherever Urtenu's factors fly their sail.
+At Ugarit, Tallaya signed the Urtenu consignment with House Urtenu: carriage silver every leg, callable wherever Urtenu's factors fly their sail. Ink dries; obligations do not.
 
-At Ugarit, Tallaya signed the storm pledge with the temple of the storm god: the god's hand over the bad crossings, tithed in daylight each time it is needed. Ink dries; obligations do not.
+The storm pledge was signed at Ugarit — the god's hand over the bad crossings, tithed in daylight each time it is needed. Its copy went into the temple of the storm god's files, which forget nothing.
 
-The sojourner's right was signed at Ugarit — standing at the Alashiyan guild hall, arranged from Ugarit before the sail. Its copy went into the guild hall of Alashiya's files, which forget nothing.
+At Ugarit, Tallaya signed the sojourner's right with the guild hall of Alashiya: standing at the Alashiyan guild hall, arranged from Ugarit before the sail. Ink dries; obligations do not.
 
-At the Salt Marsh, the road collected: a sheet of papyrus, and three days of light.
+At the Salt Marsh, the road collected: a sheet of papyrus, and 3 days of light.
 
 The road gave the Rival Sail up without argument.
 
-The road gave Open Water up without argument.
+Open Water passed beneath the caravan's feet and asked for nothing.
 
-The Drowned Shrine passed beneath the caravan's feet and asked for nothing.
+On the fifth day, the Drowned Shrine, and nothing worse.
 
 On the sixth day, Alashiya, and nothing worse.
 
 Alashiya, copper-rich and jealous, marked the far end of the season. The caravan turned.
 
-The guild hall of Alashiya chose its moment, as holders do. At Alashiya, the sojourner's right came due: four shekels of standing dues at the turn for home.
+The terms of the sojourner's right arrived at Alashiya wearing the guild hall of Alashiya's seal: four shekels of standing dues at the turn for home.
 
-Tallaya paid what the sojourner's right named — four shekels of standing dues at the turn for home — and the road went on.
+The demand was met; the sojourner's right stood, and the guild hall of Alashiya withdrew until the next bad moment.
 
-On the seventh day, the Drowned Shrine, and nothing worse.
+The road gave the Drowned Shrine up without argument.
 
-At Open Water, the road collected: a sheet of papyrus, and three days of light.
+At Open Water, the road collected: a sheet of papyrus, and 3 days of light.
 
-The Rival Sail took its toll in patience — 2 days of light gone to waiting.
+The road took 2 days at the Rival Sail, and no one could afterwards say to what.
 
-Two days were lost at the Salt Marsh, and no one could afterwards say to what.
+The road took 2 days at the Salt Marsh, and no one could afterwards say to what.
 
-Ugarit received its scribe back. 0 entries came home in the bags.
+Tallaya came through the gate of Ugarit with 0 entries in the ledger and the rest in aching feet.
 
-The road purse came home: 16 shekels of contract silver, banked into the House accounts.
+The season's carriage silver — 16 shekels — was counted twice and banked once.
 

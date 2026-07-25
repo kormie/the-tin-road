@@ -47,6 +47,14 @@ var _voided_ids: Array[String] = []
 var _last_outcome: StringName = &"arrived"
 var _heavy_going_reported := false
 
+## Where the light has gone since the last event was emitted. Every spend names
+## the bucket it belongs to and the next event carries the tally away, so the
+## log records not just that daylight went but what it went to. Attribution
+## happens at the point of spending and therefore cannot drift; measurement
+## reads the log (`measure/`) rather than re-deriving the arithmetic. This is a
+## record of a spend, not a meter — nothing in the sim ever reads it back.
+var _light_pending: Dictionary[StringName, int] = {}
+
 
 func _init(p_house: House, p_route: Route, p_rng: SimRng, p_chronicle: Chronicle, p_scribe: String, p_number: int, p_outfit: Outfit) -> void:
 	house = p_house
@@ -101,7 +109,7 @@ func travel_next() -> void:
 		_heavy_going_reported = true
 		_emit(&"heavy_going", route.nodes[position].display_name,
 			{"cost": str(HEAVY_PACK_SURCHARGE)})
-	_spend_daylight(step_cost)
+	_spend_daylight(step_cost, &"travel")
 	if is_over():
 		return
 	day += 1
@@ -120,7 +128,8 @@ func travel_next() -> void:
 			_resolve_call_ins(&"turned_home")
 	elif heading_home and position == 0:
 		result = Result.RETURNED
-		_emit(&"returned", node.display_name, {"entries": str(entries.size())})
+		_emit(&"returned", node.display_name,
+			{"entries": str(entries.size()), "light": str(daylight)})
 	else:
 		_resolve_call_ins(_last_outcome)
 
@@ -150,15 +159,18 @@ func write_entry(type: Ledger.EntryType, subject: String, leg: int = -1, use_sea
 	if use_seal:
 		seals -= 1
 	_spend_media(m_cost)
-	_spend_daylight(d_cost)
+	_spend_daylight(d_cost, &"writing")
 	if is_over():
 		return false
 	var entry := {"season": number, "type": Ledger.type_name(type), "subject": subject, "leg": leg, "sealed": use_seal}
 	entries.append(entry)
+	# The light this cost rides on the event as {light_writing}, injected by
+	# _emit. What the event adds is the decision: which leg, under seal or not.
 	_emit(&"entry_written", route.nodes[position].display_name, {
 		"entry_type": Ledger.type_name(type),
 		"subject": subject,
-		"cost": str(d_cost),
+		"leg": str(leg),
+		"sealed": "yes" if use_seal else "no",
 	})
 	return true
 
@@ -227,7 +239,7 @@ func _resolve_call_ins(outcome: StringName) -> void:
 		_emit(&"contract_called", route.nodes[position].display_name, {
 			"holder": c.holder, "contract": c.display_name, "demand": c.demand})
 		if c.demand_daylight > 0:
-			_spend_daylight(c.demand_daylight)
+			_spend_daylight(c.demand_daylight, &"obligation")
 			if not is_over():
 				_emit(&"contract_honoured", route.nodes[position].display_name, {
 					"holder": c.holder, "contract": c.display_name, "demand": c.demand})
@@ -277,13 +289,13 @@ func _arrive(node: Route.RouteNode) -> void:
 	if roll < 0.45:
 		_emit(&"arrived", node.display_name, {"kind": node.kind})
 	elif roll < 0.75:
-		_spend_daylight(DELAY_COST)
+		_spend_daylight(DELAY_COST, &"road")
 		if not is_over():
 			_last_outcome = &"delayed"
-			_emit(&"delayed", node.display_name, {"kind": node.kind, "cost": str(DELAY_COST)})
+			_emit(&"delayed", node.display_name, {"kind": node.kind})
 	elif roll < 0.93:
 		var lost := _lose_media(1, node.flavor)
-		_spend_daylight(MISHAP_COST)
+		_spend_daylight(MISHAP_COST, &"road")
 		if not is_over():
 			_last_outcome = &"mishap"
 			_emit(&"mishap", node.display_name, {"kind": node.kind,
@@ -298,9 +310,10 @@ func _peril(node: Route.RouteNode) -> void:
 			if rng.stream(&"fate").randf() < _peril_death_chance():
 				result = Result.FELL
 				_last_outcome = &"fell"
-				_emit(&"fell", node.display_name, {"kind": node.kind})
+				_emit(&"fell", node.display_name,
+					{"kind": node.kind, "light": str(daylight)})
 				return
-			_spend_daylight(PERIL_COST)
+			_spend_daylight(PERIL_COST, &"road")
 			if not is_over():
 				_last_outcome = &"peril_survived"
 				_emit(&"peril_survived", node.display_name, {"kind": node.kind})
@@ -312,7 +325,7 @@ func _peril(node: Route.RouteNode) -> void:
 					_emit(&"soaked", node.display_name, {"lost_papyrus": str(soaked)})
 		"rival":
 			var lost := _lose_media(2)
-			_spend_daylight(DELAY_COST)
+			_spend_daylight(DELAY_COST, &"road")
 			if not is_over():
 				_last_outcome = &"shaken_down"
 				_emit(&"shaken_down", node.display_name, {
@@ -334,14 +347,21 @@ func _peril_death_chance() -> float:
 	return chance
 
 
-func _spend_daylight(amount: int) -> void:
+## Spend light, naming what it bought. The bucket is one of &"travel",
+## &"writing", &"road" (what the road takes regardless of choice) or
+## &"obligation" (a contract called in). A spend larger than what is left is
+## honoured in full and the light clamps to zero — the overshoot is how far
+## short the season fell, and the log keeps it.
+func _spend_daylight(amount: int, bucket: StringName) -> void:
+	var already: int = _light_pending.get(bucket, 0)
+	_light_pending[bucket] = already + amount
 	daylight -= amount
 	if daylight <= 0:
 		daylight = 0
 		if position == 0 and heading_home:
 			return  # Staggered through the gate on the last of the light.
 		result = Result.STRANDED
-		_emit(&"stranded", route.nodes[position].display_name, {})
+		_emit(&"stranded", route.nodes[position].display_name, {"light": "0"})
 
 
 ## Lose media to the road. Neutral losses take papyrus first, then clay.
@@ -364,5 +384,11 @@ func _spend_media(amount: int) -> void:
 	clay -= amount - from_papyrus
 
 
+## Record an event, and hand it whatever light has been spent since the last
+## one. Every spend therefore lands on exactly one event: the season's whole
+## budget is readable off the log without the sim keeping a single total.
 func _emit(type: StringName, place: String, data: Dictionary) -> void:
+	for bucket: StringName in _light_pending:
+		data["light_" + String(bucket)] = str(_light_pending[bucket])
+	_light_pending.clear()
 	chronicle.record(ChronicleEvent.make(number, day, type, place, scribe, data))
