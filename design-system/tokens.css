@@ -1,0 +1,42 @@
+/* The Tin Road — design tokens.
+   Bronze Age fresco: mineral pigment on cracked lime plaster. Flat
+   perspective, strong contour lines, surfaces that look excavated rather
+   than rendered. Pigment does not glow: no shadows, no gradients, no
+   blur, no emissive anything. (docs/art-direction.md) */
+
+:root {
+	/* Palette — "fired clay" */
+	--tin-night: #161109;        /* grounds, backgrounds */
+	--tin-papyrus: #ecdfc0;      /* light fields, text on dark */
+	--tin-bronze: #c9913c;       /* primary accent, titles */
+	--tin-verdigris: #5ea892;    /* secondary accent, water, patina, status */
+	--tin-kiln: #c05a35;         /* warnings, seals, borders that mean it */
+
+	/* Derived surfaces — mixed from palette, never new hues */
+	--tin-plaster: #211a10;      /* raised panel over night */
+	--tin-plaster-deep: #1b1509; /* inset fields, inputs */
+	--tin-contour: #4a3d28;      /* the drawn line around things */
+	--tin-papyrus-dim: #a89470;  /* secondary text, captions */
+
+	/* Type. The chronicle is a book; the chrome is a tool. */
+	--tin-font-chronicle: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+	--tin-font-chrome: system-ui, -apple-system, "Segoe UI", sans-serif;
+	--tin-size-caption: 0.8125rem;  /* 13px */
+	--tin-size-body: 1rem;          /* 16px */
+	--tin-size-chronicle: 1.0625rem;/* 17px */
+	--tin-size-heading: 1.25rem;    /* 20px */
+	--tin-size-title: 1.75rem;      /* 28px */
+	--tin-leading-chronicle: 1.65;
+	--tin-leading-chrome: 1.4;
+
+	/* Space and line */
+	--tin-space-1: 0.25rem;
+	--tin-space-2: 0.5rem;
+	--tin-space-3: 0.75rem;
+	--tin-space-4: 1rem;
+	--tin-space-6: 1.5rem;
+	--tin-space-8: 2rem;
+	--tin-line: 1px;             /* ordinary contour */
+	--tin-line-heavy: 2px;       /* major pieces */
+	--tin-radius: 2px;           /* nearly square: cut, not moulded */
+}
