@@ -1,0 +1,17 @@
+{
+  "projectId": "b67d3481-cae4-427a-9f36-5e42132762a2",
+  "shape": "package",
+  "pkg": "@tin-road/design-system",
+  "globalName": "TinRoad",
+  "buildCmd": "npm run build --prefix design-system",
+  "cssEntry": "dist/index.css",
+  "tokensGlob": "tokens.css",
+  "runtimeFontPrefixes": [
+    "Iowan Old Style",
+    "Palatino"
+  ],
+  "provider": {
+    "component": "TinRoot"
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}
