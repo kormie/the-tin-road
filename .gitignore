@@ -16,3 +16,10 @@ reports/
 # OS
 .DS_Store
 Thumbs.db
+
+# design-sync staging and output (machine state; the durable set lives in .design-sync/)
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
