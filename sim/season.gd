@@ -75,7 +75,7 @@ func media_total() -> int:
 ## What the caravan is actually hauling: blank stock and seals. Written work
 ## rides in the document chest, weightless by deliberate abstraction —
 ## writing converts a heavy liability into the point of the game.
-func _carried_bulk() -> int:
+func carried_bulk() -> int:
 	return clay * Outfit.CLAY_BULK + papyrus * Outfit.PAPYRUS_BULK \
 		+ seals * Outfit.SEAL_BULK
 
@@ -83,7 +83,7 @@ func _carried_bulk() -> int:
 ## Clay slows the caravan (systems.md §1): a pack over the threshold costs
 ## an extra day of light per node. Pure arithmetic — no draws.
 func travel_cost() -> int:
-	if _carried_bulk() > HEAVY_PACK_THRESHOLD:
+	if carried_bulk() > HEAVY_PACK_THRESHOLD:
 		return TRAVEL_COST + HEAVY_PACK_SURCHARGE
 	return TRAVEL_COST
 
@@ -192,7 +192,7 @@ func sign_contract(template: ContractCatalog.ContractTemplate) -> bool:
 
 ## Buy one seal at a foreign guild hall. Access is contractual, the price
 ## comes out of the road purse, and the pack must have room. Room means
-## _carried_bulk(): blank stock and seals — written work rides weightless
+## carried_bulk(): blank stock and seals — written work rides weightless
 ## in the document chest, by the same abstraction travel_cost() uses.
 func buy_seal() -> bool:
 	if is_over():
@@ -206,7 +206,7 @@ func buy_seal() -> bool:
 			access = true
 	if not access or silver < SEAL_ROAD_PRICE:
 		return false
-	if _carried_bulk() + Outfit.SEAL_BULK > Outfit.PACK_CAPACITY:
+	if carried_bulk() + Outfit.SEAL_BULK > Outfit.PACK_CAPACITY:
 		return false
 	silver -= SEAL_ROAD_PRICE
 	seals += 1

@@ -99,6 +99,15 @@ func post_standing_order() -> bool:
 	return true
 
 
+## Why a kit would be refused at the next season's outfitting, as a code
+## (&"" means it will be bought). Conservative: judged against the treasury
+## plus the patron's certain advance; caravan income that has not landed yet
+## is not counted. Presentation owns the words; the sim owns the timing of
+## the advance — which is why this lives here and not in the UI.
+func preview_outfit_reason(outfit: Outfit) -> StringName:
+	return outfit.invalid_reason(silver + YABNINU_ADVANCE)
+
+
 ## The assignment is a document, not a flag: a standing order exists exactly
 ## when the archive holds one for this route.
 func has_standing_order() -> bool:

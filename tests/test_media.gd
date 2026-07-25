@@ -93,15 +93,15 @@ func test_soak_with_dry_pack_is_silent() -> void:
 func test_heavy_pack_costs_extra_daylight() -> void:
 	var f := _fixture()
 	var season: Season = f["season"]
-	assert_int(season._carried_bulk()).is_equal(Outfit.PACK_CAPACITY)
+	assert_int(season.carried_bulk()).is_equal(Outfit.PACK_CAPACITY)
 	assert_int(season.travel_cost()).is_equal(Season.TRAVEL_COST + Season.HEAVY_PACK_SURCHARGE)
 	# Pin the boundary itself: bulk 13 is heavy, bulk 12 travels light.
 	season.clay = 2
 	season.papyrus = 7
-	assert_int(season._carried_bulk()).is_equal(Season.HEAVY_PACK_THRESHOLD + 1)
+	assert_int(season.carried_bulk()).is_equal(Season.HEAVY_PACK_THRESHOLD + 1)
 	assert_int(season.travel_cost()).is_equal(Season.TRAVEL_COST + Season.HEAVY_PACK_SURCHARGE)
 	season.papyrus = 6
-	assert_int(season._carried_bulk()).is_equal(Season.HEAVY_PACK_THRESHOLD)
+	assert_int(season.carried_bulk()).is_equal(Season.HEAVY_PACK_THRESHOLD)
 	assert_int(season.travel_cost()).is_equal(Season.TRAVEL_COST)
 
 

@@ -1,0 +1,7 @@
+{
+  "_comment": "What a scribe writes about, by entry type. {place} is the current node's name. These are the player's words, so they live in data — a fuller game offers a choice or free text.",
+  "note": "what the road shows at {place}",
+  "record": "prices and contacts at {place}",
+  "survey": "the road as far as {place}",
+  "treatise": "on the keeping of roads, begun at {place}"
+}

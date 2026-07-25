@@ -44,10 +44,18 @@ func total_bulk() -> int:
 ## A kit the House can actually buy and carry: affordable, packable, and
 ## holding at least one piece of media to write on.
 func is_valid(silver: int) -> bool:
+	return invalid_reason(silver) == &""
+
+
+## Why a kit is refused, as a code (&"" means valid). The words belong to
+## whoever is presenting the refusal; the reason belongs to the sim.
+func invalid_reason(silver: int) -> StringName:
 	if clay < 0 or papyrus < 0 or seals < 0:
-		return false
+		return &"negative"
 	if total_cost() > silver:
-		return false
+		return &"too_costly"
 	if total_bulk() > PACK_CAPACITY:
-		return false
-	return clay + papyrus >= 1
+		return &"too_bulky"
+	if clay + papyrus < 1:
+		return &"no_media"
+	return &""

@@ -27,22 +27,30 @@ static func load_from_file(path: String, p_rng: RandomNumberGenerator) -> Chroni
 ## Render the full chronicle of a House as markdown — the raw material of the
 ## novel that "naturally flows from a playthrough."
 func render_book(house: House) -> String:
-	var lines: Array[String] = []
-	lines.append("# The Chronicle of %s" % house.display_name)
-	lines.append("")
-	lines.append("*As compiled from the House archive. Seed %d.*" % house.rng.master_seed)
+	var header := "# The Chronicle of %s\n\n*As compiled from the House archive. Seed %d.*\n" \
+		% [house.display_name, house.rng.master_seed]
+	return (header + render_events(house, 0)).trim_suffix("\n")
+
+
+## Render events from an index onward, season headings included — the
+## incremental form render_book uses, and how a live game grows the book.
+## Prose variants draw in event order, so rendering each event exactly once,
+## in order, through one renderer produces the same book split or whole.
+func render_events(house: House, from_index: int, to_index: int = -1) -> String:
+	var stop := to_index if to_index >= 0 else house.chronicle.events.size()
+	var out := ""
 	var current_season := -1
-	for ev: ChronicleEvent in house.chronicle.events:
+	if from_index > 0 and from_index <= house.chronicle.events.size():
+		current_season = house.chronicle.events[from_index - 1].season
+	for i: int in range(from_index, stop):
+		var ev: ChronicleEvent = house.chronicle.events[i]
 		if ev.season != current_season:
 			current_season = ev.season
-			lines.append("")
-			lines.append("## The %s Season" % _ordinal(current_season).capitalize())
-			lines.append("")
+			out += "\n## The %s Season\n\n" % _ordinal(current_season).capitalize()
 		var sentence := render_event(ev, house)
 		if sentence != "":
-			lines.append(sentence)
-			lines.append("")
-	return "\n".join(lines)
+			out += sentence + "\n\n"
+	return out
 
 
 func render_event(ev: ChronicleEvent, house: House) -> String:

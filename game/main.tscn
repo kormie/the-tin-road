@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://game/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://game/session.gd" id="1_session"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_main")
+script = ExtResource("1_session")
 
 [node name="Margin" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -18,44 +18,229 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 24
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 18
 
-[node name="Column" type="VBoxContainer" parent="Margin"]
+[node name="Split" type="HSplitContainer" parent="Margin"]
 layout_mode = 2
-theme_override_constants/separation = 12
+split_offset = 780
 
-[node name="Title" type="Label" parent="Margin/Column"]
+[node name="BookColumn" type="VBoxContainer" parent="Margin/Split"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "THE TIN ROAD"
-
-[node name="Subtitle" type="Label" parent="Margin/Column"]
-layout_mode = 2
-modulate = Color(0.66, 0.58, 0.44, 1)
-text = "Everything you learn dies with you. Unless you wrote it down."
-
-[node name="Controls" type="HBoxContainer" parent="Margin/Column"]
-layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="SeedInput" type="LineEdit" parent="Margin/Column/Controls"]
-unique_name_in_owner = true
+[node name="Title" type="Label" parent="Margin/Split/BookColumn"]
 layout_mode = 2
-custom_minimum_size = Vector2(160, 0)
-text = "1259"
-placeholder_text = "seed"
+theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
+theme_override_font_sizes/font_size = 24
+text = "THE TIN ROAD"
 
-[node name="RunButton" type="Button" parent="Margin/Column/Controls"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Chronicle a House"
-
-[node name="Output" type="RichTextLabel" parent="Margin/Column"]
+[node name="Book" type="RichTextLabel" parent="Margin/Split/BookColumn"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/default_color = Color(0.925, 0.875, 0.753, 1)
 selection_enabled = true
+scroll_following = true
+text = ""
+
+[node name="SidePanel" type="VBoxContainer" parent="Margin/Split"]
+layout_mode = 2
+custom_minimum_size = Vector2(400, 0)
+theme_override_constants/separation = 10
+
+[node name="Status" type="Label" parent="Margin/Split/SidePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.369, 0.659, 0.573, 1)
+autowrap_mode = 3
+text = "No House yet."
+
+[node name="TitlePanel" type="VBoxContainer" parent="Margin/Split/SidePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Tagline" type="Label" parent="Margin/Split/SidePanel/TitlePanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.925, 0.875, 0.753, 1)
+autowrap_mode = 3
+text = "Everything you learn dies with you. Unless you wrote it down."
+
+[node name="SeedRow" type="HBoxContainer" parent="Margin/Split/SidePanel/TitlePanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SeedInput" type="LineEdit" parent="Margin/Split/SidePanel/TitlePanel/SeedRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(140, 0)
+text = "101"
+placeholder_text = "seed"
+
+[node name="FoundButton" type="Button" parent="Margin/Split/SidePanel/TitlePanel/SeedRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Found the House"
+
+[node name="OutfitPanel" type="VBoxContainer" parent="Margin/Split/SidePanel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="OutfitHeading" type="Label" parent="Margin/Split/SidePanel/OutfitPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
+text = "Outfit the season"
+
+[node name="ClayRow" type="HBoxContainer" parent="Margin/Split/SidePanel/OutfitPanel"]
+layout_mode = 2
+
+[node name="ClayLabel" type="Label" parent="Margin/Split/SidePanel/OutfitPanel/ClayRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Clay (cheap, heavy, survives water)"
+
+[node name="ClaySpin" type="SpinBox" parent="Margin/Split/SidePanel/OutfitPanel/ClayRow"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 8.0
+value = 2.0
+
+[node name="PapyrusRow" type="HBoxContainer" parent="Margin/Split/SidePanel/OutfitPanel"]
+layout_mode = 2
+
+[node name="PapyrusLabel" type="Label" parent="Margin/Split/SidePanel/OutfitPanel/PapyrusRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Papyrus (light, ruined by water)"
+
+[node name="PapyrusSpin" type="SpinBox" parent="Margin/Split/SidePanel/OutfitPanel/PapyrusRow"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 16.0
+value = 6.0
+
+[node name="SealsRow" type="HBoxContainer" parent="Margin/Split/SidePanel/OutfitPanel"]
+layout_mode = 2
+
+[node name="SealsLabel" type="Label" parent="Margin/Split/SidePanel/OutfitPanel/SealsRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Seals (authenticate, or pay the courier)"
+
+[node name="SealsSpin" type="SpinBox" parent="Margin/Split/SidePanel/OutfitPanel/SealsRow"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 4.0
+value = 2.0
+
+[node name="KitLabel" type="Label" parent="Margin/Split/SidePanel/OutfitPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+autowrap_mode = 3
+text = ""
+
+[node name="DepartButton" type="Button" parent="Margin/Split/SidePanel/OutfitPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Buy the pack and take the road"
+
+[node name="RoadPanel" type="VBoxContainer" parent="Margin/Split/SidePanel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RoadHeading" type="Label" parent="Margin/Split/SidePanel/RoadPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
+text = "The road"
+
+[node name="TravelButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Travel to the next node"
+
+[node name="SealCheck" type="CheckBox" parent="Margin/Split/SidePanel/RoadPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Seal what is written next"
+
+[node name="WriteRow" type="HBoxContainer" parent="Margin/Split/SidePanel/RoadPanel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="NoteButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel/WriteRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Note"
+
+[node name="RecordButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel/WriteRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Record"
+
+[node name="SurveyButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel/WriteRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Survey"
+
+[node name="TreatiseButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel/WriteRow"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Treatise"
+
+[node name="CourierButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Send the ledger home by courier"
+
+[node name="BuySealButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Buy a seal at the guild hall"
+
+[node name="ContractsHeading" type="Label" parent="Margin/Split/SidePanel/RoadPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
+text = "Standing contracts"
+
+[node name="ContractsBox" type="VBoxContainer" parent="Margin/Split/SidePanel/RoadPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="DeskPanel" type="VBoxContainer" parent="Margin/Split/SidePanel"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DeskLabel" type="Label" parent="Margin/Split/SidePanel/DeskPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
+autowrap_mode = 3
+text = "The season is over."
+
+[node name="PostOrderButton" type="Button" parent="Margin/Split/SidePanel/DeskPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Post a standing order (assign the caravan)"
+
+[node name="NextSeasonButton" type="Button" parent="Margin/Split/SidePanel/DeskPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Begin the next season"
+
+[node name="Refusal" type="Label" parent="Margin/Split/SidePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.753, 0.353, 0.208, 1)
+autowrap_mode = 3
 text = ""
