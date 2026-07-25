@@ -11,7 +11,8 @@ in `docs/` — read it before proposing mechanics:
 
 - `docs/design/tin-road.md` — the core design document. Start here.
 - `docs/design/systems.md` — mechanics and first-pass numbers.
-- `docs/design/vertical-slice.md` — build order. We are at step 1–2.
+- `docs/design/vertical-slice.md` — build order. Steps 1–5 are built; the
+  measurement plan and the playable layer remain.
 - `docs/world/` — the setting bible, timeline, and factions.
 
 ## The three constraints (do not violate)
@@ -75,15 +76,17 @@ green `./scripts/check.sh`.
 
 ## Current honest state
 
-Vertical-slice steps 1–4 and part of the Scribe kit: season clock, daylight,
+Vertical-slice steps 1–5 and the slice's Scribe kit: season clock, daylight,
 node traversal, the Ledger's four entry types, death (stranding/peril),
 succession, the Courier (snapshot dispatch, partial merge on death), seals as
 authentication (unsealed surveys merge as half-value rumours), the outfit step
 (patron advance, priced and bulk-capped kit), Standing Contracts (road-wired
 call-ins, the season purse, contract-gated seal replenishment), media types
-that matter (water ruins papyrus, heavy packs cost daylight), a naive
-automation payout, and the chronicle pipeline. **Not built:**
-assignable automation, the Keeper and Endurance,
+that matter (water ruins papyrus, heavy packs cost daylight), assignable
+automation (a standing order in the archive: silver to post, a per-season
+caravan fee, income scaled by archive quality), and the chronicle pipeline.
+**Not built:** order revocation, incident reports and caravan loss,
+the Keeper and Endurance,
 archive corruption, factions beyond the Yabninu commission const, presses, the
 Concord axis, any real UI, saves. Do not gold-plate scaffolding; the next
 milestone is `docs/design/vertical-slice.md`.

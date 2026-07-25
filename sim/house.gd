@@ -6,6 +6,8 @@ extends RefCounted
 
 const AUTOMATED_INCOME_BASE := 260  # shekels, weighed. First-pass.
 const AUTOMATED_INCOME_SPREAD := 120
+const STANDING_ORDER_COST := 100  # shekels: the order, the caravan's first outfitting, the guild bond. Steep so posting is a decision, not a formality. First-pass.
+const CARAVAN_FEE := 60  # shekels per circuit: drovers, beasts, guards. First-pass.
 const YABNINU_ADVANCE := 30  # shekels per season. First-pass.
 # The slice's one commissioning faction (docs/design/vertical-slice.md).
 # A const until factions become commission data at milestone 5.
@@ -55,13 +57,13 @@ func start_season(outfit: Outfit = null) -> Season:
 		# The book opens with the house and its first scribe, not with money.
 		chronicle.record(ChronicleEvent.make(generation, 0, &"season_began",
 			route.nodes[0].display_name, scribe, {}))
-	if route_documented():
+	if has_standing_order():
 		var raw := AUTOMATED_INCOME_BASE + rng.stream(&"trade").randi_range(0, AUTOMATED_INCOME_SPREAD)
 		var income := _archive_income(raw)
-		silver += income
+		silver += maxi(0, income - CARAVAN_FEE)
 		chronicle.record(ChronicleEvent.make(generation, 0, &"caravan_returned",
 			route.nodes[0].display_name, scribe,
-			{"income": str(income), "route": route.display_name}))
+			{"income": str(income), "fee": str(CARAVAN_FEE), "route": route.display_name}))
 	silver += YABNINU_ADVANCE
 	chronicle.record(ChronicleEvent.make(generation, 0, &"commissioned",
 		route.nodes[0].display_name, scribe,
@@ -74,6 +76,36 @@ func start_season(outfit: Outfit = null) -> Season:
 		{"clay": str(outfit.clay), "papyrus": str(outfit.papyrus),
 			"seals": str(outfit.seals), "spent": str(outfit.total_cost())}))
 	return Season.new(self, route, rng, chronicle, scribe, generation, outfit)
+
+
+## Commit a caravan to the documented route by posting a standing order —
+## a sealed document appended to the archive. The order IS the assignment:
+## it persists across successions because writing persists, and erasing it
+## from the archive erases the automation (the corruption milestone's seam).
+## Costs treasury silver; refuses while undocumented, unaffordable, or
+## already standing. Revocation waits until there is a second road to
+## prefer.
+func post_standing_order() -> bool:
+	if has_standing_order() or not route_documented():
+		return false
+	if silver < STANDING_ORDER_COST:
+		return false
+	silver -= STANDING_ORDER_COST
+	archive.append({"season": generation, "type": "order",
+		"subject": route.display_name, "leg": -1, "sealed": true})
+	chronicle.record(ChronicleEvent.make(generation, 0, &"caravan_assigned",
+		route.nodes[0].display_name, display_name,
+		{"route": route.display_name, "price": str(STANDING_ORDER_COST)}))
+	return true
+
+
+## The assignment is a document, not a flag: a standing order exists exactly
+## when the archive holds one for this route.
+func has_standing_order() -> bool:
+	for entry: Dictionary in archive:
+		if str(entry.get("type", "")) == "order" and str(entry.get("subject", "")) == route.display_name:
+			return true
+	return false
 
 
 ## What the caravan actually pays: full share per sealed leg, half per

@@ -156,10 +156,15 @@
     "The last leg went into the archive, and {route} became a written thing. What is written can be repeated.",
     "{route}, complete in the archive. From this season forward, the road no longer required {scribe} — which was the entire idea."
   ],
+  "caravan_assigned": [
+    "The House drew up a standing order, sealed it, and set it in the archive: {route} owes it a caravan now, every season, for {price} shekels of ink and authority.",
+    "A standing order went into the archive of {house} — {price} shekels to the guild scribes and the drover bond, and {route} became a road that runs itself on paper first.",
+    "{house} committed a caravan to {route} by the oldest mechanism there is: writing it down where no one can pretend it was not written."
+  ],
   "caravan_returned": [
-    "While the House slept, a caravan walked {route} on its own and came home with {income} shekels, weighed. The road remembered. It had been written down.",
-    "A caravan ran {route} unattended and returned {income} shekels to the House. No one living had to be anywhere.",
-    "{income} shekels arrived from {route}, earned by a road walking itself. The archive, as usual, said nothing and did everything."
+    "While the House slept, a caravan walked {route} on its own and came home with {income} shekels, weighed. The drovers took their {fee} at the gate. The road remembered; it had been written down.",
+    "A caravan ran {route} unattended and returned {income} shekels; {fee} went back out for beasts and guards. No one living had to be anywhere.",
+    "{income} shekels arrived from {route}, earned by a road walking itself, less the {fee} the caravan costs to exist. The archive, as usual, said nothing and did everything."
   ],
   "succession": [
     "{scribe} inherited the House, the Archive, and the Concord's memory of {predecessor}.",

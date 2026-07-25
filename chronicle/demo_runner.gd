@@ -22,6 +22,10 @@ static func run(seed_value: int, seasons: int, house_name: String = "House Sapan
 		_sign_contracts(season, house, catalog)
 		_play_out(season, route)
 		house.merge(season)
+		# The brain posts the standing order the season it can pay the guild
+		# scribes, which may lag documentation — the wait is the cost being real.
+		if house.route_documented() and not house.has_standing_order():
+			house.post_standing_order()
 	var renderer := ChronicleRenderer.load_default(house.rng.stream(&"prose"))
 	return {"book": renderer.render_book(house), "house": house}
 

@@ -122,6 +122,8 @@ func test_dead_scribes_courier_completes_route_and_pays_the_successor() -> void:
 	assert_bool(house.surveyed_legs.has(3)).is_true()
 	assert_bool(house.route_documented()).is_true()
 	assert_int(house.chronicle.count_of(&"route_documented")).is_equal(1)
+	house.silver = House.STANDING_ORDER_COST
+	assert_bool(house.post_standing_order()).is_true()  # The House posts over its dead scribe.
 	house.start_season()
 	assert_int(house.chronicle.count_of(&"succession")).is_equal(1)
 	assert_int(house.chronicle.count_of(&"caravan_returned")).is_equal(1)

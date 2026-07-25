@@ -11,8 +11,9 @@ ledger entry types · death (peril + stranding) · succession · the Courier
 merge at half value) · the outfit step (patron advance, priced bulk-capped
 kit) · Standing Contracts (income per leg, road-wired call-ins, the season
 purse) · media that matters (water ruins papyrus, heavy packs cost daylight) ·
-naive automation payout · the chronicle pipeline (events → prose →
-markdown) · codex → ebook build · tests + CI.
+assignable automation (standing orders: posted, priced, generational) · the
+chronicle pipeline (events → prose → markdown) · codex → ebook build ·
+tests + CI.
 
 ## Milestones
 
