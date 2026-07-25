@@ -1,0 +1,13 @@
+{
+  "_comment": "The fired-clay palette's ONE home in the shipped project. The web export only carries data/** (export_presets.cfg), so design-system/tokens.json cannot be read at runtime; these values mirror its color block exactly, and tests/test_palette.gd fails the build if the two ever drift. Change a colour there first, then here. Rule zero still applies: pigment does not glow — these are flat mineral fills and drawn contour lines, never gradients or shadows.",
+
+  "night": "#161109",
+  "papyrus": "#ecdfc0",
+  "bronze": "#c9913c",
+  "verdigris": "#5ea892",
+  "kiln": "#c05a35",
+  "plaster": "#211a10",
+  "plasterDeep": "#1b1509",
+  "contour": "#4a3d28",
+  "papyrusDim": "#a89470"
+}

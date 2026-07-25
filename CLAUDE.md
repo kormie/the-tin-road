@@ -122,14 +122,28 @@ legibility pass and no constant changed: sim-owned refusal reasons
 (`Season.preview_*_reason` — the sim names one reason, `game/` prints that one),
 costs read onto every button from the constants, a `stock_spent` event so the
 empty pack stops being silent, named legs (`Route.leg_name`), and an
-inheritance panel at the outfit step. **Three of the four entry types —
+inheritance panel at the outfit step. **A second legibility pass made the
+season visual** (still no constant changed): a drawn road strip
+(`game/road_strip.gd` — node shapes by kind, each leg in one of four states:
+unknown contour, rumoured half-fill, sealed solid, written-this-season-but-
+unmerged in kiln red, which is the Courier's stake made visible; scribe
+marker with direction) at the outfit step, on the road, and at the desk; and
+a daylight bar (`game/daylight_bar.gd`) over the live season, splitting spent
+light into the four attributed buckets read from the same `SeasonRecord` the
+measurement computes, with the next act's daylight price outlined as a ghost —
+cost shown, availability never predicted. Both are flat `_draw` primitives,
+no raster art. The palette's one shipped home is `data/ui/palette.json`
+(loaded by `game/palette.gd`), mirrored from `design-system/tokens.json`
+under test (`tests/test_palette.gd`); `main.tscn` carries semantic `ink_*`
+groups instead of inline hex. **Three of the four entry types —
 `note`, `record`, `treatise` — still have no consumer:** they cost daylight and
 media and are read by nothing. Only `survey` changes what the House knows.
 That is the loudest open design question the slice has.
 **Not built:** order revocation, incident reports and caravan loss,
 the Keeper and Endurance,
 archive corruption, factions beyond the Yabninu commission const, presses, the
-Concord axis, any real UI, saves. **No audio of any kind** — the game is
+Concord axis, any real UI beyond the text panels and the two drawn widgets,
+saves. **No audio of any kind** — the game is
 currently silent, and `docs/audio-direction.md` is doctrine for a pipeline that
 does not exist yet. Do not gold-plate scaffolding; the next
 milestone is `docs/design/vertical-slice.md`.

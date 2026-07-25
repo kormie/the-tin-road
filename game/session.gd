@@ -82,6 +82,11 @@ var subjects: Dictionary = {}
 var glossary: Dictionary = {}
 var phase := Phase.TITLE
 var rendered_to := 0
+## The daylight price of the act under the pointer, while one is. Kept so a
+## refresh mid-hover re-arms the same act's price instead of resetting the
+## ghost to the road's — clicking a button is the one moment the pointer is
+## guaranteed to be on it.
+var _hovered_cost := Callable()
 
 @onready var book: RichTextLabel = %Book
 @onready var status_label: Label = %Status
@@ -103,6 +108,10 @@ var rendered_to := 0
 @onready var desk_label: Label = %DeskLabel
 @onready var holdings_label: Label = %HoldingsLabel
 @onready var facilitator_label: Label = %FacilitatorLabel
+@onready var outfit_strip: RoadStrip = %OutfitStrip
+@onready var road_strip: RoadStrip = %RoadStrip
+@onready var desk_strip: RoadStrip = %DeskStrip
+@onready var daylight_bar: DaylightBar = %DaylightBar
 
 
 func _ready() -> void:
@@ -130,6 +139,8 @@ func _ready() -> void:
 	seals_spin.max_value = floorf(float(Outfit.PACK_CAPACITY) / float(Outfit.SEAL_BULK))
 	for spin: SpinBox in [clay_spin, papyrus_spin, seals_spin]:
 		spin.value_changed.connect(func(_v: float) -> void: _refresh_kit_label())
+	UiPalette.paint(self)
+	_bind_ghost_costs()
 	_label_the_shop()
 	_label_the_desk()
 	_refresh_seal_hint()
@@ -192,6 +203,7 @@ func _show_phase(next_phase: Phase) -> void:
 	desk_panel.visible = phase == Phase.DESK
 	refusal_label.text = ""
 	_refresh_status()
+	_refresh_widgets()
 
 
 func _refuse(text: String) -> void:
@@ -215,6 +227,56 @@ func _refresh() -> void:
 			book.text += grown
 	_refresh_status()
 	_refresh_seal_hint()
+	_refresh_widgets()
+
+
+## Push sim state into the drawn widgets. The strips read the same objects the
+## labels read; the bar reads the same SeasonRecord the measurement computes —
+## the chronicle read for shape, as measure/ reads it for numbers and
+## chronicle/renderer.gd for prose. Nothing is counted here.
+func _refresh_widgets() -> void:
+	for strip: RoadStrip in [outfit_strip, road_strip, desk_strip]:
+		strip.show_road(route, house, season)
+	var record: SeasonRecord = null
+	if house != null and season != null:
+		record = Measurement.of_chronicle(house.chronicle, house.rng.master_seed) \
+			.record_for(season.number)
+	daylight_bar.show_light(record,
+		season.daylight if season != null else 0, _current_ghost())
+
+
+## The bar's resting ghost: what the next step of road would cost. Hovering a
+## priced act previews that act's price instead — cost shown before it is
+## paid, never a refusal predicted. Buttons stay pressable; the sim refuses.
+func _default_ghost() -> int:
+	if season == null or season.is_over():
+		return 0
+	return season.travel_cost()
+
+
+## The ghost as it should read right now: the hovered act's price while the
+## pointer rests on one, the next step's otherwise.
+func _current_ghost() -> int:
+	if _hovered_cost.is_valid():
+		return int(_hovered_cost.call())
+	return _default_ghost()
+
+
+func _bind_ghost_costs() -> void:
+	_hover_ghost(travel_button, func() -> int: return _default_ghost())
+	_hover_ghost(%NoteButton, func() -> int: return Ledger.daylight_cost(Ledger.EntryType.NOTE))
+	_hover_ghost(%RecordButton, func() -> int: return Ledger.daylight_cost(Ledger.EntryType.RECORD))
+	_hover_ghost(%SurveyButton, func() -> int: return Ledger.daylight_cost(Ledger.EntryType.SURVEY))
+	_hover_ghost(%TreatiseButton, func() -> int: return Ledger.daylight_cost(Ledger.EntryType.TREATISE))
+
+
+func _hover_ghost(button: Button, cost: Callable) -> void:
+	button.mouse_entered.connect(func() -> void:
+		_hovered_cost = cost
+		daylight_bar.show_ghost(_current_ghost()))
+	button.mouse_exited.connect(func() -> void:
+		_hovered_cost = Callable()
+		daylight_bar.show_ghost(_current_ghost()))
 
 
 func _refresh_status() -> void:
@@ -332,7 +394,7 @@ func _rebuild_contract_buttons() -> void:
 		var terms := Label.new()
 		terms.text = _contract_summary(template)
 		terms.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		terms.add_theme_color_override("font_color", Color(0.647, 0.616, 0.549))
+		terms.add_theme_color_override("font_color", UiPalette.color(&"papyrusDim"))
 		row.add_child(terms)
 		contracts_box.add_child(row)
 
