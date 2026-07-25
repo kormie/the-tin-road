@@ -113,8 +113,19 @@ measurement plan that closes milestone 1 (`scripts/measure.gd` over seeded
 runs; the same per-season record emitted by the playable layer as
 `TINMEASURE` lines; four signals computed, the fifth deliberately left to a
 human — `docs/design/measurement.md`, `docs/design/playtest-script.md`).
-The numbers exist; **the playtests have not been run**, so nothing has yet
-answered the slice's question.
+**One playtest has now been run** (`docs/design/playtests/session-01.md`, two
+seasons, seed 101) and the slice's question is still unanswered: the road was
+never documented, so no caravan ever ran, so signal 3 never fired. The finding
+was comprehension, not tuning — the survey was read as "recon about the current
+location" rather than the leg of road behind you. What followed was a
+legibility pass and no constant changed: sim-owned refusal reasons
+(`Season.preview_*_reason` — the sim names one reason, `game/` prints that one),
+costs read onto every button from the constants, a `stock_spent` event so the
+empty pack stops being silent, named legs (`Route.leg_name`), and an
+inheritance panel at the outfit step. **Three of the four entry types —
+`note`, `record`, `treatise` — still have no consumer:** they cost daylight and
+media and are read by nothing. Only `survey` changes what the House knows.
+That is the loudest open design question the slice has.
 **Not built:** order revocation, incident reports and caravan loss,
 the Keeper and Endurance,
 archive corruption, factions beyond the Yabninu commission const, presses, the

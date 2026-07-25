@@ -50,6 +50,57 @@ func test_refusals_are_reported_not_predicted() -> void:
 	assert_bool(session.refusal_label.text.is_empty()).is_false()
 
 
+func test_a_refusal_names_the_one_reason_that_is_true() -> void:
+	# The first playtest could not tell an empty pack from a missing seal,
+	# because the refusal listed every condition at once and named none of
+	# them. A refusal reports the code the sim gave, and only that code.
+	var session := _session()
+	session.seed_input.text = "1"
+	session._on_found_pressed()
+	session._on_depart_pressed()
+	session.season.clay = 0
+	session.season.papyrus = 0
+	session._on_courier_pressed()
+	# Nothing written yet: that is the true reason, ahead of the empty pack.
+	assert_str(session.refusal_label.text).is_equal(
+		GameSession.COURIER_REFUSALS[&"nothing_written"])
+	session.season.clay = 4
+	session.season.papyrus = 0
+	session._on_write_pressed(Ledger.EntryType.NOTE)
+	session.season.clay = 0
+	session._on_courier_pressed()
+	# Now something is written and the pack is empty — the pack is the reason,
+	# and the seals in the pack are not mentioned at all.
+	assert_bool(session.season.seals > 0).is_true()
+	assert_str(session.refusal_label.text).contains("copy needs")
+	assert_str(session.refusal_label.text).not_contains("seal")
+
+
+func test_the_road_panel_quotes_costs_from_the_ledger() -> void:
+	# A price typed into the scene is a price that rots. Every cost on a
+	# writing button is read off Ledger at load.
+	var session := _session()
+	var button: Button = session.get_node("%SurveyButton")
+	assert_str(button.text).contains(str(Ledger.daylight_cost(Ledger.EntryType.SURVEY)))
+	assert_str(button.text).contains(str(Ledger.media_cost(Ledger.EntryType.SURVEY)))
+
+
+func test_the_outfit_step_shows_what_was_inherited() -> void:
+	# Signal 5 is whether the inheritance is legible. It cannot be legible if
+	# it is not on the screen at the moment the player is deciding.
+	var session := _session()
+	session.seed_input.text = "1"
+	session._on_found_pressed()
+	assert_str(session.inherit_label.text).contains("first scribe")
+	session._on_depart_pressed()
+	session.season.write_entry(Ledger.EntryType.NOTE, "a first note")
+	session.season.result = Season.Result.RETURNED
+	session._after_action()
+	session._on_next_season_pressed()
+	assert_str(session.inherit_label.text).contains("1 entry in the archive")
+	assert_str(session.inherit_label.text).contains(session.route.display_name)
+
+
 func test_invalid_kit_is_refused_at_the_counter() -> void:
 	var session := _session()
 	session.seed_input.text = "1"
@@ -93,7 +144,11 @@ func test_the_desk_emits_the_season_record() -> void:
 		session.house.chronicle, session.house.rng.master_seed).records[0]
 	assert_str(expected.outcome).is_equal("stranded")
 	assert_int(expected.light_travel).is_equal(Season.TRAVEL_COST)
-	assert_str(session.desk_label.text).contains(expected.headline())
+	# The instrument stays on the panel for whoever is running the session —
+	# but under a summary written for whoever is playing (playtest-script.md).
+	assert_str(session.facilitator_label.text).contains(expected.headline())
+	assert_str(session.desk_label.text).contains("the light ran out")
+	assert_str(session.desk_label.text).not_contains(expected.headline())
 
 
 func test_incremental_rendering_matches_the_whole_book() -> void:

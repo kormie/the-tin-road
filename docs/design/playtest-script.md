@@ -12,6 +12,10 @@ exists so that it is not contaminated before it arrives.
 **Sessions are two seasons minimum.** A single-season session cannot test the
 thing and is not worth running.
 
+Sessions run so far: `playtests/session-01.md`. Read the last one before running
+the next — several of its findings became changes to the build that this script
+has not yet been used to check.
+
 ---
 
 ## Before
@@ -75,8 +79,13 @@ player is genuinely stuck rather than merely slow.
 | 0 | nothing | *the result we want* |
 | 1 | "Anything you're curious about?" | time |
 | 2 | "What do you think the survey does?" | time |
-| 3 | "Have a look at what the archive is holding." | time |
+| 3 | "What do you think 'the House knows 1 leg of 3' means?" | time |
 | 4 | "Surveying all three legs does something." | time — **signal 2 is now unmeasurable for this session** |
+
+Rung 3 used to be "have a look at what the archive is holding." After session 01
+the archive is on screen by default — what the House holds, and which legs it
+knows by name — so that rung stopped being a hint and became a description of
+the panel. It now points at the readout the player already has instead.
 
 Record: the highest rung used, the time at which each was used, and whether
 they got there afterwards. A session that reaches rung 4 still produces good

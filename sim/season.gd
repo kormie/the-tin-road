@@ -46,6 +46,7 @@ var contracts: Array[ContractCatalog.ContractTemplate] = []
 var _voided_ids: Array[String] = []
 var _last_outcome: StringName = &"arrived"
 var _heavy_going_reported := false
+var _stock_spent_reported := false
 
 ## Where the light has gone since the last event was emitted. Every spend names
 ## the bucket it belongs to and the next event carries the tally away, so the
@@ -134,27 +135,50 @@ func travel_next() -> void:
 		_resolve_call_ins(_last_outcome)
 
 
+## Why this entry would not get written, as a code (&"" means it will be).
+##
+## The sim owns the reason; whoever is presenting it owns the words — the same
+## split `Outfit.invalid_reason` uses at the guild hall. Every gate in
+## `write_entry` lives here and nowhere else, so a refusal reported to a player
+## is the refusal that actually happened rather than a list of everything that
+## might have. Pure: it draws nothing and changes nothing.
+##
+## Order is by usefulness, not by the order the sim happens to check: a scribe
+## with an empty pack is told about the pack, not about the seal they also lack.
+func preview_write_reason(type: Ledger.EntryType, leg: int = -1, use_seal: bool = false) -> StringName:
+	if is_over():
+		return &"season_over"
+	if daylight <= Ledger.daylight_cost(type):
+		return &"no_light"
+	if media_total() < Ledger.media_cost(type):
+		return &"no_media"
+	if use_seal and seals < 1:
+		return &"no_seal"
+	if type == Ledger.EntryType.SURVEY:
+		if leg < 1 or leg > route.leg_count():
+			return &"nothing_behind"
+		if max_leg_reached < leg:
+			return &"leg_unreached"
+		if surveys.has(leg):
+			return &"leg_written"
+		if house.surveyed_legs.has(leg):
+			return &"leg_documented"
+		if house.rumoured_legs.has(leg) and not use_seal:
+			return &"rumour_unsealed"  # A rumour cannot confirm a rumour.
+	return &""
+
+
 ## Stop and write. Costs daylight and media; the only way anything survives you.
 ## Sealing the entry spends a seal and makes it authoritative — an unsealed
 ## entry merges into the archive as a rumour at reduced value
 ## (docs/design/systems.md §3). A sealed survey may confirm a leg the House
 ## holds only as rumour; an unsealed one may not.
 func write_entry(type: Ledger.EntryType, subject: String, leg: int = -1, use_seal: bool = false) -> bool:
-	if is_over():
-		return false
-	if use_seal and seals < 1:
+	if preview_write_reason(type, leg, use_seal) != &"":
 		return false
 	var d_cost := Ledger.daylight_cost(type)
 	var m_cost := Ledger.media_cost(type)
-	if daylight <= d_cost or media_total() < m_cost:
-		return false
 	if type == Ledger.EntryType.SURVEY:
-		if leg < 1 or leg > route.leg_count() or max_leg_reached < leg:
-			return false
-		if surveys.has(leg) or house.surveyed_legs.has(leg):
-			return false
-		if house.rumoured_legs.has(leg) and not use_seal:
-			return false  # A rumour cannot confirm a rumour.
 		surveys.append(leg)
 	if use_seal:
 		seals -= 1
@@ -175,23 +199,34 @@ func write_entry(type: Ledger.EntryType, subject: String, leg: int = -1, use_sea
 	return true
 
 
+## Why this contract would not be signed, as a code (&"" means it will be).
+## See `preview_write_reason` for the split this follows.
+func preview_contract_reason(template: ContractCatalog.ContractTemplate) -> StringName:
+	if is_over():
+		return &"season_over"
+	var node: Route.RouteNode = route.nodes[position]
+	if node.kind != "settlement":
+		return &"not_settlement"
+	if not template.sign_at.has(node.id):
+		return &"not_offered_here"
+	if _voided_ids.has(template.id):
+		return &"voided"
+	for c: ContractCatalog.ContractTemplate in contracts:
+		if c.id == template.id:
+			return &"already_signed"
+	if media_total() < CONTRACT_MEDIA_COST:
+		return &"no_media"
+	return &""
+
+
 ## Sign a standing contract at a settlement that offers it. A contract is a
 ## written thing: signing consumes media, so every deal in force is writing
 ## capacity spent. Refuses duplicates and deals already voided this season —
 ## word travels.
 func sign_contract(template: ContractCatalog.ContractTemplate) -> bool:
-	if is_over():
+	if preview_contract_reason(template) != &"":
 		return false
 	var node: Route.RouteNode = route.nodes[position]
-	if node.kind != "settlement" or not template.sign_at.has(node.id):
-		return false
-	if _voided_ids.has(template.id):
-		return false
-	if media_total() < CONTRACT_MEDIA_COST:
-		return false
-	for c: ContractCatalog.ContractTemplate in contracts:
-		if c.id == template.id:
-			return false
 	_spend_media(CONTRACT_MEDIA_COST)
 	contracts.append(template)
 	_emit(&"contract_signed", node.display_name, {
@@ -202,24 +237,37 @@ func sign_contract(template: ContractCatalog.ContractTemplate) -> bool:
 	return true
 
 
+## Why no seal would change hands here, as a code (&"" means one will).
+## See `preview_write_reason` for the split this follows.
+func preview_seal_reason() -> StringName:
+	if is_over():
+		return &"season_over"
+	var node: Route.RouteNode = route.nodes[position]
+	if node.kind != "settlement":
+		return &"not_settlement"
+	if position == 0:
+		return &"home_hall"
+	var access := false
+	for c: ContractCatalog.ContractTemplate in contracts:
+		if c.grants_seal_access:
+			access = true
+	if not access:
+		return &"no_standing"
+	if silver < SEAL_ROAD_PRICE:
+		return &"no_silver"
+	if carried_bulk() + Outfit.SEAL_BULK > Outfit.PACK_CAPACITY:
+		return &"no_room"
+	return &""
+
+
 ## Buy one seal at a foreign guild hall. Access is contractual, the price
 ## comes out of the road purse, and the pack must have room. Room means
 ## carried_bulk(): blank stock and seals — written work rides weightless
 ## in the document chest, by the same abstraction travel_cost() uses.
 func buy_seal() -> bool:
-	if is_over():
+	if preview_seal_reason() != &"":
 		return false
 	var node: Route.RouteNode = route.nodes[position]
-	if node.kind != "settlement" or position == 0:
-		return false
-	var access := false
-	for c: ContractCatalog.ContractTemplate in contracts:
-		if c.grants_seal_access:
-			access = true
-	if not access or silver < SEAL_ROAD_PRICE:
-		return false
-	if carried_bulk() + Outfit.SEAL_BULK > Outfit.PACK_CAPACITY:
-		return false
 	silver -= SEAL_ROAD_PRICE
 	seals += 1
 	_emit(&"seal_bought", node.display_name, {"price": str(SEAL_ROAD_PRICE)})
@@ -264,10 +312,23 @@ func _resolve_call_ins(outcome: StringName) -> void:
 ## so the House can never receive the same entry twice. The snapshot carries
 ## each entry's leg and seal status, so a couriered survey folds exactly as
 ## a carried one would.
-func send_courier() -> bool:
+## Why no courier would go, as a code (&"" means one will). Ordered so the
+## scribe hears about the empty pack first: the courier copies the ledger, and
+## a copy needs something to be copied onto. See `preview_write_reason`.
+func preview_courier_reason() -> StringName:
 	if is_over():
-		return false
-	if seals < 1 or entries.is_empty() or media_total() < COURIER_MEDIA_COST:
+		return &"season_over"
+	if entries.is_empty():
+		return &"nothing_written"
+	if media_total() < COURIER_MEDIA_COST:
+		return &"no_media"
+	if seals < 1:
+		return &"no_seal"
+	return &""
+
+
+func send_courier() -> bool:
+	if preview_courier_reason() != &"":
 		return false
 	seals -= 1
 	_spend_media(COURIER_MEDIA_COST)
@@ -387,8 +448,28 @@ func _spend_media(amount: int) -> void:
 ## Record an event, and hand it whatever light has been spent since the last
 ## one. Every spend therefore lands on exactly one event: the season's whole
 ## budget is readable off the log without the sim keeping a single total.
+##
+## An emptied pack is announced immediately after whatever emptied it, whether
+## that was the scribe's pen or the road's weather — which is why the check
+## hangs here rather than at seven call sites that would each have to remember.
 func _emit(type: StringName, place: String, data: Dictionary) -> void:
 	for bucket: StringName in _light_pending:
 		data["light_" + String(bucket)] = str(_light_pending[bucket])
 	_light_pending.clear()
 	chronicle.record(ChronicleEvent.make(number, day, type, place, scribe, data))
+	if type != &"stock_spent":
+		_note_stock_spent()
+
+
+## The last of the stock is gone. Until now this was the game's one wholly
+## silent state change: nothing announced it, nothing refuses until you try,
+## and a player who has run out cannot tell an empty pack from a button they
+## have misunderstood. The season is not over — but from here it is walking,
+## and the book should say so. Announced once. Carries no light: `_emit` has
+## just drained the tally onto the event that caused this.
+func _note_stock_spent() -> void:
+	if _stock_spent_reported or is_over() or media_total() > 0:
+		return
+	_stock_spent_reported = true
+	_emit(&"stock_spent", route.nodes[position].display_name,
+		{"seals": str(seals), "entries": str(entries.size())})

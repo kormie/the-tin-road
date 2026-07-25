@@ -15,6 +15,10 @@ class RouteNode:
 var id: String
 var display_name: String
 var nodes: Array[RouteNode] = []
+## What each leg is called, by leg number. Content, like everything else about
+## a road: a route that names its legs lets the House say what it knows in
+## words instead of indices.
+var leg_names: Dictionary[int, String] = {}
 
 
 static func load_from_file(path: String) -> Route:
@@ -41,7 +45,17 @@ static func from_dict(d: Dictionary) -> Route:
 		node.leg = int(nd.get("leg", 0))
 		node.flavor = str(nd.get("flavor", ""))
 		route.nodes.append(node)
+	var raw_legs: Variant = d.get("legs", {})
+	if raw_legs is Dictionary:
+		for key: Variant in (raw_legs as Dictionary):
+			route.leg_names[int(str(key))] = str((raw_legs as Dictionary)[key])
 	return route
+
+
+## What to call a leg out loud. Falls back to the index for a road whose
+## author never named its legs.
+func leg_name(leg: int) -> String:
+	return leg_names.get(leg, "leg %d" % leg)
 
 
 func leg_count() -> int:

@@ -1,0 +1,18 @@
+{
+  "_comment": "What the desk tells a scribe about their own tools. Content, not code: this is the copy that answers 'what does this button do', and it should be editable without touching the UI. It describes CONTROLS ONLY — never goals. Nothing here may say what documenting a road is worth, or that finishing one does anything at all: docs/design/playtest-script.md §2 measures whether a player finds that out unprompted, and a sentence in this file would end that measurement for every session afterwards. Costs are not written here either — the UI reads those off sim constants so they cannot rot.",
+
+  "entry_note": "A quick hand: whatever the road has just shown you.",
+  "entry_record": "Prices, names, who deals with whom. Longer, and worth the ink.",
+  "entry_survey": "A full description of the leg of road behind you — the stretch you have walked to get here, not the place you are standing in.",
+  "entry_treatise": "A considered piece, written at length. The most a scribe can spend on one entry.",
+
+  "writing": "Every entry costs daylight and something to write on. Nothing you learn survives you unless it is written and reaches the archive.",
+  "media": "Clay and papyrus are what you write on. Clay is cheap and heavy and survives water; papyrus is light and cheap to carry and does not. Running out ends the writing, not the season.",
+  "seals": "A sealed entry is authoritative. Unsealed work still reaches the archive, but as rumour, and rumour is worth half.",
+  "seal_toggle_off": "Unsealed — the next entry reaches the archive as rumour.",
+  "seal_toggle_on": "Sealed — the next entry is authoritative, and spends a seal.",
+  "courier": "Sends a copy of the ledger home now, ahead of you. What is sent survives you; what you write afterwards does not.",
+  "contracts": "Signed at a settlement that offers them, and written down like everything else. They pay while you travel, and are called in when the road turns against you.",
+  "archive": "What the House has in writing. It is all that crosses from one scribe to the next.",
+  "empty_pack": "Nothing left to write on. The road home still has to be walked."
+}

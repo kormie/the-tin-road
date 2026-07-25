@@ -2,6 +2,12 @@
   "_comment": "The vertical-slice route from docs/design/vertical-slice.md: Ugarit to Alashiya and back. Three legs, six nodes, one of them will probably kill you. 'leg' is the leg you complete by arriving at that node, travelling outward; 0 means home. Routes are content — add roads by adding files, not code.",
   "id": "tin_road_slice",
   "display_name": "the Ugarit road",
+  "_legs_comment": "What each leg is called when the House talks about what it knows. A leg the player cannot name is a leg they cannot feel they inherited (docs/design/measurement.md, signal 5). Optional: a route without these falls back to 'leg N'.",
+  "legs": {
+    "1": "the marsh crossing",
+    "2": "the open water",
+    "3": "the Alashiyan landfall"
+  },
   "nodes": [
     { "id": "ugarit", "name": "Ugarit", "kind": "settlement", "leg": 0 },
     { "id": "salt_marsh", "name": "the Salt Marsh", "kind": "hazard", "leg": 1, "flavor": "water" },
