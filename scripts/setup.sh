@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 # One-time setup: fetch the pinned test framework and prime the import cache.
-# Requires: git, and `godot` (4.6.x) on PATH or in $GODOT.
+# Requires: git, and `godot` (4.7.x) on PATH or in $GODOT.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-GDUNIT_TAG="v6.1.3"  # verified against Godot 4.6.3
+GDUNIT_TAG="v6.1.3"  # verified against Godot 4.7.1
 GODOT="${GODOT:-godot}"
 
 if [ ! -d addons/gdUnit4 ]; then

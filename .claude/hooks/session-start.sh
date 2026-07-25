@@ -27,7 +27,7 @@ cd "$REPO"
 # CI is the referee, so CI pins the version. Read it from the workflow rather
 # than keeping a second copy that can drift.
 GODOT_VERSION="$(sed -n 's/^ *GODOT_VERSION: *//p' .github/workflows/ci.yml | head -1)"
-GODOT_VERSION="${GODOT_VERSION:-4.6.3-stable}"
+GODOT_VERSION="${GODOT_VERSION:-4.7.1-stable}"
 
 BIN_DIR="$HOME/.local/share/godot/bin"
 GODOT_BIN="$BIN_DIR/Godot_v${GODOT_VERSION}_linux.x86_64"

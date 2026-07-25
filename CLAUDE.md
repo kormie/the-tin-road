@@ -42,7 +42,7 @@ TIN_SEEDS=1259,735 TIN_FORMAT=jsonl godot --headless --path . -s scripts/measure
 ./scripts/build_codex.sh  # compile data/codex/*.md into the book (epub if pandoc)
 ```
 
-Godot 4.6.x required (CI pins 4.6.3). Never claim a change works without a
+Godot 4.7.x required (CI pins 4.7.1). Never claim a change works without a
 green `./scripts/check.sh`.
 
 ## Architecture rules
@@ -74,7 +74,7 @@ green `./scripts/check.sh`.
   through `SimRng` named streams. Adding a stream is fine; sharing one
   between systems is not.
 
-## GDScript conventions (Godot 4.6 — strict mode is ON)
+## GDScript conventions (Godot 4.7 — strict mode is ON)
 
 `untyped_declaration` is set to **error** in project.godot. Everything is typed:
 
