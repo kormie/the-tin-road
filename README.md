@@ -12,6 +12,17 @@ meta-progression, the automation system, and the point.
 
 Built with Godot 4.6. Everything is text; the repo is the game.
 
+![The road: the chronicle grows down the page as it is written — here a scribe has signed two contracts, written a note, and sent the ledger home by courier because the road was going badly](docs/screenshots/road.png)
+
+<details>
+<summary>More screenshots: founding a House, outfitting the season</summary>
+
+![The title screen: choose a seed and found the House](docs/screenshots/title.png)
+
+![The outfit desk: clay is cheap but heavy, papyrus is light but drowns, and the pack will not close over everything](docs/screenshots/outfit.png)
+
+</details>
+
 ## The pitch, demonstrated
 
 Every playthrough is event-sourced into a chronicle, and the chronicle renders
