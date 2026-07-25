@@ -18,6 +18,7 @@ const PERIL_COST := 4
 const PERIL_DEATH_CHANCE := 0.35
 const COURIER_MEDIA_COST := 4
 const SEAL_ROAD_PRICE := 5
+const CONTRACT_MEDIA_COST := 1
 
 var house: House
 var route: Route
@@ -138,8 +139,10 @@ func write_entry(type: Ledger.EntryType, subject: String, leg: int = -1, use_sea
 	return true
 
 
-## Sign a standing contract at a settlement that offers it. Refuses
-## duplicates and deals already voided this season — word travels.
+## Sign a standing contract at a settlement that offers it. A contract is a
+## written thing: signing consumes media, so every deal in force is writing
+## capacity spent. Refuses duplicates and deals already voided this season —
+## word travels.
 func sign_contract(template: ContractCatalog.ContractTemplate) -> bool:
 	if is_over():
 		return false
@@ -148,9 +151,12 @@ func sign_contract(template: ContractCatalog.ContractTemplate) -> bool:
 		return false
 	if _voided_ids.has(template.id):
 		return false
+	if media_total() < CONTRACT_MEDIA_COST:
+		return false
 	for c: ContractCatalog.ContractTemplate in contracts:
 		if c.id == template.id:
 			return false
+	_spend_media(CONTRACT_MEDIA_COST)
 	contracts.append(template)
 	_emit(&"contract_signed", node.display_name, {
 		"holder": template.holder,
@@ -208,6 +214,7 @@ func _resolve_call_ins(outcome: StringName) -> void:
 			_emit(&"contract_honoured", route.nodes[position].display_name, {
 				"holder": c.holder, "contract": c.display_name, "demand": c.demand})
 		else:
+			silver = 0  # The holder empties the purse before taking the penalty.
 			if c.default_media_penalty > 0:
 				_lose_media(c.default_media_penalty)
 			if c.voids_on_default:

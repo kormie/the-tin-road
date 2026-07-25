@@ -19,8 +19,7 @@ static func run(seed_value: int, seasons: int, house_name: String = "House Sapan
 	for _i: int in range(seasons):
 		var season := house.start_season(_choose_outfit(house))
 		season.begin()
-		for template: ContractCatalog.ContractTemplate in catalog.templates:
-			season.sign_contract(template)  # The brain signs everything on offer.
+		_sign_contracts(season, house, catalog)
 		_play_out(season, route)
 		house.merge(season)
 	var renderer := ChronicleRenderer.load_default(house.rng.stream(&"prose"))
@@ -31,6 +30,27 @@ static func run(seed_value: int, seasons: int, house_name: String = "House Sapan
 ## belongs to a human; the demo only has to exercise the purchase.
 static func _choose_outfit(_house: House) -> Outfit:
 	return Outfit.default_kit()
+
+
+## What the brain signs is a budget call, not a strategy. While the road is
+## still being charted, the pack must cover a survey AND the courier, so it
+## signs only the income deal. Once the route is documented it signs
+## everything on offer — and pays for that breadth with a thinner courier
+## reserve, which is the intended tension, not a bug.
+static func _sign_contracts(season: Season, house: House, catalog: ContractCatalog) -> void:
+	if house.route_documented():
+		for template: ContractCatalog.ContractTemplate in catalog.templates:
+			season.sign_contract(template)
+		return
+	var income_deal := catalog.by_id("urtenu_consignment")
+	if income_deal != null:
+		season.sign_contract(income_deal)
+	# Once the House holds any paper on the road, the far guild hall's door
+	# is worth a page of the pack — the confirming seasons spend seals.
+	if not house.surveyed_legs.is_empty() or not house.rumoured_legs.is_empty():
+		var access_deal := catalog.by_id("sojourners_right")
+		if access_deal != null:
+			season.sign_contract(access_deal)
 
 
 static func _play_out(season: Season, route: Route) -> void:

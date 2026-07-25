@@ -88,7 +88,7 @@
   "contract_signed": [
     "At {place}, {scribe} signed {contract} with {holder}: {terms}. Ink dries; obligations do not.",
     "{holder} offered {contract}, and {scribe} took the stylus: {terms}.",
-    "{contract} was signed at {place} — {terms}. {holder} filed its copy with visible satisfaction."
+    "{contract} was signed at {place} — {terms}. Its copy went into {holder}'s files, which forget nothing."
   ],
   "contract_called": [
     "At {place}, {holder} called in {contract}: {demand}.",
@@ -102,7 +102,7 @@
   ],
   "contract_defaulted": [
     "{scribe} could not meet {contract}: {penalty}.",
-    "The purse came up short at {place}. {holder} took its remedy: {penalty}.",
+    "The purse came up short at {place}, and {holder} took its remedy: {penalty}.",
     "Default, noted in {holder}'s ledger and this one: {penalty}."
   ],
   "seal_bought": [

@@ -21,13 +21,18 @@ func test_sign_at_settlement_only() -> void:
 	var season: Season = f["season"]
 	var house: House = f["house"]
 	var catalog: ContractCatalog = f["catalog"]
+	var media_before := season.media_total()
 	assert_bool(season.sign_contract(catalog.by_id("urtenu_consignment"))).is_true()
 	assert_int(house.chronicle.count_of(&"contract_signed")).is_equal(1)
+	assert_int(season.media_total()).is_equal(media_before - Season.CONTRACT_MEDIA_COST)
 	season.position = 1
+	assert_bool(season.sign_contract(catalog.by_id("storm_pledge"))).is_false()
+	season.position = 5
 	assert_bool(season.sign_contract(catalog.by_id("storm_pledge"))).is_false()
 	season.position = 0
 	assert_bool(season.sign_contract(catalog.by_id("urtenu_consignment"))).is_false()
 	assert_int(season.contracts.size()).is_equal(1)
+	assert_int(season.media_total()).is_equal(media_before - Season.CONTRACT_MEDIA_COST)
 
 
 func test_income_ticks_per_leg_into_purse() -> void:
@@ -61,10 +66,11 @@ func test_call_in_default_voids_and_costs_media() -> void:
 	var house: House = f["house"]
 	var catalog: ContractCatalog = f["catalog"]
 	assert_bool(season.sign_contract(catalog.by_id("urtenu_consignment"))).is_true()
-	season.silver = 0
+	season.silver = 5  # Short of the twelve-shekel demand.
 	var media_before := season.media_total()
 	season._resolve_call_ins(&"shaken_down")
 	assert_int(house.chronicle.count_of(&"contract_defaulted")).is_equal(1)
+	assert_int(season.silver).is_equal(0)
 	assert_int(season.media_total()).is_equal(media_before - 2)
 	assert_bool(season.contracts.is_empty()).is_true()
 	season._resolve_call_ins(&"shaken_down")
@@ -190,6 +196,35 @@ func test_purse_banks_on_return_and_dies_on_the_road() -> void:
 	stranded_house.merge(stranded_season)
 	assert_int(stranded_house.silver).is_equal(stranded_before)
 	assert_int(stranded_house.chronicle.count_of(&"purse_banked")).is_equal(0)
+
+
+func test_turn_for_home_ticks_income_before_dues() -> void:
+	# Arriving at Alashiya draws nothing (settlement), so this is fully
+	# deterministic: the leg's income must land before the turn-home dues
+	# are called, and the turn must be written before the call.
+	var f := _fixture()
+	var season: Season = f["season"]
+	var house: House = f["house"]
+	var catalog: ContractCatalog = f["catalog"]
+	assert_bool(season.sign_contract(catalog.by_id("urtenu_consignment"))).is_true()
+	assert_bool(season.sign_contract(catalog.by_id("sojourners_right"))).is_true()
+	season.position = 4
+	season.silver = 2
+	season.travel_next()
+	assert_int(season.position).is_equal(5)
+	assert_int(house.chronicle.count_of(&"contract_honoured")).is_equal(1)
+	assert_int(house.chronicle.count_of(&"contract_defaulted")).is_equal(0)
+	assert_int(season.silver).is_equal(0)
+	var turned_at := -1
+	var called_at := -1
+	for i: int in range(house.chronicle.events.size()):
+		var ev: ChronicleEvent = house.chronicle.events[i]
+		if ev.type == &"turned_home":
+			turned_at = i
+		if ev.type == &"contract_called" and called_at < 0:
+			called_at = i
+	assert_bool(turned_at >= 0).is_true()
+	assert_bool(called_at > turned_at).is_true()
 
 
 func test_demo_reaches_the_contract_pipeline() -> void:
