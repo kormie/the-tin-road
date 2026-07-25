@@ -1,0 +1,13 @@
+{
+  "_comment": "The vertical-slice route from docs/design/vertical-slice.md: Ugarit to Alashiya and back. Three legs, six nodes, one of them will probably kill you. 'leg' is the leg you complete by arriving at that node, travelling outward; 0 means home. Routes are content — add roads by adding files, not code.",
+  "id": "tin_road_slice",
+  "display_name": "the Ugarit road",
+  "nodes": [
+    { "id": "ugarit", "name": "Ugarit", "kind": "settlement", "leg": 0 },
+    { "id": "salt_marsh", "name": "the Salt Marsh", "kind": "hazard", "leg": 1 },
+    { "id": "rival_sail", "name": "the Rival Sail", "kind": "rival", "leg": 1 },
+    { "id": "open_water", "name": "Open Water", "kind": "hazard", "leg": 2 },
+    { "id": "drowned_shrine", "name": "the Drowned Shrine", "kind": "ruin", "leg": 2 },
+    { "id": "alashiya", "name": "Alashiya", "kind": "settlement", "leg": 3 }
+  ]
+}

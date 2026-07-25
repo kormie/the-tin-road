@@ -1,0 +1,88 @@
+{
+  "_comment": "Prose templates for the chronicle renderer. Each event type maps to variants; the renderer picks deterministically per seed. Slots: {scribe} {house} {place} {day_ord} {season_ord} plus any event data keys. Voice rules: dry, literate, no exclamation marks, the road is patient and so is the prose. This file is where the book lives — add variants freely, the more the better.",
+  "season_began": [
+    "In the {season_ord} season of {house}, {scribe} took up the pen.",
+    "The {season_ord} season fell to {scribe}, who had opinions about that.",
+    "It was the {season_ord} season, and the pen passed to {scribe}."
+  ],
+  "departed": [
+    "{scribe} left {place} with {daylight} days of light in hand and less certainty than the ledger admits.",
+    "The caravan cleared the gate of {place} at first light, {daylight} days of it bought and paid for.",
+    "{scribe} walked out of {place} counting daylight like silver, {daylight} days of it."
+  ],
+  "arrived": [
+    "The road gave {place} up without argument.",
+    "On the {day_ord} day, {place}, and nothing worse.",
+    "{place} passed beneath the caravan's feet and asked for nothing."
+  ],
+  "delayed": [
+    "{place} took its toll in patience — {cost} days of light gone to waiting.",
+    "The road slowed at {place}, the way roads do when watched.",
+    "Two days were lost at {place}, and no one could afterwards say to what."
+  ],
+  "mishap": [
+    "At {place}, the road collected: {lost}, and three days of light.",
+    "{place} was unkind. The caravan left lighter by {lost}.",
+    "Something went wrong at {place} in the ordinary way, and it cost {lost}."
+  ],
+  "peril_survived": [
+    "{place} nearly kept {scribe}. It settled for four days of light.",
+    "There are prayers for what happened at {place}, and {scribe} used several.",
+    "{scribe} came through {place} alive, which the ledger records without comment."
+  ],
+  "shaken_down": [
+    "A factor of House Urtenu examined the cargo at {place} with great courtesy and took {lost}.",
+    "The rival sail closed at {place}. The debt, as always, stood — paid this day in {lost}.",
+    "At {place}, papers were checked, opinions were held, and {lost} changed hands."
+  ],
+  "found_relic": [
+    "In the silence of {place}, {scribe} found something the sea had not finished claiming.",
+    "{place} kept its dead and offered {scribe} a small thing in exchange for leaving.",
+    "Among the stones of {place}, an older road's leavings. {scribe} made a note."
+  ],
+  "entry_written": [
+    "{scribe} stopped and wrote: a {entry_type} on {subject}. It cost {cost_days} of light, and it was the point.",
+    "Daylight went to ink at {place} — a {entry_type} concerning {subject}.",
+    "The pen came out at {place}. A {entry_type}: {subject}. The road will remember what {scribe} paid to know it."
+  ],
+  "turned_home": [
+    "At {place} the road ran out of away. {scribe} turned for home.",
+    "{place}, copper-rich and jealous, marked the far end of the season. The caravan turned.",
+    "The outward road ended at {place}. Everything after this was returning."
+  ],
+  "returned": [
+    "{scribe} came through the gate of {place} with {entries} entries in the ledger and the rest in aching feet.",
+    "Home. The ledger held {entries} entries, which is to say: the season had happened, and proof existed.",
+    "{place} received its scribe back. {entries} entries came home in the bags."
+  ],
+  "stranded": [
+    "The light ran out at {place}, and the road kept {scribe}. What was not sent home was lost.",
+    "The season ended where it stood, at {place}. The ledger of {scribe} never reached the archive.",
+    "{scribe} misjudged the arithmetic of daylight by very little, at {place}, which was enough."
+  ],
+  "fell": [
+    "The road kept {scribe} at {place}. The House would learn of it from strangers.",
+    "{place} took {scribe}, as it had taken others, without malice and without appeal.",
+    "{scribe} fell at {place}. The unwritten died too — that is what unwritten means."
+  ],
+  "ledger_merged": [
+    "The ledger merged into the archive of {house}: {entries} entries the House now cannot forget.",
+    "The archive grew by {entries} entries. Somewhere in the temple district, a scribe of the old school felt a chill.",
+    "{entries} entries, folded into the House's memory. The dead will thank {scribe} for this, eventually."
+  ],
+  "route_documented": [
+    "With that, {route} was documented whole — three legs written down. A road anyone could walk. A road a caravan could walk alone.",
+    "The last leg went into the archive, and {route} became a written thing. What is written can be repeated.",
+    "{route}, complete in the archive. From this season forward, the road no longer required {scribe} — which was the entire idea."
+  ],
+  "caravan_returned": [
+    "While the House slept, a caravan walked {route} on its own and came home with {income} shekels, weighed. The road remembered. It had been written down.",
+    "A caravan ran {route} unattended and returned {income} shekels to the House. No one living had to be anywhere.",
+    "{income} shekels arrived from {route}, earned by a road walking itself. The archive, as usual, said nothing and did everything."
+  ],
+  "succession": [
+    "{scribe} inherited the House, the Archive, and the Concord's memory of {predecessor}.",
+    "The pen passed to {scribe}. What {predecessor} wrote remained; what {predecessor} knew did not.",
+    "{house} continued, as houses do, in the person of {scribe}, standing on everything {predecessor} left in writing."
+  ]
+}

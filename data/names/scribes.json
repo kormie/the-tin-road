@@ -1,0 +1,11 @@
+{
+  "_comment": "Given names for scribes of the House. Mixed attested and constructed. Names marked in _attested are found in the Ugarit tablets or royal lists — the [real] convention from docs/world applies to data files too. Ilimilku was the actual scribe of the Baal Cycle; giving a playthrough his name is a blessing.",
+  "_attested": ["Ilimilku", "Attenu", "Sinaranu", "Niqmaddu", "Niqmepa", "Ammittamru", "Ibiranu", "Arhalba", "Ammurapi", "Ahatmilku", "Sharelli", "Thariyelli", "Abdimilku"],
+  "given": [
+    "Ilimilku", "Attenu", "Sinaranu", "Niqmaddu", "Niqmepa",
+    "Ammittamru", "Ibiranu", "Arhalba", "Ammurapi", "Abdimilku",
+    "Ahatmilku", "Sharelli", "Thariyelli", "Pidaya", "Milkuyaton",
+    "Shubammu", "Yarimanu", "Baaliya", "Anantenu", "Kirtahu",
+    "Danataya", "Ushriya", "Gamiradu", "Tallaya"
+  ]
+}
