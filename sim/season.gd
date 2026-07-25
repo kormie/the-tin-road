@@ -19,6 +19,8 @@ const PERIL_DEATH_CHANCE := 0.35
 const COURIER_MEDIA_COST := 4
 const SEAL_ROAD_PRICE := 5
 const CONTRACT_MEDIA_COST := 1
+const HEAVY_PACK_THRESHOLD := 12
+const HEAVY_PACK_SURCHARGE := 1
 
 var house: House
 var route: Route
@@ -43,6 +45,7 @@ var silver := 0  # The road purse: contract income in, call-ins and seals out.
 var contracts: Array[ContractCatalog.ContractTemplate] = []
 var _voided_ids: Array[String] = []
 var _last_outcome: StringName = &"arrived"
+var _heavy_going_reported := false
 
 
 func _init(p_house: House, p_route: Route, p_rng: SimRng, p_chronicle: Chronicle, p_scribe: String, p_number: int, p_outfit: Outfit) -> void:
@@ -69,6 +72,22 @@ func media_total() -> int:
 	return clay + papyrus
 
 
+## What the caravan is actually hauling: blank stock and seals. Written work
+## rides in the document chest, weightless by deliberate abstraction —
+## writing converts a heavy liability into the point of the game.
+func _carried_bulk() -> int:
+	return clay * Outfit.CLAY_BULK + papyrus * Outfit.PAPYRUS_BULK \
+		+ seals * Outfit.SEAL_BULK
+
+
+## Clay slows the caravan (systems.md §1): a pack over the threshold costs
+## an extra day of light per node. Pure arithmetic — no draws.
+func travel_cost() -> int:
+	if _carried_bulk() > HEAVY_PACK_THRESHOLD:
+		return TRAVEL_COST + HEAVY_PACK_SURCHARGE
+	return TRAVEL_COST
+
+
 ## Move one node along the road, resolving whatever the road does about it.
 func travel_next() -> void:
 	if is_over():
@@ -77,7 +96,12 @@ func travel_next() -> void:
 		position -= 1
 	else:
 		position += 1
-	_spend_daylight(TRAVEL_COST)
+	var step_cost := travel_cost()
+	if step_cost > TRAVEL_COST and not _heavy_going_reported:
+		_heavy_going_reported = true
+		_emit(&"heavy_going", route.nodes[position].display_name,
+			{"cost": str(HEAVY_PACK_SURCHARGE)})
+	_spend_daylight(step_cost)
 	if is_over():
 		return
 	day += 1
@@ -167,9 +191,9 @@ func sign_contract(template: ContractCatalog.ContractTemplate) -> bool:
 
 
 ## Buy one seal at a foreign guild hall. Access is contractual, the price
-## comes out of the road purse, and the pack must have room. Bulk is checked
-## against current stock — written tablets leave the counters; the
-## media-weight task owns that seam.
+## comes out of the road purse, and the pack must have room. Room means
+## _carried_bulk(): blank stock and seals — written work rides weightless
+## in the document chest, by the same abstraction travel_cost() uses.
 func buy_seal() -> bool:
 	if is_over():
 		return false
@@ -182,9 +206,7 @@ func buy_seal() -> bool:
 			access = true
 	if not access or silver < SEAL_ROAD_PRICE:
 		return false
-	var bulk := clay * Outfit.CLAY_BULK + papyrus * Outfit.PAPYRUS_BULK \
-		+ (seals + 1) * Outfit.SEAL_BULK
-	if bulk > Outfit.PACK_CAPACITY:
+	if _carried_bulk() + Outfit.SEAL_BULK > Outfit.PACK_CAPACITY:
 		return false
 	silver -= SEAL_ROAD_PRICE
 	seals += 1
@@ -260,11 +282,12 @@ func _arrive(node: Route.RouteNode) -> void:
 			_last_outcome = &"delayed"
 			_emit(&"delayed", node.display_name, {"kind": node.kind, "cost": str(DELAY_COST)})
 	elif roll < 0.93:
-		var lost := _lose_media(1)
+		var lost := _lose_media(1, node.flavor)
 		_spend_daylight(MISHAP_COST)
 		if not is_over():
 			_last_outcome = &"mishap"
-			_emit(&"mishap", node.display_name, {"kind": node.kind, "lost": lost})
+			_emit(&"mishap", node.display_name, {"kind": node.kind,
+				"lost_clay": str(lost["clay"]), "lost_papyrus": str(lost["papyrus"])})
 	else:
 		_peril(node)
 
@@ -281,12 +304,19 @@ func _peril(node: Route.RouteNode) -> void:
 			if not is_over():
 				_last_outcome = &"peril_survived"
 				_emit(&"peril_survived", node.display_name, {"kind": node.kind})
+				# Surviving a water peril is not surviving dry: every sheet of
+				# papyrus is pulp. The clay comes out streaked but legible.
+				if node.flavor == "water" and papyrus > 0:
+					var soaked := papyrus
+					papyrus = 0
+					_emit(&"soaked", node.display_name, {"papyrus": str(soaked)})
 		"rival":
 			var lost := _lose_media(2)
 			_spend_daylight(DELAY_COST)
 			if not is_over():
 				_last_outcome = &"shaken_down"
-				_emit(&"shaken_down", node.display_name, {"lost": lost})
+				_emit(&"shaken_down", node.display_name, {
+					"lost_clay": str(lost["clay"]), "lost_papyrus": str(lost["papyrus"])})
 		"ruin":
 			_last_outcome = &"found_relic"
 			_emit(&"found_relic", node.display_name, {})
@@ -314,18 +344,18 @@ func _spend_daylight(amount: int) -> void:
 		_emit(&"stranded", route.nodes[position].display_name, {})
 
 
-func _lose_media(amount: int) -> String:
+## Lose media to the road. Neutral losses take papyrus first, then clay.
+## Water losses take papyrus ONLY — clay survives the shipwreck (systems.md
+## §1), so a clay-forward pack can walk out of a marsh with its stock
+## intact. Returns what was actually lost; the renderer writes the words.
+func _lose_media(amount: int, flavor: String = "") -> Dictionary:
 	var lost_papyrus := mini(amount, papyrus)
 	papyrus -= lost_papyrus
-	var lost_clay := mini(amount - lost_papyrus, clay)
-	clay -= lost_clay
-	if lost_papyrus > 0 and lost_clay > 0:
-		return "papyrus and clay"
-	if lost_papyrus > 0:
-		return "papyrus"
-	if lost_clay > 0:
-		return "a clay tablet"
-	return "nothing worth keeping"
+	var lost_clay := 0
+	if flavor != "water":
+		lost_clay = mini(amount - lost_papyrus, clay)
+		clay -= lost_clay
+	return {"clay": lost_clay, "papyrus": lost_papyrus}
 
 
 func _spend_media(amount: int) -> void:

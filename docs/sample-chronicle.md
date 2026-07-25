@@ -11,7 +11,7 @@ It was the first season, and the pen passed to Niqmepa.
 
 The season began as seasons do: House Yabninu's silver on the table, 30 shekels of it, and the understanding that backing Niqmepa would continue exactly as long as it paid.
 
-At the guild hall of Ugarit, Niqmepa bought the season's pack: 4 clay, 6 papyrus, 2 seals — 26 shekels, and not a finger's width of room left over.
+At the guild hall of Ugarit, Niqmepa bought the season's pack: 2 clay, 6 papyrus, 2 seals — 24 shekels, and not a finger's width of room left over.
 
 Niqmepa left Ugarit with 40 days of light in hand and less certainty than the ledger admits.
 
@@ -23,7 +23,7 @@ The pen came out at the Salt Marsh. A survey: the road as far as the Salt Marsh.
 
 Two days were lost at the Rival Sail, and no one could afterwards say to what.
 
-At Open Water, the road collected: a clay tablet, and three days of light.
+At Open Water, the road collected: nothing worth keeping, and three days of light.
 
 Two days were lost at the Drowned Shrine, and no one could afterwards say to what.
 
@@ -46,7 +46,7 @@ House Sapanu continued, as houses do, in the person of Arhalba, standing on ever
 
 30 shekels arrived under House Yabninu's seal before the dew burned off. Patrons pay early; it is later that they collect.
 
-At the guild hall of Ugarit, Arhalba bought the season's pack: 4 clay, 6 papyrus, 2 seals — 26 shekels, and not a finger's width of room left over.
+At the guild hall of Ugarit, Arhalba bought the season's pack: 2 clay, 6 papyrus, 2 seals — 24 shekels, and not a finger's width of room left over.
 
 The caravan cleared the gate of Ugarit at first light, 40 days of it bought and paid for.
 
@@ -93,7 +93,7 @@ Danataya inherited the House, the Archive, and the Concord's memory of Arhalba.
 
 30 shekels arrived under House Yabninu's seal before the dew burned off. Patrons pay early; it is later that they collect.
 
-Danataya outfitted at Ugarit: 4 clay, 6 papyrus, 2 seals. What the pack could not carry, the season would do without.
+Danataya outfitted at Ugarit: 2 clay, 6 papyrus, 2 seals. What the pack could not carry, the season would do without.
 
 Danataya walked out of Ugarit counting daylight like silver, 40 days of it.
 
@@ -146,7 +146,7 @@ The pen passed to Pidaya. What Danataya wrote remained; what Danataya knew did n
 
 30 shekels arrived under House Yabninu's seal before the dew burned off. Patrons pay early; it is later that they collect.
 
-Pidaya outfitted at Ugarit: 4 clay, 6 papyrus, 2 seals. What the pack could not carry, the season would do without.
+Pidaya outfitted at Ugarit: 2 clay, 6 papyrus, 2 seals. What the pack could not carry, the season would do without.
 
 Pidaya walked out of Ugarit counting daylight like silver, 40 days of it.
 
@@ -176,21 +176,19 @@ Pidaya paid what the sojourner's right named — four shekels of standing dues a
 
 The Drowned Shrine passed beneath the caravan's feet and asked for nothing.
 
-Pidaya stopped and wrote: a note on what the sea left at the Drowned Shrine. It cost 1 day of light, and it was the point.
-
 The road gave Open Water up without argument.
 
-Two days were lost at the Rival Sail, and no one could afterwards say to what.
+The Rival Sail took its toll in patience — 2 days of light gone to waiting.
 
 Two days were lost at the Salt Marsh, and no one could afterwards say to what.
 
-Home. The ledger held 3 entries, which is to say: the season had happened, and proof existed.
+Ugarit received its scribe back. 2 entries came home in the bags.
 
-The archive grew by 3 entries. Somewhere in the temple district, a scribe of the old school felt a chill.
+The archive grew by 2 entries. Somewhere in the temple district, a scribe of the old school felt a chill.
 
-The season's carriage silver — 16 shekels — was counted twice and banked once.
+16 shekels, earned leg by leg, crossed from the scribe's belt to the House strongbox.
 
-The survey of leg 2 arrived unsealed, and the archive shelved it among the rumours — read, doubted, half-believed.
+No seal on the survey of leg 2. The House filed it as hearsay, which is what an unsealed truth is.
 
 
 ## The Fifth Season
@@ -199,19 +197,21 @@ Abdimilku inherited the House, the Archive, and the Concord's memory of Pidaya.
 
 House Yabninu advanced 30 shekels against the season's road — generously, promptly, and with the ledger of what it expected in return already open.
 
-26 shekels became 4 tablets of clay, 6 sheets of papyrus, and 2 seals. Every choice from here would be about what the pack held.
+At the guild hall of Ugarit, Abdimilku bought the season's pack: 2 clay, 6 papyrus, 2 seals — 24 shekels, and not a finger's width of room left over.
 
-Abdimilku walked out of Ugarit counting daylight like silver, 40 days of it.
+The caravan cleared the gate of Ugarit at first light, 40 days of it bought and paid for.
 
 The Urtenu consignment was signed at Ugarit — carriage silver every leg, callable wherever Urtenu's factors fly their sail. Its copy went into House Urtenu's files, which forget nothing.
 
-At Ugarit, Abdimilku signed the sojourner's right with the guild hall of Alashiya: standing at the Alashiyan guild hall, arranged from Ugarit before the sail. Ink dries; obligations do not.
+The sojourner's right was signed at Ugarit — standing at the Alashiyan guild hall, arranged from Ugarit before the sail. Its copy went into the guild hall of Alashiya's files, which forget nothing.
 
 The Salt Marsh nearly kept Abdimilku. It settled for four days of light.
 
+The water at the Salt Marsh took its census: 4 sheets of papyrus came out pulp. The clay came out streaked but legible.
+
 The Rival Sail passed beneath the caravan's feet and asked for nothing.
 
-Something went wrong at Open Water in the ordinary way, and it cost papyrus.
+Something went wrong at Open Water in the ordinary way, and it cost nothing worth keeping.
 
 The Drowned Shrine passed beneath the caravan's feet and asked for nothing.
 
@@ -231,9 +231,9 @@ Daylight went to ink at the Drowned Shrine — a note concerning what the sea le
 
 Open Water took its toll in patience — 2 days of light gone to waiting.
 
-Something went wrong at the Rival Sail in the ordinary way, and it cost papyrus.
+Something went wrong at the Rival Sail in the ordinary way, and it cost nothing worth keeping.
 
-Something went wrong at the Salt Marsh in the ordinary way, and it cost a clay tablet.
+Something went wrong at the Salt Marsh in the ordinary way, and it cost nothing worth keeping.
 
 Abdimilku came through the gate of Ugarit with 2 entries in the ledger and the rest in aching feet.
 
@@ -248,7 +248,7 @@ The pen passed to Gamiradu. What Abdimilku wrote remained; what Abdimilku knew d
 
 House Yabninu advanced 30 shekels against the season's road — generously, promptly, and with the ledger of what it expected in return already open.
 
-26 shekels became 4 tablets of clay, 6 sheets of papyrus, and 2 seals. Every choice from here would be about what the pack held.
+24 shekels became 2 tablets of clay, 6 sheets of papyrus, and 2 seals. Every choice from here would be about what the pack held.
 
 Gamiradu left Ugarit with 40 days of light in hand and less certainty than the ledger admits.
 
@@ -256,9 +256,9 @@ At Ugarit, Gamiradu signed the Urtenu consignment with House Urtenu: carriage si
 
 At Ugarit, Gamiradu signed the sojourner's right with the guild hall of Alashiya: standing at the Alashiyan guild hall, arranged from Ugarit before the sail. Ink dries; obligations do not.
 
-Something went wrong at the Salt Marsh in the ordinary way, and it cost papyrus.
+Something went wrong at the Salt Marsh in the ordinary way, and it cost a sheet of papyrus.
 
-At the Rival Sail, papers were checked, opinions were held, and papyrus changed hands.
+At the Rival Sail, papers were checked, opinions were held, and 2 sheets of papyrus changed hands.
 
 At the Rival Sail, House Urtenu called in the Urtenu consignment: twelve shekels, weighed on the spot.
 
@@ -278,17 +278,15 @@ The terms of the sojourner's right arrived at Alashiya wearing the guild hall of
 
 The purse came up short at Alashiya, and the guild hall of Alashiya took its remedy: what the purse held, taken; the right lapses and the guild hall's door closes.
 
-Something went wrong at the Drowned Shrine in the ordinary way, and it cost a clay tablet.
+Something went wrong at the Drowned Shrine in the ordinary way, and it cost nothing worth keeping.
 
-Gamiradu stopped and wrote: a note on what the sea left at the Drowned Shrine. It cost 1 day of light, and it was the point.
+Open Water took its toll in patience — 2 days of light gone to waiting.
 
-Two days were lost at Open Water, and no one could afterwards say to what.
+The Rival Sail passed beneath the caravan's feet and asked for nothing.
 
-On the ninth day, the Rival Sail, and nothing worse.
+On the tenth day, the Salt Marsh, and nothing worse.
 
-The road gave the Salt Marsh up without argument.
+Gamiradu came through the gate of Ugarit with 1 entries in the ledger and the rest in aching feet.
 
-Gamiradu came through the gate of Ugarit with 2 entries in the ledger and the rest in aching feet.
-
-The archive grew by 2 entries. Somewhere in the temple district, a scribe of the old school felt a chill.
+The ledger merged into the archive of House Sapanu: 1 entries the House now cannot forget.
 

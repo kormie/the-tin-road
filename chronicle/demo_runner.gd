@@ -26,10 +26,12 @@ static func run(seed_value: int, seasons: int, house_name: String = "House Sapan
 	return {"book": renderer.render_book(house), "house": house}
 
 
-## The brain buys the standard kit every season, deliberately. Outfit choice
-## belongs to a human; the demo only has to exercise the purchase.
+## The brain has learned exactly one thing about outfitting: clay is heavy.
+## It carries a light mixed pack — two tablets against the water, six sheets
+## for the words — and travels two days faster for it. Everything subtler
+## belongs to a human.
 static func _choose_outfit(_house: House) -> Outfit:
-	return Outfit.default_kit()
+	return Outfit.new(2, 6, 2)
 
 
 ## What the brain signs is a budget call, not a strategy. While the road is
@@ -71,9 +73,9 @@ static func _consider_writing(season: Season, route: Route) -> void:
 	var node: Route.RouteNode = route.nodes[season.position]
 	var travel_still_owed: int
 	if season.heading_home:
-		travel_still_owed = season.position * Season.TRAVEL_COST
+		travel_still_owed = season.position * season.travel_cost()
 	else:
-		travel_still_owed = (route.last_index() * 2 - season.position) * Season.TRAVEL_COST
+		travel_still_owed = (route.last_index() * 2 - season.position) * season.travel_cost()
 	var to_spare := season.daylight - travel_still_owed - HOME_BUFFER
 	# A bad season admits it: when the light budget goes red, send what exists
 	# home by courier. Once — a second dispatch would repeat the first.

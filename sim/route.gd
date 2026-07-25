@@ -8,8 +8,9 @@ class RouteNode:
 	extends RefCounted
 	var id: String
 	var display_name: String
-	var kind: String  # settlement | hazard | rival | ruin
-	var leg: int      # which leg you complete by arriving here, outward. 0 = home.
+	var kind: String    # settlement | hazard | rival | ruin
+	var leg: int        # which leg you complete by arriving here, outward. 0 = home.
+	var flavor: String  # what the place does to cargo: "water" ruins papyrus. "" = neutral.
 
 var id: String
 var display_name: String
@@ -38,6 +39,7 @@ static func from_dict(d: Dictionary) -> Route:
 		node.display_name = str(nd.get("name", node.id))
 		node.kind = str(nd.get("kind", "settlement"))
 		node.leg = int(nd.get("leg", 0))
+		node.flavor = str(nd.get("flavor", ""))
 		route.nodes.append(node)
 	return route
 

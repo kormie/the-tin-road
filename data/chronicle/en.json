@@ -1,5 +1,24 @@
 {
   "_comment": "Prose templates for the chronicle renderer. Each event type maps to variants; the renderer picks deterministically per seed. Slots: {scribe} {house} {place} {day_ord} {season_ord} plus any event data keys. Voice rules: dry, literate, no exclamation marks, the road is patient and so is the prose. This file is where the book lives — add variants freely, the more the better.",
+  "_fragments": {
+    "_comment": "Composable pieces for the {lost} slot; {n} is the count. Prose for structured losses lives here, not in code.",
+    "lost_papyrus_one": "a sheet of papyrus",
+    "lost_papyrus_many": "{n} sheets of papyrus",
+    "lost_clay_one": "a clay tablet",
+    "lost_clay_many": "{n} clay tablets",
+    "lost_join": " and ",
+    "lost_nothing": "nothing worth keeping"
+  },
+  "heavy_going": [
+    "The caravan moved like what it was: overloaded. Every stage would cost {cost_days} more than a lean pack would pay, beginning on the road to {place}.",
+    "Clay is honest weight. The pack owed the road {cost_days} extra at every node, and the road collects.",
+    "Heavy going from the first stage — the season's light bleeding away {cost_days} at a time for the privilege of carrying everything."
+  ],
+  "soaked": [
+    "The water at {place} took its census: {papyrus} sheets of papyrus came out pulp. The clay came out streaked but legible.",
+    "{scribe} counted the pack on the far side of {place}. The tablets had merely gotten wet; the papyrus — {papyrus} sheets — had stopped being papyrus.",
+    "What the water at {place} left: the clay. What it took: {papyrus} sheets, now one grey mass with opinions in it."
+  ],
   "season_began": [
     "In the {season_ord} season of {house}, {scribe} took up the pen.",
     "The {season_ord} season fell to {scribe}, who had opinions about that.",
