@@ -20,7 +20,7 @@ func test_courier_spends_seal_and_media() -> void:
 	assert_bool(season.write_entry(Ledger.EntryType.NOTE, "a fact worth saving")).is_true()
 	var media_before := season.media_total()
 	assert_bool(season.send_courier()).is_true()
-	assert_int(season.seals).is_equal(Season.STARTING_SEALS - 1)
+	assert_int(season.seals).is_equal(Outfit.DEFAULT_SEALS - 1)
 	assert_int(season.media_total()).is_equal(media_before - Season.COURIER_MEDIA_COST)
 	assert_int(season.sent_entries.size()).is_equal(1)
 	assert_int(house.chronicle.count_of(&"courier_sent")).is_equal(1)
@@ -89,7 +89,7 @@ func test_second_send_replaces_the_first_snapshot() -> void:
 	assert_bool(season.send_courier()).is_true()
 	assert_bool(season.write_entry(Ledger.EntryType.NOTE, "second")).is_true()
 	assert_bool(season.send_courier()).is_true()
-	assert_int(season.seals).is_equal(Season.STARTING_SEALS - 2)
+	assert_int(season.seals).is_equal(Outfit.DEFAULT_SEALS - 2)
 	assert_int(season.sent_entries.size()).is_equal(2)
 	season.result = Season.Result.FELL
 	house.merge(season)
@@ -115,7 +115,7 @@ func test_dead_scribes_courier_completes_route_and_pays_the_successor() -> void:
 	house.surveyed_legs.append(1)
 	house.surveyed_legs.append(2)
 	season.max_leg_reached = 3
-	assert_bool(season.write_entry(Ledger.EntryType.SURVEY, "the last leg", 3)).is_true()
+	assert_bool(season.write_entry(Ledger.EntryType.SURVEY, "the last leg", 3, true)).is_true()
 	assert_bool(season.send_courier()).is_true()
 	season.result = Season.Result.FELL
 	house.merge(season)
@@ -125,7 +125,7 @@ func test_dead_scribes_courier_completes_route_and_pays_the_successor() -> void:
 	house.start_season()
 	assert_int(house.chronicle.count_of(&"succession")).is_equal(1)
 	assert_int(house.chronicle.count_of(&"caravan_returned")).is_equal(1)
-	assert_bool(house.silver > 0).is_true()
+	assert_bool(house.silver > House.YABNINU_ADVANCE).is_true()
 
 
 func test_stranded_courier_also_delivers() -> void:
@@ -147,7 +147,7 @@ func test_returned_survey_still_documents_route() -> void:
 	house.surveyed_legs.append(1)
 	house.surveyed_legs.append(2)
 	season.max_leg_reached = 3
-	assert_bool(season.write_entry(Ledger.EntryType.SURVEY, "the last leg", 3)).is_true()
+	assert_bool(season.write_entry(Ledger.EntryType.SURVEY, "the last leg", 3, true)).is_true()
 	season.result = Season.Result.RETURNED
 	house.merge(season)
 	assert_bool(house.surveyed_legs.has(3)).is_true()

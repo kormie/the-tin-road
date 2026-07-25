@@ -65,6 +65,26 @@
     "{place} took {scribe}, as it had taken others, without malice and without appeal.",
     "{scribe} fell at {place}. The unwritten died too — that is what unwritten means."
   ],
+  "commissioned": [
+    "{patron} advanced {advance} shekels against the season's road — generously, promptly, and with the ledger of what it expected in return already open.",
+    "The season began as seasons do: {patron}'s silver on the table, {advance} shekels of it, and the understanding that backing {scribe} would continue exactly as long as it paid.",
+    "{advance} shekels arrived under {patron}'s seal before the dew burned off. Patrons pay early; it is later that they collect."
+  ],
+  "outfitted": [
+    "At the guild hall of {place}, {scribe} bought the season's pack: {clay} clay, {papyrus} papyrus, {seals} seals — {spent} shekels, and not a finger's width of room left over.",
+    "{spent} shekels became {clay} tablets of clay, {papyrus} sheets of papyrus, and {seals} seals. Every choice from here would be about what the pack held.",
+    "{scribe} outfitted at {place}: {clay} clay, {papyrus} papyrus, {seals} seals. What the pack could not carry, the season would do without."
+  ],
+  "leg_rumoured": [
+    "The survey of leg {leg} arrived unsealed, and the archive shelved it among the rumours — read, doubted, half-believed.",
+    "Leg {leg} entered the archive without a seal. A road half-vouched-for is walked at half confidence, and paid accordingly.",
+    "No seal on the survey of leg {leg}. The House filed it as hearsay, which is what an unsealed truth is."
+  ],
+  "rumour_confirmed": [
+    "A sealed survey settled leg {leg} at last; what a predecessor only claimed, the archive now holds as fact.",
+    "The rumour of leg {leg} was confirmed under seal. The caravans would walk it at full confidence now.",
+    "Leg {leg}, sealed and certain. The archive quietly moved it from hearsay to holding."
+  ],
   "courier_sent": [
     "At {place}, {scribe} paid a runner and a seal to send {entries} entries home ahead of the news. Scribes do this when they have begun to doubt the return leg.",
     "A copy of the ledger left {place} under seal — {entries} entries, travelling faster and safer than {scribe} now expected to.",

@@ -8,15 +8,14 @@ extends RefCounted
 enum Result { UNRESOLVED, RETURNED, FELL, STRANDED }
 
 # --- First-pass tuning. Argue with these in playtests, not in code review. ---
+# Starting stocks live in Outfit now; daylight stays here — it is the clock,
+# not something the guild hall sells.
 const STARTING_DAYLIGHT := 40
-const STARTING_CLAY := 4
-const STARTING_PAPYRUS := 6
 const TRAVEL_COST := 2
 const DELAY_COST := 2
 const MISHAP_COST := 3
 const PERIL_COST := 4
 const PERIL_DEATH_CHANCE := 0.35
-const STARTING_SEALS := 2
 const COURIER_MEDIA_COST := 4
 
 var house: House
@@ -28,31 +27,31 @@ var number: int
 
 var day := 1
 var daylight := STARTING_DAYLIGHT
-var clay := STARTING_CLAY
-var papyrus := STARTING_PAPYRUS
+var clay: int
+var papyrus: int
+var seals: int
 var position := 0
 var heading_home := false
 var max_leg_reached := 0
 var result := Result.UNRESOLVED
 var entries: Array[Dictionary] = []
 var surveys: Array[int] = []
-var seals := STARTING_SEALS
 var sent_entries: Array[Dictionary] = []
-var sent_surveys: Array[int] = []
 
 
-func _init(p_house: House, p_route: Route, p_rng: SimRng, p_chronicle: Chronicle, p_scribe: String, p_number: int) -> void:
+func _init(p_house: House, p_route: Route, p_rng: SimRng, p_chronicle: Chronicle, p_scribe: String, p_number: int, p_outfit: Outfit) -> void:
 	house = p_house
 	route = p_route
 	rng = p_rng
 	chronicle = p_chronicle
 	scribe = p_scribe
 	number = p_number
+	clay = p_outfit.clay
+	papyrus = p_outfit.papyrus
+	seals = p_outfit.seals
 
 
 func begin() -> void:
-	if number == 1:
-		_emit(&"season_began", route.nodes[0].display_name, {})
 	_emit(&"departed", route.nodes[0].display_name, {"daylight": str(daylight)})
 
 
@@ -90,8 +89,14 @@ func travel_next() -> void:
 
 
 ## Stop and write. Costs daylight and media; the only way anything survives you.
-func write_entry(type: Ledger.EntryType, subject: String, leg: int = -1) -> bool:
+## Sealing the entry spends a seal and makes it authoritative — an unsealed
+## entry merges into the archive as a rumour at reduced value
+## (docs/design/systems.md §3). A sealed survey may confirm a leg the House
+## holds only as rumour; an unsealed one may not.
+func write_entry(type: Ledger.EntryType, subject: String, leg: int = -1, use_seal: bool = false) -> bool:
 	if is_over():
+		return false
+	if use_seal and seals < 1:
 		return false
 	var d_cost := Ledger.daylight_cost(type)
 	var m_cost := Ledger.media_cost(type)
@@ -102,12 +107,16 @@ func write_entry(type: Ledger.EntryType, subject: String, leg: int = -1) -> bool
 			return false
 		if surveys.has(leg) or house.surveyed_legs.has(leg):
 			return false
+		if house.rumoured_legs.has(leg) and not use_seal:
+			return false  # A rumour cannot confirm a rumour.
 		surveys.append(leg)
+	if use_seal:
+		seals -= 1
 	_spend_media(m_cost)
 	_spend_daylight(d_cost)
 	if is_over():
 		return false
-	var entry := {"season": number, "type": Ledger.type_name(type), "subject": subject, "leg": leg}
+	var entry := {"season": number, "type": Ledger.type_name(type), "subject": subject, "leg": leg, "sealed": use_seal}
 	entries.append(entry)
 	_emit(&"entry_written", route.nodes[position].display_name, {
 		"entry_type": Ledger.type_name(type),
@@ -120,8 +129,9 @@ func write_entry(type: Ledger.EntryType, subject: String, leg: int = -1) -> bool
 ## Spend a seal and a portion of media to send a copy of the ledger home
 ## (docs/design/systems.md §3). What is sent survives the scribe; what is
 ## written afterwards does not. Sending again re-copies the whole ledger,
-## so the House can never receive the same entry twice. The seal is the
-## courier's only consumer until the full Seal system lands.
+## so the House can never receive the same entry twice. The snapshot carries
+## each entry's leg and seal status, so a couriered survey folds exactly as
+## a carried one would.
 func send_courier() -> bool:
 	if is_over():
 		return false
@@ -130,7 +140,6 @@ func send_courier() -> bool:
 	seals -= 1
 	_spend_media(COURIER_MEDIA_COST)
 	sent_entries = entries.duplicate(true)
-	sent_surveys = surveys.duplicate()
 	_emit(&"courier_sent", route.nodes[position].display_name, {
 		"entries": str(entries.size()),
 		"media": str(COURIER_MEDIA_COST),
