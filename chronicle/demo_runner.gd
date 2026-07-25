@@ -42,6 +42,11 @@ static func _consider_writing(season: Season, route: Route) -> void:
 	else:
 		travel_still_owed = (route.last_index() * 2 - season.position) * Season.TRAVEL_COST
 	var to_spare := season.daylight - travel_still_owed - HOME_BUFFER
+	# A bad season admits it: when the light budget goes red, send what exists
+	# home by courier. Once — a second dispatch would repeat the first.
+	if to_spare < 0 and season.sent_entries.is_empty() and not season.entries.is_empty():
+		season.send_courier()
+		return
 	# Survey the leg just completed, if the House doesn't know it and light allows.
 	# One survey per season: the demo brain has read what happens to greedy scribes.
 	if node.leg >= 1 and season.surveys.is_empty() and to_spare >= Ledger.daylight_cost(Ledger.EntryType.SURVEY):

@@ -51,22 +51,39 @@ func start_season() -> Season:
 	return Season.new(self, route, rng, chronicle, scribe, generation)
 
 
-## Fold a finished season back into the House. Only a scribe who came home
-## merges anything — the courier (not yet built) is what will soften this.
+## Fold a finished season back into the House. A scribe who came home merges
+## everything; a scribe the road kept merges only what the courier already
+## carried (docs/design/systems.md §2: partial merge on courier delivery).
 func merge(season: Season) -> void:
-	if season.result != Season.Result.RETURNED:
+	if not season.is_over():
 		return
-	var newly_surveyed: Array[int] = []
-	for entry: Dictionary in season.entries:
+	if season.result == Season.Result.RETURNED:
+		for entry: Dictionary in season.entries:
+			archive.append(entry)
+		if not season.entries.is_empty():
+			chronicle.record(ChronicleEvent.make(season.number, season.day, &"ledger_merged",
+				route.nodes[0].display_name, season.scribe,
+				{"entries": str(season.entries.size()), "house": display_name}))
+		_fold_surveys(season.surveys, season)
+		return
+	if season.sent_entries.is_empty():
+		return
+	for entry: Dictionary in season.sent_entries:
 		archive.append(entry)
-	for leg: int in season.surveys:
+	chronicle.record(ChronicleEvent.make(season.number, season.day, &"courier_delivered",
+		route.nodes[0].display_name, season.scribe,
+		{"entries": str(season.sent_entries.size()), "house": display_name}))
+	_fold_surveys(season.sent_surveys, season)
+
+
+## Fold surveyed legs into the House's knowledge of the road, announcing the
+## moment the route becomes a written, walkable-alone thing.
+func _fold_surveys(legs: Array[int], season: Season) -> void:
+	var newly_surveyed: Array[int] = []
+	for leg: int in legs:
 		if not surveyed_legs.has(leg):
 			surveyed_legs.append(leg)
 			newly_surveyed.append(leg)
-	if not season.entries.is_empty():
-		chronicle.record(ChronicleEvent.make(season.number, season.day, &"ledger_merged",
-			route.nodes[0].display_name, season.scribe,
-			{"entries": str(season.entries.size()), "house": display_name}))
 	if not newly_surveyed.is_empty() and route_documented():
 		chronicle.record(ChronicleEvent.make(season.number, season.day, &"route_documented",
 			route.nodes[0].display_name, season.scribe, {"route": route.display_name}))

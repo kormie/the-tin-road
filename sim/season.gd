@@ -16,6 +16,8 @@ const DELAY_COST := 2
 const MISHAP_COST := 3
 const PERIL_COST := 4
 const PERIL_DEATH_CHANCE := 0.35
+const STARTING_SEALS := 2
+const COURIER_MEDIA_COST := 4
 
 var house: House
 var route: Route
@@ -34,6 +36,9 @@ var max_leg_reached := 0
 var result := Result.UNRESOLVED
 var entries: Array[Dictionary] = []
 var surveys: Array[int] = []
+var seals := STARTING_SEALS
+var sent_entries: Array[Dictionary] = []
+var sent_surveys: Array[int] = []
 
 
 func _init(p_house: House, p_route: Route, p_rng: SimRng, p_chronicle: Chronicle, p_scribe: String, p_number: int) -> void:
@@ -108,6 +113,27 @@ func write_entry(type: Ledger.EntryType, subject: String, leg: int = -1) -> bool
 		"entry_type": Ledger.type_name(type),
 		"subject": subject,
 		"cost": str(d_cost),
+	})
+	return true
+
+
+## Spend a seal and a portion of media to send a copy of the ledger home
+## (docs/design/systems.md §3). What is sent survives the scribe; what is
+## written afterwards does not. Sending again re-copies the whole ledger,
+## so the House can never receive the same entry twice. The seal is the
+## courier's only consumer until the full Seal system lands.
+func send_courier() -> bool:
+	if is_over():
+		return false
+	if seals < 1 or entries.is_empty() or media_total() < COURIER_MEDIA_COST:
+		return false
+	seals -= 1
+	_spend_media(COURIER_MEDIA_COST)
+	sent_entries = entries.duplicate(true)
+	sent_surveys = surveys.duplicate()
+	_emit(&"courier_sent", route.nodes[position].display_name, {
+		"entries": str(entries.size()),
+		"media": str(COURIER_MEDIA_COST),
 	})
 	return true
 

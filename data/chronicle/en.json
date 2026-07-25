@@ -57,13 +57,23 @@
   ],
   "stranded": [
     "The light ran out at {place}, and the road kept {scribe}. What was not sent home was lost.",
-    "The season ended where it stood, at {place}. The ledger of {scribe} never reached the archive.",
+    "The season ended where it stood, at {place}. What {scribe} had not sent ahead never reached the archive.",
     "{scribe} misjudged the arithmetic of daylight by very little, at {place}, which was enough."
   ],
   "fell": [
     "The road kept {scribe} at {place}. The House would learn of it from strangers.",
     "{place} took {scribe}, as it had taken others, without malice and without appeal.",
     "{scribe} fell at {place}. The unwritten died too — that is what unwritten means."
+  ],
+  "courier_sent": [
+    "At {place}, {scribe} paid a runner and a seal to send {entries} entries home ahead of the news. Scribes do this when they have begun to doubt the return leg.",
+    "A copy of the ledger left {place} under seal — {entries} entries, travelling faster and safer than {scribe} now expected to.",
+    "{scribe} sent the ledger home from {place}: {entries} entries, a seal, and {media} sheets of the season's stock. The road was going badly, and this was the admission."
+  ],
+  "courier_delivered": [
+    "A courier reached {place} carrying {entries} entries under the seal of {scribe}, who did not follow them home.",
+    "What remained of {scribe} arrived by hired hands: {entries} entries, folded into the archive of {house}.",
+    "The courier's satchel held {entries} entries. The archive of {house} took them in; the road kept the one who wrote them."
   ],
   "ledger_merged": [
     "The ledger merged into the archive of {house}: {entries} entries the House now cannot forget.",
