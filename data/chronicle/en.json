@@ -85,6 +85,36 @@
     "The rumour of leg {leg} was confirmed under seal. The caravans would walk it at full confidence now.",
     "Leg {leg}, sealed and certain. The archive quietly moved it from hearsay to holding."
   ],
+  "contract_signed": [
+    "At {place}, {scribe} signed {contract} with {holder}: {terms}. Ink dries; obligations do not.",
+    "{holder} offered {contract}, and {scribe} took the stylus: {terms}.",
+    "{contract} was signed at {place} — {terms}. {holder} filed its copy with visible satisfaction."
+  ],
+  "contract_called": [
+    "At {place}, {holder} called in {contract}: {demand}.",
+    "{holder} chose its moment, as holders do. At {place}, {contract} came due: {demand}.",
+    "The terms of {contract} arrived at {place} wearing {holder}'s seal: {demand}."
+  ],
+  "contract_honoured": [
+    "{scribe} honoured {contract}: {demand}. The ledger records it without editorial.",
+    "The demand was met; {contract} stood, and {holder} withdrew until the next bad moment.",
+    "{scribe} paid what {contract} named — {demand} — and the road went on."
+  ],
+  "contract_defaulted": [
+    "{scribe} could not meet {contract}: {penalty}.",
+    "The purse came up short at {place}. {holder} took its remedy: {penalty}.",
+    "Default, noted in {holder}'s ledger and this one: {penalty}."
+  ],
+  "seal_bought": [
+    "At the guild hall of {place}, {scribe} bought a seal for {price} shekels of road silver. Authentication travels badly; money less so.",
+    "A seal changed hands at {place} — {price} shekels, weighed. The sojourner's arrangement held.",
+    "{scribe} pressed {price} shekels across a guild counter at {place} and left with one more seal than the road had allowed."
+  ],
+  "purse_banked": [
+    "The road purse came home: {silver} shekels of contract silver, banked into the House accounts.",
+    "{silver} shekels, earned leg by leg, crossed from the scribe's belt to the House strongbox.",
+    "The season's carriage silver — {silver} shekels — was counted twice and banked once."
+  ],
   "courier_sent": [
     "At {place}, {scribe} paid a runner and a seal to send {entries} entries home ahead of the news. Scribes do this when they have begun to doubt the return leg.",
     "A copy of the ledger left {place} under seal — {entries} entries, travelling faster and safer than {scribe} now expected to.",

@@ -106,6 +106,12 @@ func merge(season: Season) -> void:
 			chronicle.record(ChronicleEvent.make(season.number, season.day, &"ledger_merged",
 				route.nodes[0].display_name, season.scribe,
 				{"entries": str(season.entries.size()), "house": display_name}))
+		if season.silver > 0:
+			silver += season.silver
+			chronicle.record(ChronicleEvent.make(season.number, season.day, &"purse_banked",
+				route.nodes[0].display_name, season.scribe,
+				{"silver": str(season.silver)}))
+			season.silver = 0  # Bank once; a second merge must not double-count.
 		_fold_surveys(season.entries, season)
 		return
 	if season.sent_entries.is_empty():

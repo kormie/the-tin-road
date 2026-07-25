@@ -14,10 +14,13 @@ const HOME_BUFFER := 6  # daylight held in reserve against the road home. First-
 static func run(seed_value: int, seasons: int, house_name: String = "House Sapanu") -> Dictionary:
 	var route := Route.load_from_file("res://data/routes/tin_road_slice.json")
 	var naming := Naming.load_from_file("res://data/names/scribes.json")
+	var catalog := ContractCatalog.load_from_file("res://data/contracts/slice_contracts.json")
 	var house := House.new(house_name, seed_value, route, naming)
 	for _i: int in range(seasons):
 		var season := house.start_season(_choose_outfit(house))
 		season.begin()
+		for template: ContractCatalog.ContractTemplate in catalog.templates:
+			season.sign_contract(template)  # The brain signs everything on offer.
 		_play_out(season, route)
 		house.merge(season)
 	var renderer := ChronicleRenderer.load_default(house.rng.stream(&"prose"))
@@ -38,6 +41,10 @@ static func _play_out(season: Season, route: Route) -> void:
 		if season.is_over():
 			return
 		_consider_writing(season, route)
+		# At the far guild hall, after the writing is done (a spent survey
+		# frees pack room), restock seals if the pouch is low.
+		if season.position == route.last_index() and season.seals <= 1:
+			season.buy_seal()
 
 
 static func _consider_writing(season: Season, route: Route) -> void:

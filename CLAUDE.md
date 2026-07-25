@@ -79,8 +79,9 @@ Vertical-slice steps 1–4 and part of the Scribe kit: season clock, daylight,
 node traversal, the Ledger's four entry types, death (stranding/peril),
 succession, the Courier (snapshot dispatch, partial merge on death), seals as
 authentication (unsealed surveys merge as half-value rumours), the outfit step
-(patron advance, priced and bulk-capped kit), a naive automation payout, and
-the chronicle pipeline. **Not built:** Standing Contracts, media
+(patron advance, priced and bulk-capped kit), Standing Contracts (road-wired
+call-ins, the season purse, contract-gated seal replenishment), a naive
+automation payout, and the chronicle pipeline. **Not built:** media
 weight/fragility on the road, assignable automation, the Keeper and Endurance,
 archive corruption, factions beyond the Yabninu commission const, presses, the
 Concord axis, any real UI, saves. Do not gold-plate scaffolding; the next
