@@ -47,200 +47,337 @@ selection_enabled = true
 scroll_following = true
 text = ""
 
-[node name="SidePanel" type="VBoxContainer" parent="Margin/Split"]
+[node name="SideScroll" type="ScrollContainer" parent="Margin/Split"]
 layout_mode = 2
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(420, 0)
+horizontal_scroll_mode = 0
+
+[node name="SidePanel" type="VBoxContainer" parent="Margin/Split/SideScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 10
 
-[node name="Status" type="Label" parent="Margin/Split/SidePanel"]
+[node name="Status" type="Label" parent="Margin/Split/SideScroll/SidePanel"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.369, 0.659, 0.573, 1)
 autowrap_mode = 3
 text = "No House yet."
 
-[node name="TitlePanel" type="VBoxContainer" parent="Margin/Split/SidePanel"]
+[node name="Refusal" type="Label" parent="Margin/Split/SideScroll/SidePanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.753, 0.353, 0.208, 1)
+autowrap_mode = 3
+text = ""
+
+[node name="TitlePanel" type="VBoxContainer" parent="Margin/Split/SideScroll/SidePanel"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Tagline" type="Label" parent="Margin/Split/SidePanel/TitlePanel"]
+[node name="Tagline" type="Label" parent="Margin/Split/SideScroll/SidePanel/TitlePanel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.925, 0.875, 0.753, 1)
 autowrap_mode = 3
 text = "Everything you learn dies with you. Unless you wrote it down."
 
-[node name="SeedRow" type="HBoxContainer" parent="Margin/Split/SidePanel/TitlePanel"]
+[node name="SeedRow" type="HBoxContainer" parent="Margin/Split/SideScroll/SidePanel/TitlePanel"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="SeedInput" type="LineEdit" parent="Margin/Split/SidePanel/TitlePanel/SeedRow"]
+[node name="SeedInput" type="LineEdit" parent="Margin/Split/SideScroll/SidePanel/TitlePanel/SeedRow"]
 unique_name_in_owner = true
 layout_mode = 2
 custom_minimum_size = Vector2(140, 0)
 text = "101"
 placeholder_text = "seed"
 
-[node name="FoundButton" type="Button" parent="Margin/Split/SidePanel/TitlePanel/SeedRow"]
+[node name="FoundButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/TitlePanel/SeedRow"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Found the House"
 
-[node name="OutfitPanel" type="VBoxContainer" parent="Margin/Split/SidePanel"]
+[node name="OutfitPanel" type="VBoxContainer" parent="Margin/Split/SideScroll/SidePanel"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="OutfitHeading" type="Label" parent="Margin/Split/SidePanel/OutfitPanel"]
+[node name="InheritHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
+text = "What this scribe inherits"
+
+[node name="InheritLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.925, 0.875, 0.753, 1)
+autowrap_mode = 3
+text = ""
+
+[node name="OutfitHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
 text = "Outfit the season"
 
-[node name="ClayRow" type="HBoxContainer" parent="Margin/Split/SidePanel/OutfitPanel"]
+[node name="MediaHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
+autowrap_mode = 3
+text = ""
+
+[node name="ClayRow" type="HBoxContainer" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
 layout_mode = 2
 
-[node name="ClayLabel" type="Label" parent="Margin/Split/SidePanel/OutfitPanel/ClayRow"]
+[node name="ClayLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel/ClayRow"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Clay (cheap, heavy, survives water)"
+autowrap_mode = 3
+text = "Clay"
 
-[node name="ClaySpin" type="SpinBox" parent="Margin/Split/SidePanel/OutfitPanel/ClayRow"]
+[node name="ClaySpin" type="SpinBox" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel/ClayRow"]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 8.0
 value = 2.0
 
-[node name="PapyrusRow" type="HBoxContainer" parent="Margin/Split/SidePanel/OutfitPanel"]
+[node name="PapyrusRow" type="HBoxContainer" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
 layout_mode = 2
 
-[node name="PapyrusLabel" type="Label" parent="Margin/Split/SidePanel/OutfitPanel/PapyrusRow"]
+[node name="PapyrusLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel/PapyrusRow"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Papyrus (light, ruined by water)"
+autowrap_mode = 3
+text = "Papyrus"
 
-[node name="PapyrusSpin" type="SpinBox" parent="Margin/Split/SidePanel/OutfitPanel/PapyrusRow"]
+[node name="PapyrusSpin" type="SpinBox" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel/PapyrusRow"]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 16.0
 value = 6.0
 
-[node name="SealsRow" type="HBoxContainer" parent="Margin/Split/SidePanel/OutfitPanel"]
+[node name="SealsRow" type="HBoxContainer" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
 layout_mode = 2
 
-[node name="SealsLabel" type="Label" parent="Margin/Split/SidePanel/OutfitPanel/SealsRow"]
+[node name="SealsLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel/SealsRow"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Seals (authenticate, or pay the courier)"
+autowrap_mode = 3
+text = "Seals"
 
-[node name="SealsSpin" type="SpinBox" parent="Margin/Split/SidePanel/OutfitPanel/SealsRow"]
+[node name="SealsSpin" type="SpinBox" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel/SealsRow"]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 4.0
 value = 2.0
 
-[node name="KitLabel" type="Label" parent="Margin/Split/SidePanel/OutfitPanel"]
+[node name="KitLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 autowrap_mode = 3
 text = ""
 
-[node name="DepartButton" type="Button" parent="Margin/Split/SidePanel/OutfitPanel"]
+[node name="DepartButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/OutfitPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Buy the pack and take the road"
 
-[node name="RoadPanel" type="VBoxContainer" parent="Margin/Split/SidePanel"]
+[node name="RoadPanel" type="VBoxContainer" parent="Margin/Split/SideScroll/SidePanel"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="RoadHeading" type="Label" parent="Margin/Split/SidePanel/RoadPanel"]
+[node name="RoadHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
 text = "The road"
 
-[node name="TravelButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel"]
+[node name="TravelButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Travel to the next node"
 
-[node name="SealCheck" type="CheckBox" parent="Margin/Split/SidePanel/RoadPanel"]
+[node name="WriteHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
+text = "Write what you learn"
+
+[node name="WriteHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Seal what is written next"
+theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
+autowrap_mode = 3
+text = ""
 
-[node name="WriteRow" type="HBoxContainer" parent="Margin/Split/SidePanel/RoadPanel"]
+[node name="SealCheck" type="CheckBox" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
+autowrap_mode = 3
+text = "Seal the next entry"
+
+[node name="SealHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
+autowrap_mode = 3
+text = ""
+
+[node name="WriteBox" type="VBoxContainer" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="NoteButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel/WriteRow"]
+[node name="NoteRow" type="HBoxContainer" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="NoteButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/NoteRow"]
 unique_name_in_owner = true
 layout_mode = 2
+custom_minimum_size = Vector2(160, 0)
 text = "Note"
 
-[node name="RecordButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel/WriteRow"]
+[node name="NoteDesc" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/NoteRow"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
+autowrap_mode = 3
+text = ""
+
+[node name="RecordRow" type="HBoxContainer" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RecordButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/RecordRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(160, 0)
 text = "Record"
 
-[node name="SurveyButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel/WriteRow"]
+[node name="RecordDesc" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/RecordRow"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
+autowrap_mode = 3
+text = ""
+
+[node name="SurveyRow" type="HBoxContainer" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SurveyButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/SurveyRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(160, 0)
 text = "Survey"
 
-[node name="TreatiseButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel/WriteRow"]
+[node name="SurveyDesc" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/SurveyRow"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
+autowrap_mode = 3
+text = ""
+
+[node name="TreatiseRow" type="HBoxContainer" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TreatiseButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/TreatiseRow"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(160, 0)
 text = "Treatise"
 
-[node name="CourierButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel"]
+[node name="TreatiseDesc" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel/WriteBox/TreatiseRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
+autowrap_mode = 3
+text = ""
+
+[node name="DispatchHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
+text = "The guild hall"
+
+[node name="CourierButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Send the ledger home by courier"
 
-[node name="BuySealButton" type="Button" parent="Margin/Split/SidePanel/RoadPanel"]
+[node name="CourierHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
+autowrap_mode = 3
+text = ""
+
+[node name="BuySealButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Buy a seal at the guild hall"
 
-[node name="ContractsHeading" type="Label" parent="Margin/Split/SidePanel/RoadPanel"]
+[node name="ContractsHeading" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
 text = "Standing contracts"
 
-[node name="ContractsBox" type="VBoxContainer" parent="Margin/Split/SidePanel/RoadPanel"]
+[node name="ContractsHint" type="Label" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.647, 0.616, 0.549, 1)
+autowrap_mode = 3
+text = ""
+
+[node name="ContractsBox" type="VBoxContainer" parent="Margin/Split/SideScroll/SidePanel/RoadPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="DeskPanel" type="VBoxContainer" parent="Margin/Split/SidePanel"]
+[node name="DeskPanel" type="VBoxContainer" parent="Margin/Split/SideScroll/SidePanel"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="DeskLabel" type="Label" parent="Margin/Split/SidePanel/DeskPanel"]
+[node name="DeskLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/DeskPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0.788, 0.569, 0.235, 1)
 autowrap_mode = 3
 text = "The season is over."
 
-[node name="PostOrderButton" type="Button" parent="Margin/Split/SidePanel/DeskPanel"]
+[node name="HoldingsLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/DeskPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.925, 0.875, 0.753, 1)
+autowrap_mode = 3
+text = ""
+
+[node name="FacilitatorLabel" type="Label" parent="Margin/Split/SideScroll/SidePanel/DeskPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.443, 0.427, 0.384, 1)
+theme_override_font_sizes/font_size = 11
+autowrap_mode = 3
+text = ""
+
+[node name="PostOrderButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/DeskPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Post a standing order (assign the caravan)"
 
-[node name="NextSeasonButton" type="Button" parent="Margin/Split/SidePanel/DeskPanel"]
+[node name="NextSeasonButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/DeskPanel"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Begin the next season"
-
-[node name="Refusal" type="Label" parent="Margin/Split/SidePanel"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.753, 0.353, 0.208, 1)
-autowrap_mode = 3
-text = ""

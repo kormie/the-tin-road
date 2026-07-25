@@ -173,6 +173,22 @@ the pass ever tried to send one. Anything in that block should be read as
 
 ---
 
+## What the first playtest did to this document
+
+One session, two seasons, seed 101: `playtests/session-01.md`. It moved no
+band and touched no constant, because it never reached the choices the
+constants govern — the road was never documented and **signal 3 never fired**.
+Its finding was comprehension, not tuning: the survey was understood as
+"recon about the current location" rather than as the leg of road behind you,
+and everything downstream followed from that.
+
+Two things here are worth reading in that light. Signal 5's band was
+contradicted by the player it was measuring (see below). And the bands on
+signals 2 and 3 remain **completely untested by a human** — the reference brain
+is the only thing that has ever exercised them.
+
+---
+
 ## Numbers I would argue about
 
 Written down because the brief asked for the ones worth arguing over, and
@@ -215,6 +231,15 @@ and scores `OK`, but a player who inherits one leg and cannot remember which
 has inherited nothing they can *feel*. If §5 of the playtest keeps disagreeing
 with this number, the number is measuring the wrong thing and should probably
 become "did the second scribe act on what the first wrote".
+
+> **Session 01 settled this one against the number.** Legs inherited at season
+> two: 1 — inside the band. The player's account of season two: "felt like a
+> fresh start." That is the "inheritance reads as a reset" failure condition,
+> firing on a season the band scored healthy, exactly as predicted above. The
+> first response was presentation — the outfit step now names what carried over
+> — because an inheritance nobody can see cannot be an inheritance nobody
+> valued. If §5 disagrees with this number a second time, the number changes.
+> `playtests/session-01.md`.
 
 ---
 

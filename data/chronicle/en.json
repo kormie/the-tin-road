@@ -21,6 +21,12 @@
     "{scribe} counted the pack on the far side of {place}. The tablets had merely gotten wet; {lost} had stopped being papyrus.",
     "What the water at {place} left: the clay. What it took: {lost}, now one grey mass with opinions in it."
   ],
+  "stock_spent": [
+    "The pack came up empty at {place}. {scribe} had {entry_count} written and nothing left to write on: from here the season is walking.",
+    "At {place} the last of the stock was used. What is written is written; what is not, now, will not be.",
+    "{scribe} turned the pack out at {place} and found the bottom of it — {entry_count} down, and no blank surface between here and home.",
+    "No clay, no papyrus. {scribe} went on from {place} carrying {entry_count} and a great deal of unrecorded opinion."
+  ],
   "season_began": [
     "In the {season_ord} season of {house}, {scribe} took up the pen.",
     "The {season_ord} season fell to {scribe}, who had opinions about that.",
