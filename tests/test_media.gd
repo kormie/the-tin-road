@@ -59,6 +59,25 @@ func test_water_peril_soaks_all_papyrus() -> void:
 	assert_int(season.clay).is_equal(Outfit.DEFAULT_CLAY)
 
 
+func test_dry_peril_does_not_soak() -> void:
+	# The slice's hazards are both water, so build a dry one: only the
+	# flavor gate should decide whether the papyrus survives the survival.
+	var f := _fixture()
+	var season: Season = f["season"]
+	var house: House = f["house"]
+	var dry := Route.RouteNode.new()
+	dry.id = "dry_pass"
+	dry.display_name = "the Dry Pass"
+	dry.kind = "hazard"
+	dry.leg = 1
+	dry.flavor = ""
+	season.position = 1
+	season._peril(dry)
+	assert_bool(season.is_over()).is_false()
+	assert_int(house.chronicle.count_of(&"soaked")).is_equal(0)
+	assert_int(season.papyrus).is_equal(Outfit.DEFAULT_PAPYRUS)
+
+
 func test_soak_with_dry_pack_is_silent() -> void:
 	var f := _fixture()
 	var season: Season = f["season"]
@@ -76,7 +95,13 @@ func test_heavy_pack_costs_extra_daylight() -> void:
 	var season: Season = f["season"]
 	assert_int(season._carried_bulk()).is_equal(Outfit.PACK_CAPACITY)
 	assert_int(season.travel_cost()).is_equal(Season.TRAVEL_COST + Season.HEAVY_PACK_SURCHARGE)
-	season.papyrus = 1
+	# Pin the boundary itself: bulk 13 is heavy, bulk 12 travels light.
+	season.clay = 2
+	season.papyrus = 7
+	assert_int(season._carried_bulk()).is_equal(Season.HEAVY_PACK_THRESHOLD + 1)
+	assert_int(season.travel_cost()).is_equal(Season.TRAVEL_COST + Season.HEAVY_PACK_SURCHARGE)
+	season.papyrus = 6
+	assert_int(season._carried_bulk()).is_equal(Season.HEAVY_PACK_THRESHOLD)
 	assert_int(season.travel_cost()).is_equal(Season.TRAVEL_COST)
 
 
@@ -132,7 +157,17 @@ func test_renderer_has_words_for_media_events() -> void:
 	var renderer := ChronicleRenderer.load_default(rng.stream(&"prose"))
 	var events: Array[ChronicleEvent] = [
 		ChronicleEvent.make(1, 2, &"heavy_going", "the Salt Marsh", "Danel", {"cost": "1"}),
-		ChronicleEvent.make(1, 5, &"soaked", "Open Water", "Danel", {"papyrus": "6"}),
+		ChronicleEvent.make(1, 5, &"soaked", "Open Water", "Danel", {"lost_papyrus": "6"}),
 	]
 	for ev: ChronicleEvent in events:
 		assert_bool(renderer.render_event(ev, house).contains("no words yet for")).is_false()
+	# A one-sheet soak must read as singular prose, never "1 sheets".
+	var one := renderer.render_event(ChronicleEvent.make(1, 6, &"soaked",
+		"the Salt Marsh", "Danel", {"lost_papyrus": "1"}), house)
+	assert_bool(one.contains("1 sheets")).is_false()
+	assert_bool(one.contains("a sheet of papyrus")).is_true()
+	# A one-entry return must read as singular prose, never "1 entries".
+	var lone := renderer.render_event(ChronicleEvent.make(1, 12, &"returned",
+		"Ugarit", "Danel", {"entries": "1"}), house)
+	assert_bool(lone.contains("1 entries")).is_false()
+	assert_bool(lone.contains("a single entry")).is_true()

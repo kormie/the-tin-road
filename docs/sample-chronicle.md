@@ -11,7 +11,7 @@ It was the first season, and the pen passed to Niqmepa.
 
 The season began as seasons do: House Yabninu's silver on the table, 30 shekels of it, and the understanding that backing Niqmepa would continue exactly as long as it paid.
 
-At the guild hall of Ugarit, Niqmepa bought the season's pack: 2 clay, 6 papyrus, 2 seals — 24 shekels, and not a finger's width of room left over.
+At the guild hall of Ugarit, Niqmepa bought the season's pack: 2 clay, 6 papyrus, 2 seals — 24 shekels, weighed out before the dew burned off.
 
 Niqmepa left Ugarit with 40 days of light in hand and less certainty than the ledger admits.
 
@@ -46,7 +46,7 @@ House Sapanu continued, as houses do, in the person of Arhalba, standing on ever
 
 30 shekels arrived under House Yabninu's seal before the dew burned off. Patrons pay early; it is later that they collect.
 
-At the guild hall of Ugarit, Arhalba bought the season's pack: 2 clay, 6 papyrus, 2 seals — 24 shekels, and not a finger's width of room left over.
+At the guild hall of Ugarit, Arhalba bought the season's pack: 2 clay, 6 papyrus, 2 seals — 24 shekels, weighed out before the dew burned off.
 
 The caravan cleared the gate of Ugarit at first light, 40 days of it bought and paid for.
 
@@ -197,7 +197,7 @@ Abdimilku inherited the House, the Archive, and the Concord's memory of Pidaya.
 
 House Yabninu advanced 30 shekels against the season's road — generously, promptly, and with the ledger of what it expected in return already open.
 
-At the guild hall of Ugarit, Abdimilku bought the season's pack: 2 clay, 6 papyrus, 2 seals — 24 shekels, and not a finger's width of room left over.
+At the guild hall of Ugarit, Abdimilku bought the season's pack: 2 clay, 6 papyrus, 2 seals — 24 shekels, weighed out before the dew burned off.
 
 The caravan cleared the gate of Ugarit at first light, 40 days of it bought and paid for.
 
@@ -286,7 +286,7 @@ The Rival Sail passed beneath the caravan's feet and asked for nothing.
 
 On the tenth day, the Salt Marsh, and nothing worse.
 
-Gamiradu came through the gate of Ugarit with 1 entries in the ledger and the rest in aching feet.
+Gamiradu came through the gate of Ugarit with a single entry in the ledger and the rest in aching feet.
 
-The ledger merged into the archive of House Sapanu: 1 entries the House now cannot forget.
+The ledger merged into the archive of House Sapanu: a single entry the House now cannot forget.
 

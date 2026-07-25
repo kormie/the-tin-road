@@ -7,17 +7,19 @@
     "lost_clay_one": "a clay tablet",
     "lost_clay_many": "{n} clay tablets",
     "lost_join": " and ",
-    "lost_nothing": "nothing worth keeping"
+    "lost_nothing": "nothing worth keeping",
+    "entries_one": "a single entry",
+    "entries_many": "{n} entries"
   },
   "heavy_going": [
     "The caravan moved like what it was: overloaded. Every stage would cost {cost_days} more than a lean pack would pay, beginning on the road to {place}.",
-    "Clay is honest weight. The pack owed the road {cost_days} extra at every node, and the road collects.",
-    "Heavy going from the first stage — the season's light bleeding away {cost_days} at a time for the privilege of carrying everything."
+    "Clay is honest weight. The pack set off owing the road {cost_days} extra at every stage it stayed this full.",
+    "Heavy going on the road to {place} — the season's light bleeding away {cost_days} at a time until the pack thinned."
   ],
   "soaked": [
-    "The water at {place} took its census: {papyrus} sheets of papyrus came out pulp. The clay came out streaked but legible.",
-    "{scribe} counted the pack on the far side of {place}. The tablets had merely gotten wet; the papyrus — {papyrus} sheets — had stopped being papyrus.",
-    "What the water at {place} left: the clay. What it took: {papyrus} sheets, now one grey mass with opinions in it."
+    "The water at {place} took its census: {lost} came out pulp. The clay came out streaked but legible.",
+    "{scribe} counted the pack on the far side of {place}. The tablets had merely gotten wet; {lost} had stopped being papyrus.",
+    "What the water at {place} left: the clay. What it took: {lost}, now one grey mass with opinions in it."
   ],
   "season_began": [
     "In the {season_ord} season of {house}, {scribe} took up the pen.",
@@ -70,9 +72,9 @@
     "The outward road ended at {place}. Everything after this was returning."
   ],
   "returned": [
-    "{scribe} came through the gate of {place} with {entries} entries in the ledger and the rest in aching feet.",
-    "Home. The ledger held {entries} entries, which is to say: the season had happened, and proof existed.",
-    "{place} received its scribe back. {entries} entries came home in the bags."
+    "{scribe} came through the gate of {place} with {entry_count} in the ledger and the rest in aching feet.",
+    "Home. The ledger held {entry_count}, which is to say: the season had happened, and proof existed.",
+    "{place} received its scribe back. {entry_count} came home in the bags."
   ],
   "stranded": [
     "The light ran out at {place}, and the road kept {scribe}. What was not sent home was lost.",
@@ -90,7 +92,7 @@
     "{advance} shekels arrived under {patron}'s seal before the dew burned off. Patrons pay early; it is later that they collect."
   ],
   "outfitted": [
-    "At the guild hall of {place}, {scribe} bought the season's pack: {clay} clay, {papyrus} papyrus, {seals} seals — {spent} shekels, and not a finger's width of room left over.",
+    "At the guild hall of {place}, {scribe} bought the season's pack: {clay} clay, {papyrus} papyrus, {seals} seals — {spent} shekels, weighed out before the dew burned off.",
     "{spent} shekels became {clay} tablets of clay, {papyrus} sheets of papyrus, and {seals} seals. Every choice from here would be about what the pack held.",
     "{scribe} outfitted at {place}: {clay} clay, {papyrus} papyrus, {seals} seals. What the pack could not carry, the season would do without."
   ],
@@ -135,19 +137,19 @@
     "The season's carriage silver — {silver} shekels — was counted twice and banked once."
   ],
   "courier_sent": [
-    "At {place}, {scribe} paid a runner and a seal to send {entries} entries home ahead of the news. Scribes do this when they have begun to doubt the return leg.",
-    "A copy of the ledger left {place} under seal — {entries} entries, travelling faster and safer than {scribe} now expected to.",
-    "{scribe} sent the ledger home from {place}: {entries} entries, a seal, and {media} sheets of the season's stock. The road was going badly, and this was the admission."
+    "At {place}, {scribe} paid a runner and a seal to send {entry_count} home ahead of the news. Scribes do this when they have begun to doubt the return leg.",
+    "A copy of the ledger left {place} under seal — {entry_count}, travelling faster and safer than {scribe} now expected to.",
+    "{scribe} sent the ledger home from {place}: {entry_count}, a seal, and {media} sheets of the season's stock. The road was going badly, and this was the admission."
   ],
   "courier_delivered": [
-    "A courier reached {place} carrying {entries} entries under the seal of {scribe}, who did not follow them home.",
-    "What remained of {scribe} arrived by hired hands: {entries} entries, folded into the archive of {house}.",
-    "The courier's satchel held {entries} entries. The archive of {house} took them in; the road kept the one who wrote them."
+    "A courier reached {place} carrying {entry_count} under the seal of {scribe}, who did not follow them home.",
+    "What remained of {scribe} arrived by hired hands: {entry_count}, folded into the archive of {house}.",
+    "The courier's satchel held {entry_count}. The archive of {house} took them in; the road kept the one who wrote them."
   ],
   "ledger_merged": [
-    "The ledger merged into the archive of {house}: {entries} entries the House now cannot forget.",
-    "The archive grew by {entries} entries. Somewhere in the temple district, a scribe of the old school felt a chill.",
-    "{entries} entries, folded into the House's memory. The dead will thank {scribe} for this, eventually."
+    "The ledger merged into the archive of {house}: {entry_count} the House now cannot forget.",
+    "The archive grew by {entry_count}. Somewhere in the temple district, a scribe of the old school felt a chill.",
+    "{entry_count}, folded into the House's memory. The dead will thank {scribe} for this, eventually."
   ],
   "route_documented": [
     "With that, {route} was documented whole — three legs written down. A road anyone could walk. A road a caravan could walk alone.",

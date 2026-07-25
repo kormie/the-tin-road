@@ -66,6 +66,9 @@ func render_event(ev: ChronicleEvent, house: House) -> String:
 	if ev.data.has("lost_clay") or ev.data.has("lost_papyrus"):
 		slots["lost"] = _compose_lost(int(str(ev.data.get("lost_clay", "0"))),
 			int(str(ev.data.get("lost_papyrus", "0"))))
+	if ev.data.has("entries"):
+		slots["entry_count"] = _compose_count(int(str(ev.data["entries"])),
+			"entries_one", "entries_many")
 	if ev.data.has("cost"):
 		var cost := int(str(ev.data["cost"]))
 		slots["cost_days"] = "%d day" % cost if cost == 1 else "%d days" % cost
@@ -93,6 +96,15 @@ func _compose_lost(lost_clay: int, lost_papyrus: int) -> String:
 	if parts.is_empty():
 		return str(f.get("lost_nothing", "nothing"))
 	return str(f.get("lost_join", " and ")).join(parts)
+
+
+## Compose a pluralized count slot from the _fragments table.
+func _compose_count(n: int, one_key: String, many_key: String) -> String:
+	var fragments: Variant = templates.get("_fragments", {})
+	var f := fragments as Dictionary
+	if n == 1:
+		return str(f.get(one_key, "one"))
+	return str(f.get(many_key, "{n}")).format({"n": str(n)})
 
 
 func _ordinal(n: int) -> String:

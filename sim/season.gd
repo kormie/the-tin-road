@@ -309,7 +309,7 @@ func _peril(node: Route.RouteNode) -> void:
 				if node.flavor == "water" and papyrus > 0:
 					var soaked := papyrus
 					papyrus = 0
-					_emit(&"soaked", node.display_name, {"papyrus": str(soaked)})
+					_emit(&"soaked", node.display_name, {"lost_papyrus": str(soaked)})
 		"rival":
 			var lost := _lose_media(2)
 			_spend_daylight(DELAY_COST)
