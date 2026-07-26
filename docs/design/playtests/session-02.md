@@ -193,14 +193,26 @@ informed player's run still contains this trough at all.
 
 ## What changed as a result
 
-Nothing, yet — deliberately. This writeup exists before any change so that
-the fix list is argued from the record rather than retrofitted to it. The
-candidates it nominates, all legibility, no tuning, in order of confidence:
+This writeup was written before any change, so that the fix list would be
+argued from the record rather than retrofitted to it. Candidate 1 has since
+been built; 2 and 3 remain open. All legibility, no tuning — the third
+consecutive pass to change no constant.
 
-1. **A receipt at the order.** When the standing order is posted, the desk
-   says when it pays: the caravan walks at the opening of the next season.
-   Post-discovery, so it does not touch the glossary constraint. Directly
-   addresses the way this session ended.
+1. **A receipt at the order — built.** While an order stands and no caravan
+   has come home, the desk says it has not run yet and the continue button
+   says so too ("Begin the next season — the caravan has not run yet"). Two
+   corrections to the argument above came out of designing it. First, the
+   claim that the player "has already made the discovery" is contradicted by
+   this session's own §2 — they could not say what they had unlocked — so the
+   safety does not rest on their mental state. It rests on the gate: the copy
+   cannot render without a standing order, which cannot exist without a
+   documented road, so `route_documented` has already fired and no rung of the
+   §2 ladder can move. Second, "post-discovery" is one word for two places.
+   The order sits *after* signal 2's discovery and *before* signal 3's payoff:
+   free with respect to the first, expensive with respect to the second. The
+   copy is therefore bounded to a **time** and never a **sum**, a test enforces
+   that boundary, and `measurement.md` and `playtest-script.md` §3 now record
+   that every future §3 score is foretold.
 2. **The seal, facilitated before fixed.** The next change to the seal
    control should wait for one facilitated observation of a survey being
    written, which resolves the unread-vs-dismissed fork this sheet cannot.
@@ -234,9 +246,13 @@ different questions:
 3. **Does the seal get ticked once its purpose is known?** If yes, the
    problem was discovery and the control is fine. If still no, the control
    itself is implicated, whatever the hint text says.
-4. **Do they stop at the order again?** They know the receipt timing now; if
-   they still quit there, the ending is mis-shaped in a way knowledge does
-   not fix.
+4. **Do they stop at the order again?** Confounded, and worth stating: this
+   player was told the timing in the debrief *and* the build now says it, so
+   continuing past the desk credits neither cause. The result that still means
+   something is the negative one — if they quit at a desk whose exit button
+   names an unfinished caravan, then button labels are not read either, and
+   the next fix is structural (the desk phase is the wrong shape between
+   seasons) rather than textual.
 5. **The inert buttons, knowingly.** Does a player who knows notes and
    records feed nothing ever write one again? Their answer is design data
    for the note/record/treatise question.

@@ -110,9 +110,23 @@ caravan line appears on screen.
 ### Setup
 
 Run the measurement pass on their seed beforehand so you know roughly which
-season it lands in. Post the standing order at the desk, begin the next season,
-and the line is printed at the head of it: *"While the House slept, a caravan
-walked the Ugarit road on its own and came home with 317 shekels, weighed."*
+season it lands in. Then know which click prints the line, because it is one
+later than it reads: posting the order prints the assignment, not the return —
+a caravan and a price, which is not the moment — and "Begin the next season"
+only opens the outfitting. The caravan runs inside
+`House.start_season()`, which fires at **Depart** — the line arrives as the new
+scribe leaves the gate: *"While the House slept, a caravan walked the Ugarit
+road on its own and came home with 317 shekels, weighed."* Be watching from the
+moment they press Depart, not from the moment they press Begin.
+
+**The build now speaks here, and it did not before session 02.** Once an order
+is posted, the desk says it has not run yet and the continue button repeats it.
+That is a deliberate trade: session 02 was lost because the order read as an
+ending, and a payoff nobody stays to see cannot be reacted to at all. The trade
+is bounded — the build names a *time*, never a *sum*. So every §3 score from
+session 03 onward is a reaction to an expected return. Score the rubric
+unchanged and write **foretold** on the sheet. A 3 against an expectation and a
+3 against a surprise are different claims and must never be pooled.
 
 ### At the moment
 
@@ -217,11 +231,13 @@ session ______  date ______  facilitator ______  seed ______  seasons played ___
     expressed regret about an entry?     Y / N
 
 §2  highest hint rung used: 0 / 1 / 2 / 3 / 4    at (time): ______
+    pressed "Post a standing order" before the road was documented?  Y / N   at (time): ______
     documented the road?  Y / N   in season ______
     what they thought a survey was for, before finding out:
 
 §3  automated return appeared in season ______    observed?  Y / N
     SCORE:  3 / 2 / 1 / 0
+    foretold?  Y / N   (the desk receipt — Y for every session from 03 on)
     said, within 30s (verbatim):
 
     returned to re-read it later unprompted?  Y / N

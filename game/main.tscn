@@ -381,4 +381,5 @@ text = "Post a standing order (assign the caravan)"
 [node name="NextSeasonButton" type="Button" parent="Margin/Split/SideScroll/SidePanel/DeskPanel"]
 unique_name_in_owner = true
 layout_mode = 2
+autowrap_mode = 3
 text = "Begin the next season"
