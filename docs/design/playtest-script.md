@@ -12,9 +12,11 @@ exists so that it is not contaminated before it arrives.
 **Sessions are two seasons minimum.** A single-season session cannot test the
 thing and is not worth running.
 
-Sessions run so far: `playtests/session-01.md`. Read the last one before running
-the next — several of its findings became changes to the build that this script
-has not yet been used to check.
+Sessions run so far: `playtests/session-01.md`, `playtests/session-02.md`.
+Read the last one before running the next — several of session 01's findings
+became changes to the build that this script has not yet been used to check,
+and session 02 ended one click short of §3 in a way the next session should
+be braced for.
 
 ---
 
