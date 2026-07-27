@@ -189,6 +189,39 @@ is the only thing that has ever exercised them.
 
 ---
 
+## What the second playtest did to this document
+
+`playtests/session-02.md`: sixteen seasons, seed 101, the road documented and
+the order posted — progress session 01 never made — and **signal 3 still did
+not fire**, because the player closed the app at the order, before the return.
+No band moved and no constant changed, again.
+
+One thing changes how this document is read from session 03 on: the build now
+**tells the player the return is coming.** While an order stands and no caravan
+has yet come home, the desk says it has not run yet and the continue button
+says the same. Signal 3 is a reaction to a payoff, and a payoff nobody stays to
+see cannot be reacted to at all; the build buys the observation by giving up
+the surprise.
+
+The trade is bounded on purpose. The receipt names **when**, never **what** —
+no sum, nothing `data/chronicle/en.json` does not already print at that same
+click. §3 still scores a reaction to an unknown quantity arriving at a known
+time, and `tests/test_session.gd` holds that line: the copy may not contain a
+digit or a word for money.
+
+What it costs: every §3 score from session 03 onward is **foretold** and must
+be recorded as such. Foretold and unforetold reactions are not the same claim
+and must not be averaged. Nothing is lost retroactively — §3 has never produced
+a score, which is the only reason this trade is cheap now and would not have
+been after even one clean observation.
+
+Signal 2 is untouched. Every word is gated on a standing order existing, which
+requires a documented road, so `route_documented` has already fired before any
+of it can render. No band moved, `SeasonRecord` gains no field, and the
+`TINMEASURE` stream is byte-identical to before this change.
+
+---
+
 ## Numbers I would argue about
 
 Written down because the brief asked for the ones worth arguing over, and

@@ -113,9 +113,9 @@ measurement plan that closes milestone 1 (`scripts/measure.gd` over seeded
 runs; the same per-season record emitted by the playable layer as
 `TINMEASURE` lines; four signals computed, the fifth deliberately left to a
 human — `docs/design/measurement.md`, `docs/design/playtest-script.md`).
-**One playtest has now been run** (`docs/design/playtests/session-01.md`, two
-seasons, seed 101) and the slice's question is still unanswered: the road was
-never documented, so no caravan ever ran, so signal 3 never fired. The finding
+**Two playtests have now been run** (`docs/design/playtests/`) and the slice's
+question is still unanswered — session 01 (two seasons, seed 101) never
+documented the road, so no caravan ever ran, so signal 3 never fired. The finding
 was comprehension, not tuning — the survey was read as "recon about the current
 location" rather than the leg of road behind you. What followed was a
 legibility pass and no constant changed: sim-owned refusal reasons
@@ -135,7 +135,16 @@ cost shown, availability never predicted. Both are flat `_draw` primitives,
 no raster art. The palette's one shipped home is `data/ui/palette.json`
 (loaded by `game/palette.gd`), mirrored from `design-system/tokens.json`
 under test (`tests/test_palette.gd`); `main.tscn` carries semantic `ink_*`
-groups instead of inline hex. **Three of the four entry types —
+groups instead of inline hex. **Session 02** (sixteen seasons, seed 101)
+documented the road and posted the order, then closed the app one click short
+of the return: the order read as an ending, and signal 3 has now failed to fire
+twice for opposite reasons. **A third legibility pass** (still no constant
+changed) answered exactly that: while an order stands and no caravan has come
+home, the desk and the continue button say it has not run yet. The copy names a
+**time and never a sum** — `tests/test_session.gd` enforces both that boundary
+and the gate that keeps every word of it off screen before an order exists, so
+signal 2 is untouched and signal 3 is knowingly traded from surprise to
+foretold (`docs/design/measurement.md`). **Three of the four entry types —
 `note`, `record`, `treatise` — still have no consumer:** they cost daylight and
 media and are read by nothing. Only `survey` changes what the House knows.
 That is the loudest open design question the slice has.

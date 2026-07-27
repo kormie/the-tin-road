@@ -64,6 +64,16 @@ const CONTRACT_REFUSALS: Dictionary[StringName, String] = {
 	&"no_media": "A contract has to be written down, and there is nothing left to write it on.",
 }
 
+## The receipt at the standing order. Session 02 posted the order — the largest
+## single spend of a sixteen-season run — read the desk, and closed the app: the
+## order read as an ending (docs/design/playtests/session-02.md). It is not one.
+## These say WHEN the caravan first runs and never what it brings back. The
+## timing is the fix; the takings are what docs/design/playtest-script.md §3
+## measures, and a sum written here would turn that reaction into arithmetic.
+const ORDER_RECEIPT := "The standing order for %s stands in the archive, and it has not run yet. The first caravan goes out with the next scribe: begin the next season, outfit them, and send them down the road. The caravan's return is entered as they leave the gate."
+const NEXT_SEASON_LABEL := "Begin the next season"
+const NEXT_SEASON_LABEL_PENDING := "Begin the next season — the caravan has not run yet"
+
 ## The road outcome a call-in rides, in words. Contract data names the trigger;
 ## the phrasing is presentation's.
 const TRIGGER_WORDS: Dictionary[StringName, String] = {
@@ -105,6 +115,7 @@ var _hovered_cost := Callable()
 @onready var seal_check: CheckBox = %SealCheck
 @onready var seal_hint: Label = %SealHint
 @onready var travel_button: Button = %TravelButton
+@onready var next_season_button: Button = %NextSeasonButton
 @onready var desk_label: Label = %DeskLabel
 @onready var holdings_label: Label = %HoldingsLabel
 @onready var facilitator_label: Label = %FacilitatorLabel
@@ -130,7 +141,7 @@ func _ready() -> void:
 	%CourierButton.pressed.connect(_on_courier_pressed)
 	%BuySealButton.pressed.connect(_on_buy_seal_pressed)
 	%PostOrderButton.pressed.connect(_on_post_order_pressed)
-	%NextSeasonButton.pressed.connect(_on_next_season_pressed)
+	next_season_button.pressed.connect(_on_next_season_pressed)
 	seal_check.toggled.connect(func(_on: bool) -> void: _refresh_seal_hint())
 	# Spinner ranges come from sim constants — the scene must never invent a
 	# gate the sim does not have; the guild hall does all the refusing.
@@ -204,6 +215,7 @@ func _show_phase(next_phase: Phase) -> void:
 	refusal_label.text = ""
 	_refresh_status()
 	_refresh_widgets()
+	_label_next_season_button()
 
 
 func _refuse(text: String) -> void:
@@ -228,6 +240,7 @@ func _refresh() -> void:
 	_refresh_status()
 	_refresh_seal_hint()
 	_refresh_widgets()
+	_label_next_season_button()
 
 
 ## Push sim state into the drawn widgets. The strips read the same objects the
@@ -314,6 +327,22 @@ func _road_knowledge() -> String:
 	return "Of %s the House knows: %s — %d leg%s of %d." % [
 		route.display_name, ", ".join(known), known.size(),
 		"" if known.size() == 1 else "s", route.leg_count()]
+
+
+## True while a standing order stands and no caravan has yet come home under it.
+## Read off the archive and the chronicle — the two things the sim already
+## publishes; game/ tracks no state of its own. The second clause is what stops
+## the desk saying "it has not run yet" in a season where it plainly has.
+func _order_is_pending() -> bool:
+	return house != null and house.has_standing_order() \
+		and house.chronicle.count_of(&"caravan_returned") == 0
+
+
+## The continue button says whether anything is still owed. The desk is where a
+## run ends by accident, and this is the widget a leaving player presses.
+func _label_next_season_button() -> void:
+	next_season_button.text = NEXT_SEASON_LABEL_PENDING if _order_is_pending() \
+		else NEXT_SEASON_LABEL
 
 
 ## Everything one scribe leaves the next, on one panel, before a shekel is
@@ -584,6 +613,9 @@ func _write_the_desk(record: SeasonRecord) -> void:
 	if gained > 0:
 		holdings.append("That is %d more than the season began with." % gained)
 	holdings.append("Treasury %d shekels." % house.silver)
+	if _order_is_pending():
+		holdings.append("")
+		holdings.append(ORDER_RECEIPT % route.display_name)
 	holdings_label.text = "\n".join(holdings)
 	facilitator_label.text = "for the facilitator — " + record.headline()
 

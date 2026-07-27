@@ -151,6 +151,100 @@ func test_the_desk_emits_the_season_record() -> void:
 	assert_str(session.desk_label.text).not_contains(expected.headline())
 
 
+## Post a standing order the way a player does: a season closed at the desk, the
+## road documented, the treasury able to cover it.
+func _desk_with_a_posted_order(session: GameSession) -> void:
+	session.seed_input.text = "1"
+	session._on_found_pressed()
+	session._on_depart_pressed()
+	session.season.result = Season.Result.RETURNED
+	session._after_action()
+	for leg: int in range(1, session.route.leg_count() + 1):
+		session.house.surveyed_legs.append(leg)
+	session.house.silver = House.STANDING_ORDER_COST + 200
+	session._on_post_order_pressed()
+
+
+func test_the_desk_says_when_the_caravan_first_runs() -> void:
+	# Session 02, encoded: the order was posted and the app was closed, because
+	# nothing said the caravan had not run yet. The desk says so now, and the
+	# button a leaving player presses says it too.
+	var session := _session()
+	_desk_with_a_posted_order(session)
+	assert_bool(session.refusal_label.text.is_empty()).is_true()
+	assert_bool(session.house.has_standing_order()).is_true()
+	assert_str(session.holdings_label.text).contains(
+		GameSession.ORDER_RECEIPT % session.route.display_name)
+	assert_str(session.next_season_button.text).is_equal(
+		GameSession.NEXT_SEASON_LABEL_PENDING)
+
+
+func test_the_desk_says_nothing_of_caravans_before_an_order() -> void:
+	# The signal 2 guard (docs/design/playtest-script.md §2). Whether a player
+	# finds the automation goal unprompted is a measurement, and a word about
+	# caravans on a desk they reach in season one would end it. Every string
+	# added for the receipt is gated on an order that already exists.
+	var session := _session()
+	session.seed_input.text = "1"
+	session._on_found_pressed()
+	session._on_depart_pressed()
+	session.season.result = Season.Result.RETURNED
+	session._after_action()
+	assert_bool(session.house.has_standing_order()).is_false()
+	assert_str(session.holdings_label.text.to_lower()).not_contains("caravan")
+	assert_str(session.desk_label.text.to_lower()).not_contains("caravan")
+	assert_str(session.next_season_button.text).is_equal(GameSession.NEXT_SEASON_LABEL)
+
+
+func test_the_receipt_names_a_time_and_never_a_sum() -> void:
+	# The signal 3 guard (docs/design/playtest-script.md §3, measurement.md).
+	# The receipt is affordable only because it names WHEN, not WHAT: §3 scores
+	# a reaction to an unknown quantity arriving at a known time. A figure here
+	# would quietly re-scope that signal from surprise to confirmation.
+	var forbidden: Array[String] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
+		"shekel", "silver", "income", "profit", "pay"]
+	for copy: String in [GameSession.ORDER_RECEIPT, GameSession.NEXT_SEASON_LABEL,
+			GameSession.NEXT_SEASON_LABEL_PENDING]:
+		for word: String in forbidden:
+			assert_str(copy.to_lower()).not_contains(word)
+
+
+func test_the_caravan_comes_home_at_depart_and_the_desk_stops_saying_not_yet() -> void:
+	# The copy's timing claim, made executable. "Begin the next season" only
+	# opens the outfitting; the caravan runs inside House.start_season(), which
+	# the UI calls at Depart. If that ever moves, this fails rather than turning
+	# the receipt into a lie — and once the caravan HAS run, the desk stops
+	# saying it has not.
+	var session := _session()
+	_desk_with_a_posted_order(session)
+	session._on_next_season_pressed()
+	assert_int(session.house.chronicle.count_of(&"caravan_returned")).is_equal(0)
+	session._on_depart_pressed()
+	assert_int(session.house.chronicle.count_of(&"caravan_returned")).is_equal(1)
+	session.season.result = Season.Result.RETURNED
+	session._after_action()
+	assert_str(session.holdings_label.text).not_contains("has not run yet")
+	assert_str(session.next_season_button.text).is_equal(GameSession.NEXT_SEASON_LABEL)
+
+
+func test_the_glossary_never_names_the_caravan() -> void:
+	# The glossary describes controls, never goals — its header says so, and
+	# nothing enforced it until now. Keys beginning with "_" are that header,
+	# which discusses the boundary and so may use the words the copy may not.
+	var parsed: Variant = JSON.parse_string(
+		FileAccess.get_file_as_string("res://data/ui/glossary.json"))
+	assert_bool(parsed is Dictionary).is_true()
+	var glossary := parsed as Dictionary
+	assert_bool(glossary.size() > 1).is_true()
+	for key: Variant in glossary:
+		if str(key).begins_with("_"):
+			continue
+		var value := str(glossary[key]).to_lower()
+		assert_str(value).not_contains("caravan")
+		assert_str(value).not_contains("standing order")
+		assert_str(value).not_contains("automat")
+
+
 func test_incremental_rendering_matches_the_whole_book() -> void:
 	# Prose variants draw in event order, so a book grown in two pulls must
 	# equal the same book rendered in one.
